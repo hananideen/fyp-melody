@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -30,7 +29,7 @@ import java.util.Random;
 /**
  * Created by Hananideen on 28/5/2015.
  */
-public class PhoneLogin extends Activity {
+public class PhoneLogin extends ActionBarActivity {
 
     private static final String TAG = PhoneLogin.class.getSimpleName();
 
