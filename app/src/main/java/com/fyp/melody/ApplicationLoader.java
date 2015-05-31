@@ -34,7 +34,7 @@ public class ApplicationLoader extends Application {
         Instance = this;
         Instance.setAppContext(getApplicationContext());
         //initialize the singleton.
-//        VolleySingleton.init();
+        VolleySingleton.init();
         Settings = getSharedPreferences(Settings_PREFS_NAME, MODE_PRIVATE);
         SettingsEditor = Settings.edit();
 
