@@ -1,54 +1,184 @@
 package com.fyp.melody;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
+
+    private String[] mNavigationDrawerItemTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+
+    private ActionBarDrawerToggle mDrawerToggle;
+
+    // nav drawer title
+    private CharSequence mDrawerTitle;
+
+    // used to store app title
+    private CharSequence mTitle;
+
+    //private TextView mTextView;
+    private Restaurant lightFragment;
+    private ShoppingCart videoFragment;
+    private Tracking musicFragment;
+    private Settings nfcFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Boolean Login = ApplicationLoader.getInstance().getSettingPrefFile().getBoolean("hasLoggedIn", false);
+//        Boolean Login = ApplicationLoader.getInstance().getSettingPrefFile().getBoolean("hasLoggedIn", false);
+//
+//        if(!Login)
+//        {
+//            Log.e("MainActivity", "login");
+//            Intent intent = new Intent(this, PhoneLogin.class);
+//            startActivity(intent);
+//            finish();
+//
+//        } else {
+//            Log.e("MainActivity", "main");
+            setContentView(R.layout.activity_main);
+//        }
+
+        // for proper titles
+        mTitle = mDrawerTitle = getTitle();
+
+        // initialize properties
+        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.navigation_drawer_items_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // list the drawer items
+        ObjectDrawerItem[] drawerItem = new ObjectDrawerItem[4];
+
+        drawerItem[0] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Restaurant");
+        drawerItem[1] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Shopping Cart");
+        drawerItem[2] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Order Tracking");
+        drawerItem[3] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Settings");
+
+        // Pass the folderData to our ListView adapter
+        DrawerItemCustomAdapter adapter = new DrawerItemCustomAdapter(this, R.layout.listview_item_row, drawerItem);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(adapter);
+
+        // set the item click listener
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        lightFragment = new Restaurant();
+        videoFragment = new ShoppingCart();
+        musicFragment = new Tracking();
+        nfcFragment = new Settings();
+
+        // for app icon control for nav drawer
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                mDrawerLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.string.drawer_open,  /* "open drawer" description */
+                R.string.drawer_close  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getActionBar().setTitle(mTitle);
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getActionBar().setTitle(mDrawerTitle);
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        // enable ActionBar app icon to behave as action to toggle nav drawer
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
 
-        if(!Login)
-        {
-            Log.e("MainActivity", "login");
-            Intent intent = new Intent(this, PhoneLogin.class);
-            startActivity(intent);
-            finish();
+
+        if (savedInstanceState == null) {
+            // on first time display view for first nav item
+            selectItem(3);
+        }
+
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+
+    // navigation drawer click listener
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+
+    private void selectItem(int position) {
+
+        // update the main content by replacing fragments
+
+        Fragment fragment = null;
+
+        switch (position) {
+            case 0:
+                fragment = lightFragment;
+                break;
+            case 1:
+                fragment = videoFragment;
+                break;
+            case 2:
+                fragment = musicFragment;
+                break;
+            case 3:
+                fragment = nfcFragment;
+                break;
+
+            default:
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerList.setSelection(position);
+            setTitle(mNavigationDrawerItemTitles[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
 
         } else {
-            Log.e("MainActivity", "main");
-            setContentView(R.layout.activity_main);
+            // error in creating fragment
+            Log.e("MainActivity", "Error in creating fragment");
         }
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getActionBar().setTitle(mTitle);
     }
 }
