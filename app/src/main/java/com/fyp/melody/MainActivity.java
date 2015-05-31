@@ -3,6 +3,7 @@ package com.fyp.melody;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -12,7 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
@@ -27,28 +28,28 @@ public class MainActivity extends Activity {
     private CharSequence mTitle;
 
     //private TextView mTextView;
-    private Restaurant lightFragment;
-    private ShoppingCart videoFragment;
-    private Tracking musicFragment;
-    private Settings nfcFragment;
+    private Restaurant restFragment;
+    private ShoppingCart cartFragment;
+    private Tracking trackFragment;
+    private Settings settingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Boolean Login = ApplicationLoader.getInstance().getSettingPrefFile().getBoolean("hasLoggedIn", false);
-//
-//        if(!Login)
-//        {
-//            Log.e("MainActivity", "login");
-//            Intent intent = new Intent(this, PhoneLogin.class);
-//            startActivity(intent);
-//            finish();
-//
-//        } else {
-//            Log.e("MainActivity", "main");
+        Boolean Login = ApplicationLoader.getInstance().getSettingPrefFile().getBoolean("hasLoggedIn", false);
+
+        if(!Login)
+        {
+            Log.e("MainActivity", "login");
+            Intent intent = new Intent(this, PhoneLogin.class);
+            startActivity(intent);
+            finish();
+
+        } else {
+            Log.e("MainActivity", "main");
             setContentView(R.layout.activity_main);
-//        }
+        }
 
         // for proper titles
         mTitle = mDrawerTitle = getTitle();
@@ -75,10 +76,10 @@ public class MainActivity extends Activity {
         // set the item click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-        lightFragment = new Restaurant();
-        videoFragment = new ShoppingCart();
-        musicFragment = new Tracking();
-        nfcFragment = new Settings();
+        restFragment = new Restaurant();
+        cartFragment = new ShoppingCart();
+        trackFragment = new Tracking();
+        settingFragment = new Settings();
 
         // for app icon control for nav drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -93,13 +94,13 @@ public class MainActivity extends Activity {
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getActionBar().setTitle(mTitle);
+                getSupportActionBar().setTitle(mTitle);
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(mDrawerTitle);
+                getSupportActionBar().setTitle(mDrawerTitle);
             }
         };
 
@@ -107,14 +108,14 @@ public class MainActivity extends Activity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
 
 
         if (savedInstanceState == null) {
             // on first time display view for first nav item
-            selectItem(3);
+            selectItem(0);
         }
 
     }
@@ -144,16 +145,16 @@ public class MainActivity extends Activity {
 
         switch (position) {
             case 0:
-                fragment = lightFragment;
+                fragment = restFragment;
                 break;
             case 1:
-                fragment = videoFragment;
+                fragment = cartFragment;
                 break;
             case 2:
-                fragment = musicFragment;
+                fragment = trackFragment;
                 break;
             case 3:
-                fragment = nfcFragment;
+                fragment = settingFragment;
                 break;
 
             default:
@@ -179,6 +180,6 @@ public class MainActivity extends Activity {
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getActionBar().setTitle(mTitle);
+        getSupportActionBar().setTitle(mTitle);
     }
 }
