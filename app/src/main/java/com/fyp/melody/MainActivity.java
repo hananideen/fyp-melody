@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity  {
 
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
 
         drawerItem[0] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Restaurant");
         drawerItem[1] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Shopping Cart");
-        drawerItem[2] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Order Tracking");
+        drawerItem[2] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Tracking");
         drawerItem[3] = new ObjectDrawerItem(R.mipmap.ic_launcher, "Settings");
 
         // Pass the folderData to our ListView adapter

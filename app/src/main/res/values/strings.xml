@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Melody</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_rest_list">Restaurant List</string>
+    <string name="title_activity_rest">Restaurant</string>
+    <string name="title_activity_cart">Shopping Cart</string>
+    <string name="title_activity_track">Order Tracking</string>
     <string name="title_activity_rest1">Rest1</string>
     <string name="title_activity_rest2">Rest2</string>
     <string name="title_activity_rest3">Rest3</string>
     <string name="title_activity_rest4">Rest4</string>
     <string name="title_activity_recommend">Recommend</string>
-    <string name="food">Food</string>
-    <string name="beverages">Beverages</string>
 
     <string name="button1">Click Me</string>
     <string name="textview1">Does it work?</string>
@@ -20,18 +20,11 @@
     <string name="Bsettings">Settings</string>
     <string name="Bvisible">Visible</string>
     <string name="Binvisible">Invisible</string>
-    <string name="title_activity_look_around">Look Around</string>
-    <string name="title_activity_proadcast">Broadcast</string>
     <string name="button_send">Send</string>
     <string name="edit_message">Enter a Message</string>
-    <string name="title_activity_promotions">Promotions</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_list_view">ListView</string>
-    <string name="title_activity_broadcast">Broadcast</string>
     <string name="title_activity_setting">Settings</string>
-    <string name="title_activity_my_location">MyLocation</string>
-    <string name="latitude_label">Latitude: </string>
-    <string name="longitude_label">Longitude: </string>
     <string name="start_updates">Start updates</string>
     <string name="stop_updates">Stop updates</string>
     <string name="Plus">+</string>
@@ -65,7 +58,7 @@
     <string-array name="navigation_drawer_items_array">
         <item>Restaurant</item>
         <item>Shopping Cart</item>
-        <item>Order Tracking</item>
+        <item>Tracking</item>
         <item>Settings</item>
     </string-array>
 
