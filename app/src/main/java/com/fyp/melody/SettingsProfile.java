@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -26,6 +27,8 @@ public class SettingsProfile extends ActionBarActivity {
 
     private ImageView viewImage;
     private ImageButton button;
+    private EditText viewName;
+    private Button saveName;
 
     SharedPreferences settings;
     SharedPreferences.Editor editor;
@@ -49,6 +52,19 @@ public class SettingsProfile extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 selectImage();
+            }
+        });
+
+        viewName = (EditText) findViewById(R.id.ProfileUsername);
+        viewName.setText(settings.getString("userName", ""));
+
+        saveName = (Button) findViewById(R.id.editUserName);
+        saveName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putString("userName", viewName.getText().toString());
+                editor.commit();
+                finish();
             }
         });
 
