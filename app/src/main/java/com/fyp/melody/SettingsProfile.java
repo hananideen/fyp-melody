@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
@@ -64,7 +65,7 @@ public class SettingsProfile extends ActionBarActivity {
             public void onClick(View v) {
                 editor.putString("userName", viewName.getText().toString());
                 editor.commit();
-                finish();
+                Toast.makeText(getApplicationContext(), "Username changed.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -125,8 +126,8 @@ public class SettingsProfile extends ActionBarActivity {
         Intent cropIntent = new Intent("com.android.camera.action.CROP");
         cropIntent.setDataAndType(selectedImage, "image/*");
         cropIntent.putExtra("crop", "true");
-        cropIntent.putExtra("outputX", 300);
-        cropIntent.putExtra("outputY", 300);
+        cropIntent.putExtra("outputX", 500);
+        cropIntent.putExtra("outputY", 500);
         cropIntent.putExtra("return-data", true);
         startActivityForResult(cropIntent, 3);
 
