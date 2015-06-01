@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <PreferenceScreen
+            android:title="User Profile"
+            android:summary="Change username and profile photo">
+
+            <intent  android:targetPackage="com.fyp.melody"
+                android:targetClass="com.fyp.melody.SettingsProfile"
+                />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="Password"
+            android:summary="Change user password">
+
+            <intent  android:targetPackage="com.fyp.melody"
+                android:targetClass="com.fyp.melody.SettingsProfile"
+                />
+
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:title="Address"
+            android:summary="Add or change user address">
+
+            <intent  android:targetPackage="com.fyp.melody"
+                android:targetClass="com.fyp.melody.SettingsProfile"
+                />
+
+        </PreferenceScreen>
+
+</PreferenceScreen>

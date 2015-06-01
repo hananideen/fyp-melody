@@ -154,7 +154,9 @@ public class MainActivity extends ActionBarActivity {
                 fragment = trackFragment;
                 break;
             case 3:
-                fragment = settingFragment;
+                Intent intent = new Intent(this, Settings.class);
+                startActivity(intent);
+//                fragment = settingFragment;
                 break;
 
             default:
