@@ -34,11 +34,38 @@ public class Restaurant extends Fragment {
         listViewCatalog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Intent productDetailsIntent = new Intent(getActivity(),SettingsProfile.class);
-                productDetailsIntent.putExtra(RestaurantHelper.PRODUCT_INDEX, position);
-                startActivity(productDetailsIntent);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (position) {
+                    case 0:
+                        Intent kfc = new Intent(getActivity(), Settings.class);
+                        startActivity(kfc);
+                        break;
+                    case 1:
+                        Intent sana = new Intent(getActivity(), SettingsProfile.class);
+                        startActivity(sana);
+                        break;
+                    case 2:
+                        Intent sedap = new Intent(getActivity(), ProfileLogin.class);
+                        startActivity(sedap);
+                        break;
+                    case 3:
+                        Intent tappers = new Intent(getActivity(), PhoneLogin.class);
+                        startActivity(tappers);
+                        break;
+                    case 4:
+                        Intent salam = new Intent(getActivity(), Settings.class);
+                        startActivity(salam);
+                        break;
+                    case 5:
+                        Intent deli = new Intent(getActivity(), SettingsProfile.class);
+                        startActivity(deli);
+                        break;
+                }
+
+//                Intent productDetailsIntent = new Intent(getActivity(),SettingsProfile.class);
+//                productDetailsIntent.putExtra(RestaurantHelper.PRODUCT_INDEX, position);
+//                startActivity(productDetailsIntent);
             }
         });
 
