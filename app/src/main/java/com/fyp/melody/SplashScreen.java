@@ -26,7 +26,7 @@ public class SplashScreen extends Activity {
                     }
                     Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.animator.hold, R.animator.fade_in);
+                    overridePendingTransition(R.animator.fade_in, R.animator.hold);
                     SplashScreen.this.finish();
                 } catch (InterruptedException e) {
                     // do nothing

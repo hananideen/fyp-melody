@@ -42,7 +42,7 @@ public class RestaurantListAdapter extends BaseAdapter {
         final ViewItem item;
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.restaurant, null);
+            convertView = mInflater.inflate(R.layout.restaurant_list, null);
             item = new ViewItem();
 
             item.productImageView = (ImageView) convertView
