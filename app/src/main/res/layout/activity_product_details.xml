@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent" android:layout_width="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/ImageViewProduct"
+            android:layout_width="130dp"
+            android:layout_height="114dp"
+            android:layout_margin="5dip"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" >
+        </ImageView>
+
+        <TextView
+            android:id="@+id/TextViewProductTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dip"
+            android:text="Chicken Chop"
+            android:textColor="#000000"
+            android:textSize="26dip" >
+        </TextView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/TextViewProductPrice"
+        android:layout_width="fill_parent"
+        android:layout_margin="5dip"
+        android:textColor="#000000"
+        android:text="Product Price"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/TextViewProductDetails"
+        android:layout_width="fill_parent"
+        android:layout_margin="5dip"
+        android:layout_weight="1"
+        android:textColor="#000000"
+        android:text="Product description"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:id="@+id/linearLayoutCurrentlyInCart">
+
+        <TextView
+            android:id="@+id/textViewCurrentlyInCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dip"
+            android:textColor="#000000"
+            android:text="Currently in Cart:"
+            android:layout_margin="5dip"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:id="@+id/linearLayoutAddLayout"
+        android:orientation="horizontal"
+        android:layout_margin="5dip">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity:"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:id="@+id/editTextQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.01"
+            android:gravity="right"
+            android:inputType="number"
+            android:text="1" >
+        </EditText>
+
+        <Button
+            android:id="@+id/ButtonAddToCart"
+            android:layout_gravity="right"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Add to Cart"/>
+    </LinearLayout>
+</LinearLayout>
