@@ -67,16 +67,8 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Settings"
-            android:label="Settings"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".SettingsProfile"
             android:label="@string/title_activity_settings" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Settings" />
         </activity>
 
     </application>
