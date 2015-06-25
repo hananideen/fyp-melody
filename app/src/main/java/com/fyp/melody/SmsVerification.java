@@ -148,7 +148,6 @@ public class SmsVerification extends Activity {
 
                         } else {
                             countDownTimer.cancel();
-                            //TODO Hanani, just call the setting activity
                         }
                         finish();
 
@@ -230,7 +229,7 @@ public class SmsVerification extends Activity {
             SmsManager manager = SmsManager.getDefault();
             code = generateCode(Integer.parseInt(phoneNumber.substring(phoneNumber.length()-4)));
             //TODO uncomment to send msgs
-//            manager.sendTextMessage(phoneNumber, null, ""+code, null, null);
+            manager.sendTextMessage(phoneNumber, null, ""+code, null, null);
             Log.i(TAG, "Msg sent to "+phoneNumber);
 
 
