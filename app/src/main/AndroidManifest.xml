@@ -102,6 +102,14 @@
                 android:value=".ShoppingCartActivity" />
         </activity>
 
+        <activity
+            android:name=".TrackingActivity"
+            android:label="Order Status" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ShoppingCartActivity" />
+        </activity>
+
     </application>
 
 </manifest>
