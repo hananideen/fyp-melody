@@ -2,10 +2,8 @@ package com.fyp.melody;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,7 +12,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -34,12 +31,12 @@ public class MenuActivity extends ActionBarActivity {
     List<NameValuePair> params;
 //    ServerRequest sr;
 //    PhoneStatus cs;
-    private ListView PromotionsListView;
+    private ListView MenuListView;
     SharedPreferences Settings;
 
-    List<Menus> PromoList;
+    List<Menus> MenuList;
 
-    MenuAdapter promoListAdapter;
+    MenuAdapter menuListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +48,13 @@ public class MenuActivity extends ActionBarActivity {
 //        sr = new ServerRequest();
 //        cs = new PhoneStatus();
 
-        PromoList = new ArrayList<Menus>();
+        MenuList = new ArrayList<Menus>();
 
-        promoListAdapter = new MenuAdapter(this,PromoList);
+        menuListAdapter = new MenuAdapter(this,MenuList);
 
         initUI();
 
-        PromotionsListView.setAdapter(promoListAdapter);
+        MenuListView.setAdapter(menuListAdapter);
 
 //        PromotionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -88,21 +85,21 @@ public class MenuActivity extends ActionBarActivity {
                     Log.e("jsonObjectRequest", "Success");
                     jsonArray = response.optJSONArray("data");
                     for (int i = 0; i <jsonArray.length();i++){
-                        Menus promo = new Menus(new Json2Menu(jsonArray.optJSONObject(i)));
-                        PromoList.add(0, promo);
+                        Menus menus = new Menus(new Json2Menu(jsonArray.optJSONObject(i)));
+                        MenuList.add(0, menus);
                         Log.d("json item", jsonArray.optJSONObject(i).toString());
-                        Log.e("jsonobjectrequest", promo.toString());
+                        Log.e("jsonobjectrequest", menus.toString());
                     }
-                    promoListAdapter.notifyDataSetChanged();
+                    menuListAdapter.notifyDataSetChanged();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("VolleyServer", "Error" + error.getMessage());
-                Toast.makeText(getApplication(), "Can't refresh!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "No internet connection!", Toast.LENGTH_SHORT).show();
                 LoadData();
-                promoListAdapter.notifyDataSetChanged();
+                menuListAdapter.notifyDataSetChanged();
             }
         });
 
@@ -129,11 +126,9 @@ public class MenuActivity extends ActionBarActivity {
     }
 
     private void initUI() {
-        PromotionsListView = (ListView) findViewById(R.id.PromolistView);
+        MenuListView = (ListView) findViewById(R.id.MenulistView);
 
     }
-
-
 
     HashMap<String, String> getparams(){
 
@@ -147,10 +142,10 @@ public class MenuActivity extends ActionBarActivity {
 
         for(int i =0;i<5;i++)
         {
-            Menus promo = new Menus();
-            promo.setDescription("Menu Name " + i);
-            promo.setPromoPrice("Price " + i);
-            PromoList.add(0, promo);
+            Menus menus = new Menus();
+            menus.setMenuName("Menu Name " + i);
+            menus.setMenuPrice("Price " + i);
+            MenuList.add(0, menus);
         }
     }
 

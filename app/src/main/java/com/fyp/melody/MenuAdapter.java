@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -23,24 +22,23 @@ public class MenuAdapter extends BaseAdapter {
     SharedPreferences settings;
 
     private Activity mactivity;
-    private List<Menus> PromoList;
+    private List<Menus> MenuList;
     private LayoutInflater inflater;
-    private boolean isLikeButtonClicked = false, isDislikeButtonClicked= false;
-    private Menus curPromo;
+    private Menus curMenu;
 
-    public MenuAdapter (Activity mactivity, List<Menus> PromoList){
+    public MenuAdapter (Activity mactivity, List<Menus> MenuList){
         this.mactivity = mactivity;
-        this.PromoList = PromoList;
+        this.MenuList = MenuList;
     }
 
     @Override
     public int getCount() {
-        return PromoList.size();
+        return MenuList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return PromoList.get(position);
+        return MenuList.get(position);
     }
 
     @Override
@@ -59,52 +57,39 @@ public class MenuAdapter extends BaseAdapter {
 
         }
 
-        TextView promoDesc = (TextView) convertView.findViewById(R.id.Description);
-        TextView promoPrice = (TextView) convertView.findViewById(R.id.Price);
-        NetworkImageView promoCompImg = (NetworkImageView) convertView.findViewById(R.id.CompanyImage);
+        TextView menuDesc = (TextView) convertView.findViewById(R.id.Description);
+        TextView menuPrice = (TextView) convertView.findViewById(R.id.Price);
+        NetworkImageView menuCompImg = (NetworkImageView) convertView.findViewById(R.id.CompanyImage);
 
-        curPromo = PromoList.get(position);
+        curMenu = MenuList.get(position);
 
-        promoDesc.setText(curPromo.getDescription());
-        promoPrice.setText(curPromo.getPromoPrice());
-//        promoDueDate.setText(curPromo.getDueDate());
+        menuDesc.setText(curMenu.getMenuName());
+        menuPrice.setText(curMenu.getMenuPrice());
 
-//        settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-//        boolean promotionImage = settings.getBoolean("promotionPreference",true);
-//        if (promotionImage == true) {
 
-        Log.e("tag", ApplicationLoader.getIp(curPromo.getPromotionImage()));
-        promoCompImg.setImageUrl(ApplicationLoader.getIp(curPromo.getPromotionImage()), VolleySingleton.getInstance().getImageLoader());
+        Log.e("tag", ApplicationLoader.getIp(curMenu.getCompanyImage()));
+        menuCompImg.setImageUrl(ApplicationLoader.getIp(curMenu.getCompanyImage()), VolleySingleton.getInstance().getImageLoader());
         switch (position) {
             case 3:
-//                    promoImage.setImageResource(R.drawable.hadramawt);
-                promoCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuCompImg.setImageResource(R.mipmap.ic_launcher);
                 break;
             case 2:
-//                    promoImage.setImageResource(R.drawable.sanaa);
-                promoCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuCompImg.setImageResource(R.mipmap.ic_launcher);
                 break;
             case 1:
-//                    promoImage.setImageResource(R.drawable.dsedap);
-                promoCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuCompImg.setImageResource(R.mipmap.ic_launcher);
                 break;
             case 0:
-//                    promoImage.setImageResource(R.drawable.noodles);
-                promoCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuCompImg.setImageResource(R.mipmap.ic_launcher);
                 break;
         }
-//        }
-
-
-        //promoImage.setImageDrawable(curPromo.PromotionImage);
-        //promoCompImg.setImageDrawable(curPromo.CompanyImage);
 
         return convertView;
     }
 
-    public Menus getPromo(int position) {
+    public Menus getMenus(int position) {
 
-        return PromoList.get(position);
+        return MenuList.get(position);
     }
 
 }
