@@ -110,6 +110,14 @@
                 android:value=".ShoppingCartActivity" />
         </activity>
 
+        <activity
+            android:name=".MenuActivity"
+            android:label="Menu" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

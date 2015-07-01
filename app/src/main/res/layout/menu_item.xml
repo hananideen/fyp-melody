@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayoutPromotion"
+        android:background="#efeeee"
+        android:paddingLeft="16dp"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:descendantFocusability="blocksDescendants" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/companyLogoName"
+            android:orientation="vertical" >
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:id="@+id/CompanyImage"
+                android:src="@mipmap/ic_launcher" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/promotionDetails"
+            android:gravity="left"
+            android:layout_toRightOf="@id/companyLogoName"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/Description"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:text="Product Name"
+                android:ellipsize="end"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/Price"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#cd2906"
+                android:ellipsize="end"
+                android:text="Price"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:layout_below="@id/promotionDetails"
+            android:layout_toRightOf="@id/companyLogoName"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" >
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
