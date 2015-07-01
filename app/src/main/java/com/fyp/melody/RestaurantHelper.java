@@ -17,7 +17,7 @@ public class RestaurantHelper {
     public static List<RestaurantList> getCatalog(Resources res){
         if(catalog == null) {
             catalog = new Vector<RestaurantList>();
-            catalog.add(new RestaurantList("KFC", res.getDrawable(R.mipmap.ic_launcher), "Fast Food"));
+            catalog.add(new RestaurantList("Tokio Cafe", res.getDrawable(R.mipmap.ic_launcher), "Western & Japanese Cuisine"));
             catalog.add(new RestaurantList("Sana'a", res.getDrawable(R.mipmap.ic_launcher), "Arabic Cuisine"));
             catalog.add(new RestaurantList("Dsedap Sengoti", res.getDrawable(R.mipmap.ic_launcher), "Malay Cuisine"));
             catalog.add(new RestaurantList("Tappers", res.getDrawable(R.mipmap.ic_launcher), "Western"));

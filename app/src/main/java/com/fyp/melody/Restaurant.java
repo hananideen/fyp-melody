@@ -38,8 +38,8 @@ public class Restaurant extends Fragment {
 
                 switch (position) {
                     case 0:
-                        Intent kfc = new Intent(getActivity(), Restaurant1.class);
-                        startActivity(kfc);
+                        Intent tokio = new Intent(getActivity(), Restaurant1.class);
+                        startActivity(tokio);
                         break;
                     case 1:
                         Intent sana = new Intent(getActivity(), Restaurant1.class);
@@ -58,7 +58,7 @@ public class Restaurant extends Fragment {
                         startActivity(salam);
                         break;
                     case 5:
-                        Intent deli = new Intent(getActivity(), Restaurant1.class);
+                        Intent deli = new Intent(getActivity(), MenuActivity.class);
                         startActivity(deli);
                         break;
                 }
