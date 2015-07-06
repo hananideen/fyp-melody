@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -24,7 +25,7 @@ import android.widget.TextView;
 
 public class TrackingActivity extends ActionBarActivity {
 
-    Button btnStart;
+    Button btnStart, btnMap;
     TextView textViewTime;
 
     @Override
@@ -33,6 +34,7 @@ public class TrackingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_tracking);
 
         btnStart = (Button) findViewById(R.id.btnStart);
+        btnMap = (Button) findViewById(R.id.btnMap);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
 
         textViewTime.setText("01:00:00");
@@ -42,10 +44,17 @@ public class TrackingActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 timer.start();
             }
         });timer.start();
+
+        btnMap.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(TrackingActivity.this, MapsActivity.class);
+                startActivity(map);
+            }
+        });
 
 
     }
@@ -56,14 +65,12 @@ public class TrackingActivity extends ActionBarActivity {
 
         public CounterClass(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
-            // TODO Auto-generated constructor stub
         }
 
         @SuppressLint("NewApi")
         @TargetApi(Build.VERSION_CODES.GINGERBREAD)
         @Override
         public void onTick(long millisUntilFinished) {
-            // TODO Auto-generated method stub
 
             long millis = millisUntilFinished;
             String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
@@ -75,7 +82,6 @@ public class TrackingActivity extends ActionBarActivity {
 
         @Override
         public void onFinish() {
-            // TODO Auto-generated method stub
             textViewTime.setText("Completed.");
         }
 
