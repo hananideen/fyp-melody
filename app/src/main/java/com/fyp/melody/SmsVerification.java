@@ -140,7 +140,7 @@ public class SmsVerification extends Activity {
                         ApplicationLoader.getInstance().getSettingsPrefFileEditor().putString("phoneNumber", PhoneNumberUtils.stripSeparators(phoneNumber));
 
                         if (Direction == 0){
-                            Intent intnt = new Intent(SmsVerification.this, MainActivity.class);
+                            Intent intnt = new Intent(SmsVerification.this, LoginProfile.class);
                             ApplicationLoader.getInstance().getSettingsPrefFileEditor().putBoolean("hasLoggedIn", true);
                             ApplicationLoader.getInstance().getSettingsPrefFileEditor().apply();
                             countDownTimer.cancel();
@@ -161,7 +161,7 @@ public class SmsVerification extends Activity {
             @Override
             public void onClick(View v) {
                 countDownTimer.cancel();
-                Intent intent1 = new Intent(SmsVerification.this, MainActivity.class);
+                Intent intent1 = new Intent(SmsVerification.this, LoginPhone.class);
                 startActivity(intent1);
                 finish();
             }

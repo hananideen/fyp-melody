@@ -30,9 +30,9 @@ import java.io.File;
 import java.util.HashMap;
 
 /**
- * Created by Hananideen on 1/6/2015.
+ * Created by Hananideen on 7/7/2015.
  */
-public class ProfileLogin extends ActionBarActivity {
+public class LoginProfile extends ActionBarActivity {
 
     private Button Start;
     private EditText Username;
@@ -41,10 +41,9 @@ public class ProfileLogin extends ActionBarActivity {
     private Uri selectedImage;
     private String userName;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_login);
+        setContentView(R.layout.activity_login_profile);
 
         InitUI();
 
@@ -55,9 +54,9 @@ public class ProfileLogin extends ActionBarActivity {
                 if (userName.length() == 0){
                     Toast.makeText(ApplicationLoader.getContext(), "Please Enter a Username", Toast.LENGTH_LONG).show();
                 } else {
-                    final ProgressDialog dialog = ProgressDialog.show(ProfileLogin.this,"", "Getting you ready for Melody", true);
+                    final ProgressDialog dialog = ProgressDialog.show(LoginProfile.this,"", "Getting you ready for Melody", true);
 
-                    final Intent intent = new Intent(ProfileLogin.this, MainActivity.class);
+                    final Intent intent = new Intent(LoginProfile.this, MainActivity.class);
                     JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("user/userregister"),new JSONObject(getParams()), new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -107,7 +106,7 @@ public class ProfileLogin extends ActionBarActivity {
     public void SelectPhoto(){
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileLogin.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginProfile.this);
         builder.setTitle("Add Photo!");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override

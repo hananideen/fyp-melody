@@ -1,6 +1,5 @@
 package com.fyp.melody;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,16 +21,15 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberType;
 import com.google.i18n.phonenumbers.Phonenumber;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 /**
  * Created by Hananideen on 28/5/2015.
  */
-public class PhoneLogin extends ActionBarActivity {
+public class LoginPhone extends ActionBarActivity {
 
-    private static final String TAG = PhoneLogin.class.getSimpleName();
+    private static final String TAG = LoginPhone.class.getSimpleName();
 
 
     private SharedPreferences settings;
@@ -52,7 +50,7 @@ public class PhoneLogin extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_login);
+        setContentView(R.layout.activity_login_phone);
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
         editor = settings.edit();
@@ -74,7 +72,7 @@ public class PhoneLogin extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // create an intent and open a new activity for the country list
-                Intent intent = new Intent(PhoneLogin.this, ChooseCountry.class);
+                Intent intent = new Intent(LoginPhone.this, ChooseCountry.class);
                 countryname = chooseCountry.getText().toString();
                 countrycode = codefield.getText().toString();
                 startActivityForResult(intent, 1);
@@ -192,7 +190,7 @@ public class PhoneLogin extends ActionBarActivity {
                                 editor.putString("CountryCode", countrycode);
                                 editor.apply();
 
-                                Intent intent = new Intent(PhoneLogin.this, SmsVerification.class);
+                                Intent intent = new Intent(LoginPhone.this, SmsVerification.class);
                                 intent.putExtra("phonenumber", phoneUtil.format(numberProto, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL));
                                 intent.putExtra("direction", Direction);
                                 startActivity(intent);

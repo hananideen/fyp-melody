@@ -47,7 +47,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".PhoneLogin"
+            android:name=".LoginPhone"
             android:label="Verify your phone number"
             android:screenOrientation="portrait" >
         </activity>
@@ -71,7 +71,7 @@
         </receiver>
 
         <activity
-            android:name=".ProfileLogin"
+            android:name=".LoginProfile"
             android:label="Setup Profile"
             android:screenOrientation="portrait" >
         </activity>

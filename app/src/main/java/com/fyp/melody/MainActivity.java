@@ -1,6 +1,5 @@
 package com.fyp.melody;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.Fragment;
 import android.content.Intent;
@@ -42,7 +41,7 @@ public class MainActivity extends ActionBarActivity  {
         if(!Login)
         {
             Log.e("MainActivity", "login");
-            Intent intent = new Intent(this, PhoneLogin.class);
+            Intent intent = new Intent(this, LoginPhone.class);
             startActivity(intent);
             finish();
 
