@@ -42,11 +42,11 @@ public class Settings extends Fragment {
                         startActivity(profile);
                         break;
                     case 1:
-                        Intent pass = new Intent(getActivity(), SettingsProfile.class);
+                        Intent pass = new Intent(getActivity(), SettingsPassword.class);
                         startActivity(pass);
                         break;
                     case 2:
-                        Intent address = new Intent(getActivity(), SettingsProfile.class);
+                        Intent address = new Intent(getActivity(), SettingsAddress.class);
                         startActivity(address);
                         break;
                 }
