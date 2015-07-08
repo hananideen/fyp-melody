@@ -84,7 +84,7 @@
         </activity>
         <activity
             android:name=".SettingsPassword"
-            android:label="Password"
+            android:label="Edit Password"
             android:theme="@android:style/Theme.Holo.Light.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
