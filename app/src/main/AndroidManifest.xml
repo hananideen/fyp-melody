@@ -84,14 +84,15 @@
         </activity>
         <activity
             android:name=".SettingsPassword"
-            android:label="@string/title_activity_settings" >
+            android:label="Password"
+            android:theme="@android:style/Theme.Holo.Light.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".SettingsAddress"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
