@@ -120,7 +120,8 @@
         </activity>
         <activity
             android:name=".CheckoutActivity"
-            android:label="Details Confirmation" >
+            android:label="Details Confirmation"
+            android:theme="@android:style/Theme.Holo.Light.Dialog">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ShoppingCartActivity" />

@@ -1,5 +1,6 @@
 package com.fyp.melody;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 /**
  * Created by Hananideen on 30/7/2015.
  */
-public class CheckoutActivity extends AppCompatActivity {
+public class CheckoutActivity extends Activity {
 
     SharedPreferences settings;
     SharedPreferences.Editor editor;
