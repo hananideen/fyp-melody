@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -26,18 +27,34 @@ import android.widget.TextView;
 public class TrackingActivity extends ActionBarActivity {
 
     Button btnStart, btnMap;
-    TextView textViewTime;
+    TextView textViewTime, textViewName, textViewAddress1, textViewAddress2, textViewAddress3, textViewAddress4;
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
+        settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
+
         btnStart = (Button) findViewById(R.id.btnStart);
         btnMap = (Button) findViewById(R.id.btnMap);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
+        textViewName = (TextView) findViewById(R.id.textName);
+        textViewAddress1 = (TextView) findViewById(R.id.textAddress1);
+        textViewAddress2 = (TextView) findViewById(R.id.textAddress2);
+        textViewAddress3 = (TextView) findViewById(R.id.textAddress3);
+        textViewAddress4 = (TextView) findViewById(R.id.textAddress4);
 
         textViewTime.setText("01:00:00");
+
+
+        textViewName.setText(settings.getString("userName", ""));
+        textViewAddress1.setText(settings.getString("Home", ""));
+        textViewAddress2.setText(settings.getString("Street", ""));
+        textViewAddress3.setText(settings.getString("Postcode", ""));
+        textViewAddress4.setText(settings.getString("City", ""));
+
 
         final CounterClass timer = new CounterClass(3600000, 1000);
         btnStart.setOnClickListener(new OnClickListener() {
