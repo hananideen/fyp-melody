@@ -73,7 +73,7 @@ public class MenuActivity extends ActionBarActivity {
 //            }
 //        });
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("promotion/display"),new JSONObject(getparams()), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("restaurant.json"),new JSONObject(getparams()), new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
