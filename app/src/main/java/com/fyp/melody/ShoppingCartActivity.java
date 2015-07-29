@@ -73,7 +73,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
         TextView productPriceTextView = (TextView) findViewById(R.id.TextViewSubtotal);
         String subTotal = null;
         productPriceTextView.setText("Subtotal: RM" + subTotal);
-        Intent payment = new Intent(getBaseContext(), TrackingActivity.class);
+        Intent payment = new Intent(getBaseContext(), CheckoutActivity.class);
         payment.putExtra("subtotal", subTotal);
         startActivity(payment);
     }
