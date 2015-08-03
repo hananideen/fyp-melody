@@ -15,24 +15,26 @@
         android:layout_alignParentStart="true" />
 
 
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:textSize="60sp"
-        />
+    <!--<TextView-->
+        <!--android:id="@+id/textViewTime"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="24dp"-->
+        <!--android:textSize="60sp"-->
+        <!--/>-->
 
     <TextView
         android:id="@+id/textViewTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="134dp"
         android:text="Order Time: 00:00"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textViewETA"
@@ -40,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:text="ETA: 00:00"
+        android:textStyle="bold"
         android:layout_below="@+id/textViewTimestamp"
         android:textSize="18sp" />
 
@@ -50,7 +53,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewTime"
         android:layout_marginTop="134dp"
-        android:text="Thank you for your order. We will deliver your food within 1 hour to :"
+        android:text="Thank you for your order. We will deliver your food to: "
         android:textSize="18sp" />
 
     <TextView
@@ -116,5 +119,14 @@
         android:layout_above="@+id/btnStart"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Order Status"
+        android:id="@+id/status"
+        android:layout_below="@+id/textViewETA"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

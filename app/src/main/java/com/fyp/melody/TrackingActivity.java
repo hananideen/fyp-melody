@@ -43,7 +43,7 @@ public class TrackingActivity extends ActionBarActivity {
 
         btnStart = (Button) findViewById(R.id.btnStart);
         btnMap = (Button) findViewById(R.id.btnMap);
-        textViewTime = (TextView) findViewById(R.id.textViewTime);
+//        textViewTime = (TextView) findViewById(R.id.textViewTime);
         textViewName = (TextView) findViewById(R.id.textName);
         textViewAddress1 = (TextView) findViewById(R.id.textAddress1);
         textViewAddress2 = (TextView) findViewById(R.id.textAddress2);
@@ -51,7 +51,7 @@ public class TrackingActivity extends ActionBarActivity {
         textViewAddress4 = (TextView) findViewById(R.id.textAddress4);
         timestamp = (TextView) findViewById(R.id.textViewTimestamp);
 
-        textViewTime.setText("01:00:00");
+//        textViewTime.setText("01:00:00");
 
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR);
@@ -87,14 +87,14 @@ public class TrackingActivity extends ActionBarActivity {
         textViewAddress4.setText(settings.getString("City", ""));
 
 
-        final CounterClass timer = new CounterClass(3600000, 1000);
-        btnStart.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                timer.start();
-            }
-        });timer.start();
+//        final CounterClass timer = new CounterClass(3600000, 1000);
+//        btnStart.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                timer.start();
+//            }
+//        });timer.start();
 
         btnMap.setOnClickListener(new OnClickListener() {
             @Override
@@ -107,35 +107,35 @@ public class TrackingActivity extends ActionBarActivity {
 
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    @SuppressLint("NewApi")
-    public class CounterClass extends CountDownTimer {
-
-        public CounterClass(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @SuppressLint("NewApi")
-        @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-        @Override
-        public void onTick(long millisUntilFinished) {
-
-            long millis = millisUntilFinished;
-            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-            System.out.println(hms);
-            textViewTime.setText(hms);
-        }
-
-        @Override
-        public void onFinish() {
-            textViewTime.setText("Completed.");
-        }
-
-
-
-    }
+//    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+//    @SuppressLint("NewApi")
+//    public class CounterClass extends CountDownTimer {
+//
+//        public CounterClass(long millisInFuture, long countDownInterval) {
+//            super(millisInFuture, countDownInterval);
+//        }
+//
+//        @SuppressLint("NewApi")
+//        @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+//        @Override
+//        public void onTick(long millisUntilFinished) {
+//
+//            long millis = millisUntilFinished;
+//            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+//                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+//                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+//            System.out.println(hms);
+//            textViewTime.setText(hms);
+//        }
+//
+//        @Override
+//        public void onFinish() {
+//            textViewTime.setText("Completed.");
+//        }
+//
+//
+//
+//    }
 
 
 }
