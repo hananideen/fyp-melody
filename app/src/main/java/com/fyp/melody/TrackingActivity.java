@@ -1,5 +1,8 @@
 package com.fyp.melody;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import android.annotation.SuppressLint;
@@ -29,6 +32,7 @@ public class TrackingActivity extends ActionBarActivity {
     Button btnStart, btnMap;
     TextView textViewTime, textViewName, textViewAddress1, textViewAddress2, textViewAddress3, textViewAddress4;
     SharedPreferences settings;
+    TextView timestamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +49,36 @@ public class TrackingActivity extends ActionBarActivity {
         textViewAddress2 = (TextView) findViewById(R.id.textAddress2);
         textViewAddress3 = (TextView) findViewById(R.id.textAddress3);
         textViewAddress4 = (TextView) findViewById(R.id.textAddress4);
+        timestamp = (TextView) findViewById(R.id.textViewTimestamp);
 
         textViewTime.setText("01:00:00");
 
+        Calendar c = Calendar.getInstance();
+        int hours = c.get(Calendar.HOUR);
+        int minutes = c.get(Calendar.MINUTE);
+        int AMPM = c.get(Calendar.AM_PM);
+        try{
+            if (hours < 12)
+            {
+                String PM = "";
+                if (AMPM == 1)
+                {
+                    PM = "PM";
+                }
+                timestamp.setText("Order Time: " + hours + ":" + minutes + PM);
+            }
+            else if (hours > 12)
+            {
+                String AM = "";
+                if (AMPM == 0)
+                {
+                    AM = "AM";
+                }
+                hours = hours - 12;
+                timestamp.setText("Order Time: " + hours + ":" + minutes + AM);
+            }
+        } catch (Exception e) {
+        }
 
         textViewName.setText(settings.getString("userName", ""));
         textViewAddress1.setText(settings.getString("Home", ""));
