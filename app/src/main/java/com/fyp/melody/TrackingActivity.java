@@ -58,23 +58,16 @@ public class TrackingActivity extends ActionBarActivity {
         int minutes = c.get(Calendar.MINUTE);
         int AMPM = c.get(Calendar.AM_PM);
         try{
-            if (hours < 12)
+            if (AMPM == 1)
             {
                 String PM = "";
-                if (AMPM == 1)
-                {
-                    PM = "PM";
-                }
+                PM = "PM";
                 timestamp.setText("Order Time: " + hours + ":" + minutes + PM);
             }
-            else if (hours > 12)
+            else if (AMPM == 0)
             {
                 String AM = "";
-                if (AMPM == 0)
-                {
-                    AM = "AM";
-                }
-                hours = hours - 12;
+                AM = "AM";
                 timestamp.setText("Order Time: " + hours + ":" + minutes + AM);
             }
         } catch (Exception e) {
