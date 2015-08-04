@@ -46,7 +46,14 @@ public class CheckoutActivity extends Activity {
         });
 
         address2 = (RadioButton) findViewById(R.id.radio2);
-        address2.setText("Delivery Address: " + settings.getString("Home", ""));
+        address2.setText("Delivery Address: " + settings.getString("Home2", ""));
+        address2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent add = new Intent(CheckoutActivity.this, SettingsAddress2.class);
+                startActivity(add);
+            }
+        });
 
         savedPassword = settings.getString("Password", "");
 

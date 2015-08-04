@@ -100,7 +100,11 @@
         </activity>
         <activity
             android:name=".SettingsAddress1"
-            android:label="@string/title_activity_settings">
+            android:label="Main Address">
+        </activity>
+        <activity
+            android:name=".SettingsAddress2"
+            android:label="Delivery Address">
         </activity>
         <activity
             android:name=".Restaurant1"
