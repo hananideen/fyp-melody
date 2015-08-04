@@ -3,64 +3,95 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <RelativeLayout
-        android:orientation="horizontal"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal" >
 
-        <EditText
-            android:layout_marginTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search"
-            android:id="@+id/searchPlaces"
-            />
-
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"
-            android:id="@+id/SearchplaceButton"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+                <EditText
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Search"
+                    android:id="@+id/searchPlaces"
+                    />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please tap to choose your location and fill in below:"
-        android:id="@+id/textView9"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:id="@+id/SearchplaceButton"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Building/Home No."
-        android:id="@+id/editHome" />
+            </RelativeLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Street"
-        android:id="@+id/editStreet" />
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Confirm"
-        android:id="@+id/buttonConfirm"
-        android:layout_gravity="end" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please tap to choose your location and fill in below:"
+                android:id="@+id/textView9"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Building/Home No."
+                android:id="@+id/editHome" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Street"
+                android:id="@+id/editStreet" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Confirm"
+                    android:id="@+id/buttonConfirm"
+                    android:layout_gravity="end" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:id="@+id/buttonCancel"
+                    android:layout_gravity="end"
+                    android:layout_alignTop="@+id/buttonConfirm"
+                    android:layout_toRightOf="@+id/buttonConfirm"
+                    android:layout_toEndOf="@+id/buttonConfirm" />
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
