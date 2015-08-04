@@ -29,30 +29,30 @@
         android:id="@+id/ProfileUsername"
         android:layout_marginTop="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Building/Home No."
-        android:id="@+id/editHome" />
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Building/Home No."-->
+        <!--android:id="@+id/editHome" />-->
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Street"
-        android:id="@+id/editStreet" />
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Street"-->
+        <!--android:id="@+id/editStreet" />-->
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Postcode"
-        android:inputType="number"
-        android:id="@+id/editPostcode" />
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Postcode"-->
+        <!--android:inputType="number"-->
+        <!--android:id="@+id/editPostcode" />-->
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="City"
-        android:id="@+id/editCity" />
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="City"-->
+        <!--android:id="@+id/editCity" />-->
 
             <RadioGroup
                 android:id="@+id/radioGroup1"
