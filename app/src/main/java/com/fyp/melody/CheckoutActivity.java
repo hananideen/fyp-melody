@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 /**
@@ -21,6 +21,7 @@ public class CheckoutActivity extends Activity {
     private EditText editName, editHome, editStreet, editPostcode, editCity, editPass;
     private Button buttonConfirm;
     private String password, savedPassword;
+    private RadioButton address1;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,6 +47,15 @@ public class CheckoutActivity extends Activity {
 
         editPass = (EditText) findViewById(R.id.editPass);
 
+        address1 = (RadioButton) findViewById(R.id.radio1);
+        address1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent add = new Intent(CheckoutActivity.this, SettingsAddress1.class);
+                startActivity(add);
+            }
+        });
+
 
         savedPassword = settings.getString("Password", "");
 
@@ -66,7 +76,7 @@ public class CheckoutActivity extends Activity {
                     Intent track = new Intent(CheckoutActivity.this, TrackingActivity.class);
                     startActivity(track);
 
-                } else if (password == null) {
+                } else if (password.length()==0) {
                     Toast.makeText(getApplicationContext(), "Please insert your password.", Toast.LENGTH_LONG).show();
                 }
                 else {
