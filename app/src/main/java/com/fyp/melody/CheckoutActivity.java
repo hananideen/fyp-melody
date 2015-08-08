@@ -20,7 +20,7 @@ public class CheckoutActivity extends Activity {
 
     private EditText editName, editPass;
     private Button buttonConfirm;
-    private String password, savedPassword;
+    private String password, savedPassword, home, street, home2, street2;
     private RadioButton address1, address2;
 
     protected void onCreate(Bundle savedInstanceState){
@@ -36,7 +36,7 @@ public class CheckoutActivity extends Activity {
         editPass = (EditText) findViewById(R.id.editPass);
 
         address1 = (RadioButton) findViewById(R.id.radio1);
-        address1.setText("Main Address: " + settings.getString("Home", ""));
+        address1.setText("Main Address: " + settings.getString("Home", "") + ", " + settings.getString("Street", ""));
         address1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class CheckoutActivity extends Activity {
         });
 
         address2 = (RadioButton) findViewById(R.id.radio2);
-        address2.setText("Delivery Address: " + settings.getString("Home2", ""));
+        address2.setText("Delivery Address: " + settings.getString("Home2", "") + ", " + settings.getString("Street2", ""));
         address2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +56,11 @@ public class CheckoutActivity extends Activity {
         });
 
         savedPassword = settings.getString("Password", "");
+        home = settings.getString("Home", "");
+        street = settings.getString("Street", "");
+        home2 = settings.getString("Home2", "");
+        street2 = settings.getString("Street2", "");
+
 
         buttonConfirm = (Button) findViewById(R.id.buttonConfirm);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +73,13 @@ public class CheckoutActivity extends Activity {
                     editor.commit();
 
                     Intent track = new Intent(CheckoutActivity.this, TrackingActivity.class);
+                    if (address1.isChecked()){
+                        track.putExtra("home", home);
+                        track.putExtra("street", street);
+                    } else {
+                        track.putExtra("home", home2);
+                        track.putExtra("street", street2);
+                    }
                     startActivity(track);
 
                 } else if (password.length()==0) {

@@ -30,7 +30,7 @@ import android.widget.TextView;
 public class TrackingActivity extends ActionBarActivity {
 
     Button btnStart, btnMap;
-    TextView textViewTime, textViewName, textViewAddress1, textViewAddress2, textViewAddress3, textViewAddress4;
+    TextView textViewTime, textViewName, textViewAddress1, textViewAddress2;
     SharedPreferences settings;
     TextView timestamp;
 
@@ -43,14 +43,11 @@ public class TrackingActivity extends ActionBarActivity {
 
         btnStart = (Button) findViewById(R.id.btnStart);
         btnMap = (Button) findViewById(R.id.btnMap);
-//        textViewTime = (TextView) findViewById(R.id.textViewTime);
         textViewName = (TextView) findViewById(R.id.textName);
         textViewAddress1 = (TextView) findViewById(R.id.textAddress1);
         textViewAddress2 = (TextView) findViewById(R.id.textAddress2);
-        textViewAddress3 = (TextView) findViewById(R.id.textAddress3);
-        textViewAddress4 = (TextView) findViewById(R.id.textAddress4);
         timestamp = (TextView) findViewById(R.id.textViewTimestamp);
-
+//        textViewTime = (TextView) findViewById(R.id.textViewTime);
 //        textViewTime.setText("01:00:00");
 
         Calendar c = Calendar.getInstance();
@@ -73,11 +70,13 @@ public class TrackingActivity extends ActionBarActivity {
         } catch (Exception e) {
         }
 
+        Intent track = getIntent();
+        String home = track.getStringExtra("home");
+        String street = track.getStringExtra("street");
+
         textViewName.setText(settings.getString("userName", ""));
-        textViewAddress1.setText(settings.getString("Home", ""));
-        textViewAddress2.setText(settings.getString("Street", ""));
-        textViewAddress3.setText(settings.getString("Postcode", ""));
-        textViewAddress4.setText(settings.getString("City", ""));
+        textViewAddress1.setText(home);
+        textViewAddress2.setText(street);
 
 
 //        final CounterClass timer = new CounterClass(3600000, 1000);
