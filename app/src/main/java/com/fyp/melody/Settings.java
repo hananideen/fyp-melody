@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +17,19 @@ import java.util.List;
 /**
  * Created by Hananideen on 31/5/2015.
  */
-public class Settings extends Fragment {
+public class Settings extends AppCompatActivity {
 
     private List<SettingsList> mProductList;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_setings, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_setings);
 
         mProductList = SettingsHelper.getCatalog(getResources());
 
 
-        ListView listViewCatalog = (ListView) rootView.findViewById(R.id.ListViewSettings);
-        listViewCatalog.setAdapter(new SettingsListAdapter(mProductList, getActivity().getLayoutInflater()));
+        ListView listViewCatalog = (ListView) findViewById(R.id.ListViewSettings);
+        listViewCatalog.setAdapter(new SettingsListAdapter(mProductList, getLayoutInflater()));
 
         listViewCatalog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -38,22 +38,20 @@ public class Settings extends Fragment {
 
                 switch (position) {
                     case 0:
-                        Intent profile = new Intent(getActivity(), SettingsProfile.class);
+                        Intent profile = new Intent(Settings.this, SettingsProfile.class);
                         startActivity(profile);
                         break;
                     case 1:
-                        Intent pass = new Intent(getActivity(), SettingsPassword.class);
+                        Intent pass = new Intent(Settings.this, SettingsPassword.class);
                         startActivity(pass);
                         break;
                     case 2:
-                        Intent address = new Intent(getActivity(), SettingsAddress.class);
+                        Intent address = new Intent(Settings.this, SettingsAddress.class);
                         startActivity(address);
                         break;
                 }
             }
         });
-
-        return rootView;
 
     }
 

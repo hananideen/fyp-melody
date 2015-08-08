@@ -181,7 +181,7 @@ public class SmsVerification extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             Log.e(TAG, "Back key is pressed");
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Restaurant.class);
             startActivity(intent);
             finish();
             return true;

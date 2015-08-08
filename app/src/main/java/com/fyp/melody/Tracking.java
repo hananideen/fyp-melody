@@ -2,6 +2,7 @@ package com.fyp.melody;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,10 @@ import android.view.ViewGroup;
 /**
  * Created by Hananideen on 31/5/2015.
  */
-public class Tracking extends Fragment {
+public class Tracking extends AppCompatActivity {
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_tracking, container, false);
-        return rootView;
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_tracking);
     }
 }
