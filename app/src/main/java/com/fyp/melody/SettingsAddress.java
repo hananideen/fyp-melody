@@ -1,5 +1,6 @@
 package com.fyp.melody;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,8 +14,7 @@ import android.widget.Toast;
  */
 public class SettingsAddress extends ActionBarActivity {
 
-    private EditText editHome, editStreet, editPostcode, editCity;
-    private Button buttonSave;
+    private Button buttonMain, buttonDelivery;
 
     SharedPreferences settings;
     SharedPreferences.Editor editor;
@@ -26,36 +26,25 @@ public class SettingsAddress extends ActionBarActivity {
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
         editor = settings.edit();
 
-        editHome = (EditText) findViewById(R.id.editHome);
-        editHome.setText(settings.getString("Home", ""));
-
-        editStreet = (EditText) findViewById(R.id.editStreet);
-        editStreet.setText(settings.getString("Street", ""));
-
-        editPostcode = (EditText) findViewById(R.id.editPostcode);
-        editPostcode.setText(settings.getString("Postcode", ""));
-
-        editCity = (EditText) findViewById(R.id.editCity);
-        editCity.setText(settings.getString("City", ""));
-
-        buttonSave = (Button) findViewById(R.id.buttonSave);
-        buttonSave.setOnClickListener(new View.OnClickListener() {
+        buttonMain = (Button) findViewById(R.id.buttonMain);
+        buttonMain.setText(settings.getString("Home", "") + ", " + settings.getString("Street", ""));
+        buttonMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(editHome == null && editStreet == null && editPostcode == null && editCity == null){
-                    Toast.makeText(getApplicationContext(), "Please insert your address.", Toast.LENGTH_LONG).show();
-                }
-
-                else {
-                    editor.putString("Home", editHome.getText().toString());
-                    editor.putString("Street", editStreet.getText().toString());
-                    editor.putString("Postcode", editPostcode.getText().toString());
-                    editor.putString("City", editCity.getText().toString());
-                    editor.commit();
-                    Toast.makeText(getApplicationContext(), "Address saved.", Toast.LENGTH_LONG).show();
-                }
+                Intent intent = new Intent(SettingsAddress.this, SettingsAddress1.class);
+                startActivity(intent);
             }
         });
+
+        buttonDelivery = (Button) findViewById(R.id.buttonDelivery);
+        buttonDelivery.setText(settings.getString("Home2", "") + ", " + settings.getString("Street2", ""));
+        buttonDelivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsAddress.this, SettingsAddress2.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

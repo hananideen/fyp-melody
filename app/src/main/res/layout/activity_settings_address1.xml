@@ -14,29 +14,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:id="@+id/linearLayoutAddLayout"
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_margin="5dip">
 
                 <EditText
                     android:layout_marginTop="12dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Search"
-                    android:id="@+id/searchPlaces"
-                    />
-
-                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Search"
-                    android:id="@+id/SearchplaceButton"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_weight="0.01"
+                    android:hint="Search"
+                    android:id="@+id/searchPlaces">
+                </EditText>
 
-            </RelativeLayout>
+                <Button
+                    android:layout_gravity="right"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Search"
+                    android:id="@+id/SearchButton"/>
+            </LinearLayout>
 
             <fragment
                 android:layout_width="match_parent"
