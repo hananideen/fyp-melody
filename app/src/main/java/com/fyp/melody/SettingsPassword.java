@@ -14,7 +14,8 @@ import android.widget.Toast;
 public class SettingsPassword extends Activity {
 
     private EditText editPass, editPass2;
-    private Button buttonSave;
+    private Button buttonSave, buttonCancel;
+    private String password, confirmPassword;
 
     SharedPreferences settings;
     SharedPreferences.Editor editor;
@@ -32,20 +33,35 @@ public class SettingsPassword extends Activity {
         editPass2 = (EditText) findViewById(R.id.editPass2);
         editPass2.setText(settings.getString("confirmPassword", ""));
 
+        buttonCancel = (Button) findViewById(R.id.buttonCancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-//                if (editPass != editPass2 ) {
-//                    Toast.makeText(getApplicationContext(), "The passwords are different.", Toast.LENGTH_LONG).show();
-//                } else {
+                password = editPass.getText().toString();
+                confirmPassword = editPass2.getText().toString();
+
+                if (password.length()==0 && confirmPassword.length()==0) {
+                    Toast.makeText(getApplicationContext(), "Please insert your password", Toast.LENGTH_LONG).show();
+
+                } else if (password.equals(confirmPassword)) {
                     editor.putString("Password", editPass.getText().toString());
                     editor.putString("confirmPassword", editPass2.getText().toString());
                     editor.commit();
-                    Toast.makeText(getApplicationContext(), "Password saved.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Password saved", Toast.LENGTH_LONG).show();
                     finish();
-//                }
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Both passwords are different, please insert correctly", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
