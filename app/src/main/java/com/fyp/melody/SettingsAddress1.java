@@ -1,5 +1,7 @@
 package com.fyp.melody;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +14,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -134,7 +134,11 @@ public class SettingsAddress1 extends AppCompatActivity {
                     editor.putString("Home", editHome.getText().toString());
                     editor.putString("Street", editStreet.getText().toString());
                     editor.commit();
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("address", home);
+                    setResult(Activity.RESULT_OK, resultIntent);
                     finish();
+
                 }
             }
         });

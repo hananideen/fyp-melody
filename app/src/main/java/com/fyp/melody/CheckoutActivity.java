@@ -20,7 +20,7 @@ public class CheckoutActivity extends Activity {
 
     private EditText editName, editPass;
     private Button buttonConfirm;
-    private String password, savedPassword, home, street, home2, street2;
+    private String password, savedPassword, home, street, home2, street2, savedLatitude, savedLongitude;
     private RadioButton address1, address2;
 
     protected void onCreate(Bundle savedInstanceState){
@@ -41,7 +41,7 @@ public class CheckoutActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent add = new Intent(CheckoutActivity.this, SettingsAddress1.class);
-                startActivity(add);
+                startActivityForResult(add, 1);
             }
         });
 
@@ -51,16 +51,11 @@ public class CheckoutActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent add = new Intent(CheckoutActivity.this, SettingsAddress2.class);
-                startActivity(add);
+                startActivityForResult(add, 2);
             }
         });
 
         savedPassword = settings.getString("Password", "");
-        home = settings.getString("Home", "");
-        street = settings.getString("Street", "");
-        home2 = settings.getString("Home2", "");
-        street2 = settings.getString("Street2", "");
-
 
         buttonConfirm = (Button) findViewById(R.id.buttonConfirm);
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
@@ -76,9 +71,13 @@ public class CheckoutActivity extends Activity {
                     if (address1.isChecked()){
                         track.putExtra("home", home);
                         track.putExtra("street", street);
+                        track.putExtra("lat", savedLatitude);
+                        track.putExtra("long", savedLongitude);
                     } else {
                         track.putExtra("home", home2);
                         track.putExtra("street", street2);
+                        track.putExtra("lat", savedLatitude);
+                        track.putExtra("long", savedLongitude);
                     }
                     startActivity(track);
 
@@ -91,5 +90,28 @@ public class CheckoutActivity extends Activity {
 
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+
+                address1.setText("Main Address: " + settings.getString("Home", "") + ", " + settings.getString("Street", ""));
+                home = settings.getString("Home", "");
+                street = settings.getString("Street", "");
+                savedLatitude = settings.getString("Latitude", "");
+                savedLongitude = settings.getString("Longitude", "");
+
+            } else if (requestCode == 2) {
+
+                address2.setText("Delivery Address: " + settings.getString("Home2", "") + ", " + settings.getString("Street2", ""));
+                home2 = settings.getString("Home2", "");
+                street2 = settings.getString("Street2", "");
+                savedLatitude = settings.getString("Latitude2", "");
+                savedLongitude = settings.getString("Longitude2", "");
+
+            }
+        }
     }
 }

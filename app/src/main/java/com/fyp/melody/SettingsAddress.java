@@ -32,7 +32,7 @@ public class SettingsAddress extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsAddress.this, SettingsAddress1.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -42,9 +42,24 @@ public class SettingsAddress extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsAddress.this, SettingsAddress2.class);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+
+                buttonMain.setText(settings.getString("Home", "") + ", " + settings.getString("Street", ""));
+
+            } else if (requestCode == 2) {
+
+                buttonDelivery.setText(settings.getString("Home2", "") + ", " + settings.getString("Street2", ""));
+
+            }
+        }
     }
 }

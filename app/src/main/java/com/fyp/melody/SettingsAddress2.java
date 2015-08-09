@@ -1,5 +1,7 @@
 package com.fyp.melody;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -132,6 +134,9 @@ public class SettingsAddress2 extends AppCompatActivity {
                     editor.putString("Home2", editHome.getText().toString());
                     editor.putString("Street2", editStreet.getText().toString());
                     editor.commit();
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("address", home);
+                    setResult(Activity.RESULT_OK, resultIntent);
                     finish();
                 }
             }
