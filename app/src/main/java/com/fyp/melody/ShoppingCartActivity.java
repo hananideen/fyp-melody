@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
 
     private List<Product> mCartList;
     private ProductAdapter mProductAdapter;
+    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
 
 
         mCartList = ShoppingCartHelper.getCartList();
+        df = new DecimalFormat("#.##");
 
         // Make sure to clear the selections
         for(int i=0; i<mCartList.size(); i++) {
@@ -66,15 +69,12 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
         }
 
         TextView productPriceTextView = (TextView) findViewById(R.id.TextViewSubtotal);
-        productPriceTextView.setText("Subtotal: RM" + subTotal);
+        productPriceTextView.setText("Subtotal: RM" + df.format(subTotal));
     }
 
     public void checkout (View v) {
-        TextView productPriceTextView = (TextView) findViewById(R.id.TextViewSubtotal);
-        String subTotal = null;
-        productPriceTextView.setText("Subtotal: RM" + subTotal);
         Intent payment = new Intent(getBaseContext(), CheckoutActivity.class);
-        payment.putExtra("subtotal", subTotal);
+//        payment.putExtra("subtotal", subTotal);
         startActivity(payment);
     }
 
