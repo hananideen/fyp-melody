@@ -33,7 +33,7 @@ public class TrackingActivity extends ActionBarActivity {
     Button btnStart, btnMap;
     TextView textViewTime, textViewName, textViewAddress1, textViewAddress2;
     SharedPreferences settings;
-    TextView timestamp;
+    TextView timestamp, ETA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,8 @@ public class TrackingActivity extends ActionBarActivity {
         textViewAddress1 = (TextView) findViewById(R.id.textAddress1);
         textViewAddress2 = (TextView) findViewById(R.id.textAddress2);
         timestamp = (TextView) findViewById(R.id.textViewTimestamp);
+        ETA = (TextView) findViewById(R.id.textViewETA);
+
 //        textViewTime = (TextView) findViewById(R.id.textViewTime);
 //        textViewTime.setText("01:00:00");
 
@@ -67,6 +69,39 @@ public class TrackingActivity extends ActionBarActivity {
                 String AM = "";
                 AM = "AM";
                 timestamp.setText("Order Time: " + hours + ":" + minutes + AM);
+            }
+        } catch (Exception e) {
+        }
+
+        try{
+            if (AMPM == 1)
+            {
+                String PM = "";
+                PM = "PM";
+                minutes = minutes + 40;
+                if(minutes > 59)
+                {
+                    hours = hours + 1;
+                    minutes = minutes - 60;
+                    ETA.setText("ETA: " + hours + ":" + minutes + PM);
+                } else {
+                    ETA.setText("ETA: " + hours + ":" + minutes + PM);
+                }
+
+            }
+            else if (AMPM == 0)
+            {
+                String AM = "";
+                AM = "AM";
+                minutes = minutes + 40;
+                if(minutes > 59)
+                {
+                    hours = hours + 1;
+                    minutes = minutes - 60;
+                    ETA.setText("ETA: " + hours + ":" + minutes + AM);
+                } else {
+                    ETA.setText("ETA: " + hours + ":" + minutes + AM);
+                }
             }
         } catch (Exception e) {
         }
