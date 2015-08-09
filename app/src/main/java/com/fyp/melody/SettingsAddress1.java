@@ -63,7 +63,7 @@ public class SettingsAddress1 extends AppCompatActivity {
             @Override
             public void onMapClick(LatLng point) {
 
-                if(markerPoints.size()>0){
+                if (markerPoints.size() > 0) {
                     markerPoints.clear();
                     map.clear();
                 }
@@ -96,6 +96,20 @@ public class SettingsAddress1 extends AppCompatActivity {
                     CameraUpdate mmuLocation = CameraUpdateFactory.newLatLngZoom(mmu, 15);
                     map.animateCamera(mmuLocation);
 
+                } else if (search.equals("TPC") || search.equals("Taman Pinggiran Cyber") || search.equals("tpc") || search.equals("taman pinggiran cyber")  || search.equals("PC") || search.equals("Pinggiran Cyber") || search.equals("pc") || search.equals("pinggiran cyber")){
+
+                    LatLng tpc = new LatLng(2.914, 101.629);
+                    CameraUpdate tpcLocation = CameraUpdateFactory.newLatLngZoom(tpc, 15);
+                    map.animateCamera(tpcLocation);
+
+                } else if (search.equals("Cyberia") || search.equals("cyberia")){
+
+                    LatLng cbr = new LatLng(2.923, 101.638);
+                    CameraUpdate cbrLocation = CameraUpdateFactory.newLatLngZoom(cbr, 15);
+                    map.animateCamera(cbrLocation);
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Location not found", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -114,7 +128,7 @@ public class SettingsAddress1 extends AppCompatActivity {
 
                 home = editHome.getText().toString();
                 if (home.length()==0) {
-                    Toast.makeText(getApplicationContext(), "Please insert your home number/building name.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please insert your home number/building name", Toast.LENGTH_LONG).show();
                 }
                 else {
                     editor.putString("Home", editHome.getText().toString());
