@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Hananideen on 30/6/2015.
@@ -73,11 +74,12 @@ public class TrackingActivity extends ActionBarActivity {
         Intent track = getIntent();
         String home = track.getStringExtra("home");
         String street = track.getStringExtra("street");
+        final String latitude = track.getStringExtra("lat");
+        final String longitude = track.getStringExtra("long");
 
         textViewName.setText(settings.getString("userName", ""));
         textViewAddress1.setText(home);
         textViewAddress2.setText(street);
-
 
 //        final CounterClass timer = new CounterClass(3600000, 1000);
 //        btnStart.setOnClickListener(new OnClickListener() {
@@ -92,6 +94,8 @@ public class TrackingActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent map = new Intent(TrackingActivity.this, MapsActivity.class);
+                map.putExtra("lat",latitude);
+                map.putExtra("long",longitude);
                 startActivity(map);
             }
         });
