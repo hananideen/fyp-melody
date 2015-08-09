@@ -46,16 +46,18 @@ public class SettingsAddress1 extends AppCompatActivity {
 
         savedLatitude = settings.getString("Latitude", "");
         savedLongitude = settings.getString("Longitude", "");
+        if(savedLatitude.length()==0){
 
-        Toast.makeText(getApplicationContext(), "" +savedLatitude +"," +savedLongitude , Toast.LENGTH_LONG).show();
+        } else{
 
-//        Double latDouble = Double.parseDouble(savedLatitude);
-//        Double longDouble = Double.parseDouble(savedLongitude);
+            Double latDouble = Double.parseDouble(savedLatitude);
+            Double longDouble = Double.parseDouble(savedLongitude);
 
-        LatLng location = new LatLng(2.927, 101.641);
-        map.addMarker(new MarkerOptions().position(location).title("Your location"));
-        CameraUpdate zoomLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
-        map.animateCamera(zoomLocation);
+            LatLng location = new LatLng(latDouble, longDouble);
+            map.addMarker(new MarkerOptions().position(location).title("Your location"));
+            CameraUpdate zoomLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
+            map.animateCamera(zoomLocation);
+        }
 
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
@@ -69,7 +71,7 @@ public class SettingsAddress1 extends AppCompatActivity {
                 markerPoints.add(point);
                 MarkerOptions options = new MarkerOptions();
                 options.position(point);
-                map.addMarker(options.title("Your location" + point.latitude + point.longitude));
+                map.addMarker(options.title("Your location"));
 
                 String latitude = String.valueOf(point.latitude);
                 String longitude = String.valueOf(point.longitude);
