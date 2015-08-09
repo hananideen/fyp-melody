@@ -40,10 +40,17 @@
         android:id="@+id/textViewETA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:text="ETA: 00:00"
         android:textStyle="bold"
         android:layout_below="@+id/textViewTimestamp"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Status:"
+        android:textStyle="bold"
+        android:layout_below="@+id/textViewETA"
         android:textSize="18sp" />
 
     <TextView
@@ -51,7 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="134dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/imageView2"
         android:text="Thank you for your order. We will deliver your food to: "
         android:textSize="18sp" />
 
@@ -98,13 +106,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Order Status"
-        android:id="@+id/status"
-        android:layout_below="@+id/textViewETA"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="20dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/order"
+        android:scaleType="center"
+        android:layout_below="@+id/textView11"
+        android:layout_toLeftOf="@+id/btnMap"
+        android:layout_toStartOf="@+id/btnMap" />
+
 
 </RelativeLayout>
