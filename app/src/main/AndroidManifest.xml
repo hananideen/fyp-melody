@@ -140,6 +140,22 @@
                 android:value=".ShoppingCartActivity" />
         </activity>
         <activity
+            android:name=".PaymentActivity"
+            android:label="Choose Payment Method"
+            android:theme="@android:style/Theme.Holo.Light.Dialog">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ShoppingCartActivity" />
+        </activity>
+        <activity
+            android:name=".PaymentBankActivity"
+            android:label="Online Payment"
+            android:theme="@android:style/Theme.Holo.Light.Dialog">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ShoppingCartActivity" />
+        </activity>
+        <activity
             android:name=".CheckoutActivity"
             android:label="Details Confirmation"
             android:theme="@android:style/Theme.Holo.Light.Dialog">

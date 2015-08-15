@@ -73,7 +73,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
     }
 
     public void checkout (View v) {
-        Intent payment = new Intent(getBaseContext(), CheckoutActivity.class);
+        Intent payment = new Intent(getBaseContext(), PaymentActivity.class);
 //        payment.putExtra("subtotal", subTotal);
         startActivity(payment);
     }

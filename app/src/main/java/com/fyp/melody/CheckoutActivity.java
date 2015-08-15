@@ -79,7 +79,9 @@ public class CheckoutActivity extends Activity {
                         track.putExtra("lat", savedLatitude);
                         track.putExtra("long", savedLongitude);
                     }
+                    Toast.makeText(getApplicationContext(), "Order submitted", Toast.LENGTH_LONG).show();
                     startActivity(track);
+
 
                 } else if (password.length()==0) {
                     Toast.makeText(getApplicationContext(), "Please insert your password", Toast.LENGTH_LONG).show();
