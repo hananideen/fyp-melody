@@ -94,11 +94,12 @@
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Confirm"
+                android:layout_margin="10dp"
+                android:layout_height="32dp"
                 android:background="@drawable/button_bg"
                 android:textColor="@color/white"
+                android:layout_marginTop="30dp"
+                android:text="Confirm"
                 android:id="@+id/buttonConfirm"
                 android:layout_gravity="end" />
 

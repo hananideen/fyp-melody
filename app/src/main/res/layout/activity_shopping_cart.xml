@@ -32,21 +32,24 @@
 
     </ListView>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="375dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_margin="5dip"
         android:id="@+id/LinearLayoutCheckout"
-        android:layout_gravity="right">
+        android:layout_gravity="right"
+        android:weightSum="1">
 
         <Button
             android:id="@+id/Button02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Proceed to Checkout"
+            android:layout_width="173dp"
+            android:layout_margin="10dp"
+            android:layout_height="32dp"
             android:background="@drawable/button_bg"
             android:textColor="@color/white"
-            android:onClick="checkout" >
+            android:layout_gravity="end"
+            android:text="Proceed to Checkout"
+            android:onClick="checkout">
         </Button>
     </LinearLayout>
 

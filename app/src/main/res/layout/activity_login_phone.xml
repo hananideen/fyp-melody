@@ -85,10 +85,11 @@
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Ok"
+            android:layout_margin="10dp"
+            android:layout_height="32dp"
             android:background="@drawable/button_bg"
             android:textColor="@color/white"
+            android:text="@string/Ok"
             android:id="@+id/OkButton" />
     </LinearLayout>
 
