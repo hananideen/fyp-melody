@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -31,10 +32,14 @@ public class SettingsAddress1 extends AppCompatActivity {
     private EditText editHome, editStreet, editSearch;
     private Button buttonConfirm, buttonCancel, buttonSearch;
     private String home, search, savedLatitude, savedLongitude;
+    private TextView lat, lng;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_address1);
+
+        lat = (TextView) findViewById(R.id.latitude);
+        lng = (TextView) findViewById(R.id.longitude);
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
         editor = settings.edit();
@@ -46,8 +51,11 @@ public class SettingsAddress1 extends AppCompatActivity {
 
         savedLatitude = settings.getString("Latitude", "");
         savedLongitude = settings.getString("Longitude", "");
-        if(savedLatitude.length()==0){
+        lat.setText(savedLatitude);
+        lng.setText(savedLongitude);
 
+        if(savedLatitude.length()==0){
+            //do nothing
         } else{
 
             Double latDouble = Double.parseDouble(savedLatitude);
@@ -75,6 +83,9 @@ public class SettingsAddress1 extends AppCompatActivity {
 
                 String latitude = String.valueOf(point.latitude);
                 String longitude = String.valueOf(point.longitude);
+
+                lat.setText(latitude);
+                lng.setText(longitude);
                 editor.putString("Latitude", latitude);
                 editor.putString("Longitude", longitude);
                 editor.commit();
