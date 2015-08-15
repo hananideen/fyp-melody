@@ -101,11 +101,6 @@ public class Restaurant extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.action_track) {
-            Intent track = new Intent(Restaurant.this, Tracking.class);
-            startActivity(track);
-            return true;
-        }
 
         if (id == R.id.action_cart) {
             Intent cart = new Intent(Restaurant.this, ShoppingCartActivity.class);

@@ -6,8 +6,8 @@
     </style>
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background"  tools:ignore="NewApi">@color/purple</item>
-        <item name="background">@color/purple</item>
+        <item name="android:background"  tools:ignore="NewApi">@color/valencia</item>
+        <item name="background">@color/valencia</item>
         <item name="android:titleTextStyle">@style/MyTextStyle</item>
     </style>
 

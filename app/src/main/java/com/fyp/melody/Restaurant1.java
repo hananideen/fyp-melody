@@ -3,6 +3,8 @@ package com.fyp.melody;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -50,5 +52,28 @@ public class Restaurant1 extends ActionBarActivity{
             }
         });
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_restaurant, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent setting = new Intent(Restaurant1.this, Settings.class);
+            startActivity(setting);
+            return true;
+        }
+
+        if (id == R.id.action_cart) {
+            Intent cart = new Intent(Restaurant1.this, ShoppingCartActivity.class);
+            startActivity(cart);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
