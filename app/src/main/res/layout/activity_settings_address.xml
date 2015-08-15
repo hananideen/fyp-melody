@@ -26,6 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Main Address"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:textSize="15sp"
         android:id="@+id/buttonMain"/>
@@ -45,6 +47,8 @@
         android:layout_marginTop="20dp"
         android:text="Delivery Address"
         android:id="@+id/buttonDelivery"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
         android:textSize="15sp"/>
 
 </LinearLayout>

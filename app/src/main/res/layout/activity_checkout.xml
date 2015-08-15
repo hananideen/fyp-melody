@@ -97,6 +97,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Confirm"
+                android:background="@drawable/button_bg"
+                android:textColor="@color/white"
                 android:id="@+id/buttonConfirm"
                 android:layout_gravity="end" />
 

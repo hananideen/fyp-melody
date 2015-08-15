@@ -19,5 +19,7 @@
         android:layout_margin="5dip"
         android:layout_gravity="right"
         android:id="@+id/ButtonViewCart"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
         android:text="View Shopping Cart"/>
 </LinearLayout>

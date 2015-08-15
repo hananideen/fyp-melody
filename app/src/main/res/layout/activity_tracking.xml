@@ -100,8 +100,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Map View"
+        android:text="Track Your Deliveryman"
         android:id="@+id/btnMap"
+        android:background="@drawable/button_bg"
+        android:textColor="@color/white"
         android:layout_above="@+id/btnStart"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -109,13 +111,12 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:id="@+id/imageView2"
         android:src="@drawable/order"
         android:scaleType="center"
         android:layout_below="@+id/textView11"
-        android:layout_toLeftOf="@+id/btnMap"
-        android:layout_toStartOf="@+id/btnMap" />
+        android:layout_toRightOf="@+id/textViewETA"
+        android:layout_toEndOf="@+id/textViewETA" />
 
 
 </RelativeLayout>
