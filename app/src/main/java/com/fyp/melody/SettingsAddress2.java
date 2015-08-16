@@ -30,6 +30,7 @@ public class SettingsAddress2 extends AppCompatActivity {
     SharedPreferences settings;
     SharedPreferences.Editor editor;
     GoogleMap map;
+    GPSTracker gps;
     ArrayList<LatLng> markerPoints;
     private EditText editHome, editStreet, editSearch;
     private Button buttonConfirm, buttonCancel, buttonSearch;
@@ -50,6 +51,14 @@ public class SettingsAddress2 extends AppCompatActivity {
         markerPoints = new ArrayList<LatLng>();
         map = fm.getMap();
         map.setMyLocationEnabled(true);
+
+        gps = new GPSTracker(SettingsAddress2.this);
+        if(gps.canGetLocation()) {
+            //do nothing
+        } else {
+            gps.showSettingsAlert();
+
+        }
 
         savedLatitude = settings.getString("Latitude2", "");
         savedLongitude = settings.getString("Longitude2", "");
