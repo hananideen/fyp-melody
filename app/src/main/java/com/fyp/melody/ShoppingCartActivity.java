@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
 
 
         mCartList = ShoppingCartHelper.getCartList();
-        df = new DecimalFormat("#.##");
+        df = new DecimalFormat("@@##");
 
         // Make sure to clear the selections
         for(int i=0; i<mCartList.size(); i++) {
@@ -62,14 +63,14 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
             mProductAdapter.notifyDataSetChanged();
         }
 
-        double subTotal = 0;
+        double subTotal = 0.00;
         for(Product p : mCartList) {
             int quantity = ShoppingCartHelper.getProductQuantity(p);
             subTotal += p.price * quantity;
         }
 
         TextView productPriceTextView = (TextView) findViewById(R.id.TextViewSubtotal);
-        productPriceTextView.setText("Subtotal: RM" + df.format(subTotal));
+        productPriceTextView.setText("Subtotal: RM" + String.format("%.2f", subTotal));
     }
 
     public void checkout (View v) {

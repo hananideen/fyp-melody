@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class ProductAdapter extends BaseAdapter {
     private List<Product> mProductList;
     private LayoutInflater mInflater;
     private boolean mShowQuantity;
+    DecimalFormat df;
 
     public ProductAdapter(List<Product> list, LayoutInflater inflater, boolean showQuantity) {
         mProductList = list;
@@ -42,6 +44,7 @@ public class ProductAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewItem item;
+        df = new DecimalFormat("@@##");
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.menu_list, null);
@@ -68,7 +71,7 @@ public class ProductAdapter extends BaseAdapter {
 
         item.productImageView.setImageDrawable(curProduct.productImage);
         item.productTitle.setText(curProduct.title);
-        item.productPrice.setText("RM" + curProduct.price);
+        item.productPrice.setText("RM" + String.format("%.2f", curProduct.price));
 
 
         // Show the quantity in the cart or not
