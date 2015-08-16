@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 /**
@@ -15,6 +16,7 @@ public class SettingsPassword extends Activity {
 
     private EditText editPass, editPass2;
     private Button buttonSave, buttonCancel;
+    private ImageButton buttonHelp;
     private String password, confirmPassword;
 
     SharedPreferences settings;
@@ -32,6 +34,14 @@ public class SettingsPassword extends Activity {
 
         editPass2 = (EditText) findViewById(R.id.editPass2);
         editPass2.setText(settings.getString("confirmPassword", ""));
+
+        buttonHelp = (ImageButton) findViewById(R.id.help);
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "This password will be used during order confirmation", Toast.LENGTH_LONG).show();
+            }
+        });
 
         buttonCancel = (Button) findViewById(R.id.buttonCancel);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
