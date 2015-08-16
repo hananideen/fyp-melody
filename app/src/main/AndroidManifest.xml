@@ -177,13 +177,6 @@
                 android:value=".ShoppingCartActivity" />
         </activity>
         <activity
-            android:name=".Tracking"
-            android:label="Order Status" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ShoppingCartActivity" />
-        </activity>
-        <activity
             android:name=".MenuActivity"
             android:label="Menu" >
             <meta-data
