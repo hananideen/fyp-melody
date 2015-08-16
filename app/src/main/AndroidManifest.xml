@@ -82,6 +82,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".LoginPassword"
+            android:label="Setup Password"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.Dialog">
+        </activity>
+        <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings" >
             <meta-data

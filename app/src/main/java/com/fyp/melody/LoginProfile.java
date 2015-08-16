@@ -56,7 +56,7 @@ public class LoginProfile extends ActionBarActivity {
                 } else {
                     final ProgressDialog dialog = ProgressDialog.show(LoginProfile.this,"", "Getting you ready for Melody", true);
 
-                    final Intent intent = new Intent(LoginProfile.this, Restaurant.class);
+                    final Intent intent = new Intent(LoginProfile.this, LoginPassword.class);
                     JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("user/userregister"),new JSONObject(getParams()), new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
