@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Hananideen on 16/8/2015.
@@ -12,6 +15,8 @@ import android.widget.Button;
 public class PaymentActivity extends Activity {
 
     Button cod, bank, cancel;
+    TextView subtotal;
+    String total;
 
     protected void onCreate (Bundle savedInstance){
         super.onCreate(savedInstance);
@@ -20,11 +25,17 @@ public class PaymentActivity extends Activity {
         cod = (Button) findViewById(R.id.buttonCOD);
         bank = (Button) findViewById(R.id.buttonBank);
         cancel = (Button) findViewById(R.id.buttonCancel);
+        subtotal = (TextView) findViewById(R.id.textViewTotal);
+
+        Intent intent = getIntent();
+        total = intent.getStringExtra("subtotal");
+        subtotal.setText("Subtotal: RM" +total);
 
         cod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PaymentActivity.this, CheckoutActivity.class);
+                intent.putExtra("subtotal", total);
                 startActivity(intent);
                 finish();
             }

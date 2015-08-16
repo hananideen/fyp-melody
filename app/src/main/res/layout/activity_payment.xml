@@ -7,8 +7,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Subtotal"
-        android:id="@+id/textViewSubtotal"
-        android:textSize="18dp"
+        android:id="@+id/textViewTotal"
+        android:textSize="18sp"
         android:textStyle="bold"/>
 
     <Button

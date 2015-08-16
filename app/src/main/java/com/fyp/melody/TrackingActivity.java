@@ -34,6 +34,7 @@ public class TrackingActivity extends ActionBarActivity {
     TextView textViewTime, textViewName, textViewAddress1, textViewAddress2;
     SharedPreferences settings;
     TextView timestamp, ETA;
+    String total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +112,8 @@ public class TrackingActivity extends ActionBarActivity {
         String street = track.getStringExtra("street");
         final String latitude = track.getStringExtra("lat");
         final String longitude = track.getStringExtra("long");
+        total = track.getStringExtra("subtotal");
+        Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
 
         textViewName.setText(settings.getString("userName", ""));
         textViewAddress1.setText(home);

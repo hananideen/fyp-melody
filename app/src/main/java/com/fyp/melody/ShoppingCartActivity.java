@@ -20,6 +20,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
     private List<Product> mCartList;
     private ProductAdapter mProductAdapter;
     private DecimalFormat df;
+    double subTotal = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,6 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
             mProductAdapter.notifyDataSetChanged();
         }
 
-        double subTotal = 0.00;
         for(Product p : mCartList) {
             int quantity = ShoppingCartHelper.getProductQuantity(p);
             subTotal += p.price * quantity;
@@ -75,7 +75,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
 
     public void checkout (View v) {
         Intent payment = new Intent(getBaseContext(), PaymentActivity.class);
-//        payment.putExtra("subtotal", subTotal);
+        payment.putExtra("subtotal", String.format("%.2f", subTotal));
         startActivity(payment);
     }
 

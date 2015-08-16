@@ -20,7 +20,7 @@ public class CheckoutActivity extends Activity {
 
     private EditText editName, editPass;
     private Button buttonConfirm;
-    private String password, savedPassword, home, street, home2, street2, savedLatitude, savedLongitude;
+    private String password, savedPassword, home, street, home2, street2, savedLatitude, savedLongitude, total;
     private RadioButton address1, address2;
 
     protected void onCreate(Bundle savedInstanceState){
@@ -29,6 +29,10 @@ public class CheckoutActivity extends Activity {
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
         editor = settings.edit();
+
+        Intent intent = getIntent();
+        total = intent.getStringExtra("subtotal");
+        Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
 
         editName = (EditText) findViewById(R.id.ProfileUsername);
         editName.setText(settings.getString("userName", ""));
@@ -79,6 +83,7 @@ public class CheckoutActivity extends Activity {
                         track.putExtra("lat", savedLatitude);
                         track.putExtra("long", savedLongitude);
                     }
+                    track.putExtra("subtotal", total);
                     Toast.makeText(getApplicationContext(), "Order submitted", Toast.LENGTH_LONG).show();
                     startActivity(track);
 
