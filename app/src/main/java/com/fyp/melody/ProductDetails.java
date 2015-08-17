@@ -39,7 +39,7 @@ public class ProductDetails extends ActionBarActivity {
         productDetailsTextView.setText(selectedProduct.description);
 
         TextView productPriceTextView = (TextView) findViewById(R.id.TextViewProductPrice);
-        productPriceTextView.setText("RM" + selectedProduct.price);
+        productPriceTextView.setText("RM" + String.format("%.2f", selectedProduct.price));
 
         // Update the current quantity in the cart
         TextView textViewCurrentQuantity = (TextView) findViewById(R.id.textViewCurrentlyInCart);
