@@ -92,8 +92,8 @@ public class SettingsAddress1 extends AppCompatActivity {
                 options.position(point);
                 map.addMarker(options.title("Your location"));
 
-                String latitude = String.valueOf(point.latitude);
-                String longitude = String.valueOf(point.longitude);
+                String latitude = String.format("Latitude: " + "%.6f", point.latitude);
+                String longitude = String.format("Longitude: "+"%.6f", point.longitude);
 
                 lat.setText(latitude);
                 lng.setText(longitude);
