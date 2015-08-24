@@ -20,6 +20,7 @@ public class SettingsHelper {
             catalog.add(new SettingsList("User Profile", "Change username and profile picture"));
             catalog.add(new SettingsList("Password", "Change password"));
             catalog.add(new SettingsList("Address", "Add or change address"));
+            catalog.add(new SettingsList("Feedback", "Send us feedback"));
         }
 
         return catalog;

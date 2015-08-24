@@ -2,6 +2,7 @@ package com.fyp.melody;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -49,28 +51,32 @@ public class Settings extends AppCompatActivity {
                         Intent address = new Intent(Settings.this, SettingsAddress.class);
                         startActivity(address);
                         break;
+                    case 3:
+                        sendEmail();
+                        break;
                 }
             }
         });
 
     }
 
+    protected void sendEmail() {
 
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        getFragmentManager().beginTransaction().replace(android.R.id.content,
-//                new MainSettingsFragment()).commit();
-//    }
-//
-//    public static class MainSettingsFragment extends PreferenceFragment {
-//
-//        @Override
-//        public void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            addPreferencesFromResource(R.xml.preference);
-//
-//        }
-//    }
+        String[] TO = {"hananee92@gmail.com"};
+
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto:"));
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from Melody app");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Feedback on this app:");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Choose an Email client"));
+        }
+        catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }
