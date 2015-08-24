@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class SettingsAddress2 extends AppCompatActivity {
     private Button buttonConfirm, buttonCancel, buttonSearch;
     private String home, search, savedLatitude, savedLongitude, latitude, longitude;
     private TextView lat, lng;
+    private ScrollView mScrollView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +49,16 @@ public class SettingsAddress2 extends AppCompatActivity {
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
         editor = settings.edit();
 
-        SupportMapFragment fm = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         markerPoints = new ArrayList<LatLng>();
-        map = fm.getMap();
+        mScrollView = (ScrollView) findViewById(R.id.scrollView);
+        map = ((WorkaroundMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         map.setMyLocationEnabled(true);
-
+        ((WorkaroundMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).setListener(new WorkaroundMapFragment.OnTouchListener() {
+            @Override
+            public void onTouch() {
+                mScrollView.requestDisallowInterceptTouchEvent(true);
+            }
+        });
         gps = new GPSTracker(SettingsAddress2.this);
         if(gps.canGetLocation()) {
             //do nothing

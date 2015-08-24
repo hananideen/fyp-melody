@@ -3,16 +3,30 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/map"
+                class="com.fyp.melody.WorkaroundMapFragment"/>
 
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:id="@+id/linearLayoutAddLayout"
-                android:orientation="horizontal"
-                android:layout_margin="5dip">
+                android:orientation="horizontal">
 
                 <EditText
-                    android:layout_marginTop="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.01"
@@ -21,8 +35,7 @@
                 </EditText>
 
                 <Button
-                    android:layout_gravity="right"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_width="wrap_content"
                     android:text="Search"
                     android:background="@drawable/button_bg"
@@ -30,21 +43,11 @@
                     android:id="@+id/SearchButton"/>
             </LinearLayout>
 
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/scrollView">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -58,7 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Building/Home No."
-                android:id="@+id/editHome" />
+                android:id="@+id/editHome">
+                <requestFocus/>
+            </EditText>
 
             <EditText
                 android:layout_width="match_parent"
@@ -70,12 +75,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Latitude"
+                android:textStyle="bold"
                 android:id="@+id/latitude" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Longitude"
+                android:textStyle="bold"
                 android:id="@+id/longitude" />
 
 
@@ -110,9 +117,10 @@
 
 
             </RelativeLayout>
-             </LinearLayout>
+        </LinearLayout>
 
-            </ScrollView>
+        </LinearLayout>
+    </ScrollView>
 
 
 
