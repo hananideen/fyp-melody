@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class PaymentBankActivity extends Activity {
 
     Button confirm, cancel;
-    EditText ref;
+    EditText ref, time;
 
     protected void onCreate (Bundle savedInstance) {
         super.onCreate(savedInstance);
@@ -23,12 +23,14 @@ public class PaymentBankActivity extends Activity {
         confirm = (Button) findViewById(R.id.buttonConfirm);
         cancel = (Button) findViewById(R.id.buttonCancel);
         ref = (EditText) findViewById(R.id.ediRef);
+        time = (EditText) findViewById(R.id.editTime);
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String reff = ref.getText().toString();
-                if (reff.length()==0){
+                String times = time.getText().toString();
+                if (reff.length()==0 && times.length()==0){
                     Toast.makeText(PaymentBankActivity.this, "Please insert your Reference No", Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(PaymentBankActivity.this, "Payment confirmed", Toast.LENGTH_SHORT).show();
