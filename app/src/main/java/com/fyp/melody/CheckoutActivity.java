@@ -20,7 +20,7 @@ public class CheckoutActivity extends Activity {
 
     private EditText editName, editPass;
     private Button buttonConfirm;
-    private String password, savedPassword, home, street, home2, street2, savedLatitude, savedLongitude, total;
+    private String password, savedPassword, home, street, home2, street2, savedLatitude, savedLongitude, savedLatitude2, savedLongitude2, total;
     private RadioButton address1, address2;
 
     protected void onCreate(Bundle savedInstanceState){
@@ -50,7 +50,8 @@ public class CheckoutActivity extends Activity {
         });
 
         address2 = (RadioButton) findViewById(R.id.radio2);
-        address2.setText("Delivery Address: " + settings.getString("Home2", "") + ", " + settings.getString("Street2", ""));
+        address2.setText("Delivery Address: " + settings.getString("Home2", "") + ", " + settings.getString("Street2", "")
+                + "(Change this address if your delivery address is not listed)");
         address2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +81,8 @@ public class CheckoutActivity extends Activity {
                     } else {
                         track.putExtra("home", home2);
                         track.putExtra("street", street2);
-                        track.putExtra("lat", savedLatitude);
-                        track.putExtra("long", savedLongitude);
+                        track.putExtra("lat", savedLatitude2);
+                        track.putExtra("long", savedLongitude2);
                     }
                     track.putExtra("subtotal", total);
                     Toast.makeText(getApplicationContext(), "Order submitted", Toast.LENGTH_LONG).show();
@@ -112,11 +113,12 @@ public class CheckoutActivity extends Activity {
 
             } else if (requestCode == 2) {
 
-                address2.setText("Delivery Address: " + settings.getString("Home2", "") + ", " + settings.getString("Street2", ""));
+                address2.setText("Delivery Address: " + settings.getString("Home2", "") + ", " + settings.getString("Street2", "")
+                        + "(Change this address if your delivery address is not listed)");
                 home2 = settings.getString("Home2", "");
                 street2 = settings.getString("Street2", "");
-                savedLatitude = settings.getString("Latitude2", "");
-                savedLongitude = settings.getString("Longitude2", "");
+                savedLatitude2 = settings.getString("Latitude2", "");
+                savedLongitude2 = settings.getString("Longitude2", "");
 
             }
         }

@@ -34,7 +34,7 @@ public class SettingsAddress2 extends AppCompatActivity {
     ArrayList<LatLng> markerPoints;
     private EditText editHome, editStreet, editSearch;
     private Button buttonConfirm, buttonCancel, buttonSearch;
-    private String home, search, savedLatitude, savedLongitude;
+    private String home, search, savedLatitude, savedLongitude, latitude, longitude;
     private TextView lat, lng;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +62,8 @@ public class SettingsAddress2 extends AppCompatActivity {
 
         savedLatitude = settings.getString("Latitude2", "");
         savedLongitude = settings.getString("Longitude2", "");
-        lat.setText(savedLatitude);
-        lng.setText(savedLongitude);
+        lat.setText("Latitude: "+savedLatitude);
+        lng.setText("Longitude: " +savedLongitude);
 
         if(savedLatitude.length()==0){
             //do nothing
@@ -82,24 +82,19 @@ public class SettingsAddress2 extends AppCompatActivity {
             @Override
             public void onMapClick(LatLng point) {
 
-                if (markerPoints.size() > 0) {
-                    markerPoints.clear();
-                    map.clear();
-                }
+                markerPoints.clear();
+                map.clear();
 
                 markerPoints.add(point);
                 MarkerOptions options = new MarkerOptions();
                 options.position(point);
                 map.addMarker(options.title("Your location"));
 
-                String latitude = String.format("Latitude: " + "%.6f", point.latitude);
-                String longitude = String.format("Longitude: " + "%.6f", point.longitude);
+                latitude = String.format("%.6f", point.latitude);
+                longitude = String.format("%.6f", point.longitude);
 
-                lat.setText(latitude);
-                lng.setText(longitude);
-                editor.putString("Latitude2", latitude);
-                editor.putString("Longitude2", longitude);
-                editor.commit();
+                lat.setText("Latitude: " + latitude);
+                lng.setText("Longitude: " + longitude);
 
             }
         });
@@ -155,6 +150,8 @@ public class SettingsAddress2 extends AppCompatActivity {
                 else {
                     editor.putString("Home2", editHome.getText().toString());
                     editor.putString("Street2", editStreet.getText().toString());
+                    editor.putString("Latitude2", latitude);
+                    editor.putString("Longitude2", longitude);
                     editor.commit();
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("address", home);
@@ -168,6 +165,8 @@ public class SettingsAddress2 extends AppCompatActivity {
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }
         });
@@ -187,6 +186,9 @@ public class SettingsAddress2 extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onBackPressed (){
     }
 
 }
