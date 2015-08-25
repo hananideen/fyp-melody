@@ -54,13 +54,14 @@ public class MapsActivity extends ActionBarActivity {
         Double longDouble = Double.parseDouble(longitude);
 
         LatLng location = new LatLng(latDouble, longDouble);
-        mMap.addMarker(new MarkerOptions().position(location).title("Your location"));
+        mMap.addMarker(new MarkerOptions().position(location).title("Your location")
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_finish)));
         CameraUpdate zoomLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
         mMap.animateCamera(zoomLocation);
 
         LatLng delivery = new LatLng(2.923615, 101.662622);
         mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
 
         LatLng destination = location;
         LatLng origin = delivery;

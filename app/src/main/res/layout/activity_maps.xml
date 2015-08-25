@@ -11,7 +11,8 @@
         android:text="ETA: Distance: "
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:textColor="@color/orange"/>
 
     <fragment
         android:layout_width="match_parent"
