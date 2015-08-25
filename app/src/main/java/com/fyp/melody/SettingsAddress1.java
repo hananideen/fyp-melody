@@ -82,6 +82,8 @@ public class SettingsAddress1 extends AppCompatActivity {
             Double longDouble = Double.parseDouble(savedLongitude);
 
             LatLng location = new LatLng(latDouble, longDouble);
+            latitude = String.format("%.6f", location.latitude);
+            longitude = String.format("%.6f", location.longitude);
             map.addMarker(new MarkerOptions().position(location).title("Your location"));
             CameraUpdate zoomLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
             map.animateCamera(zoomLocation);

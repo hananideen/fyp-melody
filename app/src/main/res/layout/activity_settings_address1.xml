@@ -13,12 +13,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/map"
-                class="com.fyp.melody.WorkaroundMapFragment"/>
-
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
@@ -42,6 +36,13 @@
                     android:textColor="@color/white"
                     android:id="@+id/SearchButton"/>
             </LinearLayout>
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/map"
+                class="com.fyp.melody.WorkaroundMapFragment"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
