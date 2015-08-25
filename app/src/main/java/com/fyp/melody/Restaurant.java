@@ -38,6 +38,8 @@ public class Restaurant extends AppCompatActivity {
         } else {
             Log.e("MainActivity", "main");
             setContentView(R.layout.fragment_restaurant);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setIcon(R.mipmap.melody_logo);
         }
 
         mProductList = RestaurantHelper.getCatalog(getResources());
