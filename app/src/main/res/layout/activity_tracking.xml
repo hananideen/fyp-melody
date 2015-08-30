@@ -5,14 +5,13 @@
     android:background="#ffffff"
     tools:context=".TrackingActivity" >
 
-    <Button
-        android:id="@+id/btnStart"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:background="#ffffff"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
 
     <!--<TextView-->
@@ -31,6 +30,7 @@
         android:layout_height="wrap_content"
         android:text="Order Time: 00:00"
         android:textSize="18sp"
+        android:textColor="@color/orange"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -41,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ETA: 00:00"
+        android:textColor="@color/red"
         android:textStyle="bold"
         android:layout_below="@+id/textViewTimestamp"
         android:textSize="18sp" />
@@ -101,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView2"
-        android:src="@drawable/order"
+        android:src="@drawable/tracking1"
         android:scaleType="center"
         android:layout_below="@+id/textView11"
         android:layout_toRightOf="@+id/textViewETA"
@@ -113,6 +114,8 @@
         android:layout_margin="20dp"
         android:id="@+id/layoutDelivery"
         android:background="#d3d3d3"
+        android:layout_below="@+id/textAddress2"
+        android:gravity="bottom"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
 
@@ -168,6 +171,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
     </RelativeLayout>
+    </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

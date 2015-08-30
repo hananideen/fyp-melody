@@ -43,16 +43,12 @@ public class TrackingActivity extends ActionBarActivity {
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
 
-        btnStart = (Button) findViewById(R.id.btnStart);
         btnMap = (Button) findViewById(R.id.btnMap);
         textViewName = (TextView) findViewById(R.id.textName);
         textViewAddress1 = (TextView) findViewById(R.id.textAddress1);
         textViewAddress2 = (TextView) findViewById(R.id.textAddress2);
         timestamp = (TextView) findViewById(R.id.textViewTimestamp);
         ETA = (TextView) findViewById(R.id.textViewETA);
-
-//        textViewTime = (TextView) findViewById(R.id.textViewTime);
-//        textViewTime.setText("01:00:00");
 
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR);
@@ -79,11 +75,10 @@ public class TrackingActivity extends ActionBarActivity {
             {
                 String PM = "";
                 PM = "PM";
-                minutes = minutes + 40;
-                if(minutes > 59)
+                hours = hours + 1;
+                if(hours > 12)
                 {
-                    hours = hours + 1;
-                    minutes = minutes - 60;
+                    hours = hours - 12;
                     ETA.setText("ETA: " + hours + ":" + minutes + PM);
                 } else {
                     ETA.setText("ETA: " + hours + ":" + minutes + PM);
@@ -94,11 +89,10 @@ public class TrackingActivity extends ActionBarActivity {
             {
                 String AM = "";
                 AM = "AM";
-                minutes = minutes + 40;
-                if(minutes > 59)
+                hours = hours + 1;
+                if(hours > 12)
                 {
-                    hours = hours + 1;
-                    minutes = minutes - 60;
+                    hours = hours - 12;
                     ETA.setText("ETA: " + hours + ":" + minutes + AM);
                 } else {
                     ETA.setText("ETA: " + hours + ":" + minutes + AM);
@@ -119,15 +113,6 @@ public class TrackingActivity extends ActionBarActivity {
         textViewAddress1.setText(home);
         textViewAddress2.setText(street);
 
-//        final CounterClass timer = new CounterClass(3600000, 1000);
-//        btnStart.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                timer.start();
-//            }
-//        });timer.start();
-
         btnMap.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +122,20 @@ public class TrackingActivity extends ActionBarActivity {
                 startActivity(map);
             }
         });
+
+
+
+//        btnStart = (Button) findViewById(R.id.btnStart);
+//        textViewTime = (TextView) findViewById(R.id.textViewTime);
+//        textViewTime.setText("01:00:00");
+//        final CounterClass timer = new CounterClass(3600000, 1000);
+//        btnStart.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                timer.start();
+//            }
+//        });timer.start();
 
 
     }
