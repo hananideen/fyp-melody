@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.fyp.melody.ApplicationLoader;
-import com.fyp.melody.activity.Menus;
+import com.fyp.melody.model.Menus;
 import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
 

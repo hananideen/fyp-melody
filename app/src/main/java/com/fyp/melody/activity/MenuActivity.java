@@ -20,6 +20,7 @@ import com.fyp.melody.JSON.Json2Menu;
 import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
 import com.fyp.melody.adapter.MenuAdapter;
+import com.fyp.melody.model.Menus;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -37,13 +38,9 @@ public class MenuActivity extends ActionBarActivity {
     public static final String Settings_PREFS_NAME = "SettingsFile";
 
     List<NameValuePair> params;
-//    ServerRequest sr;
-//    PhoneStatus cs;
     private ListView MenuListView;
     SharedPreferences Settings;
-
     List<Menus> MenuList;
-
     MenuAdapter menuListAdapter;
 
     @Override
@@ -53,15 +50,9 @@ public class MenuActivity extends ActionBarActivity {
 
         Settings = getSharedPreferences(Settings_PREFS_NAME, 0);
 
-//        sr = new ServerRequest();
-//        cs = new PhoneStatus();
-
         MenuList = new ArrayList<Menus>();
-
         menuListAdapter = new MenuAdapter(this,MenuList);
-
-        initUI();
-
+        MenuListView = (ListView) findViewById(R.id.MenulistView);
         MenuListView.setAdapter(menuListAdapter);
 
 //        PromotionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -133,10 +124,6 @@ public class MenuActivity extends ActionBarActivity {
         Log.d("pause","app is pausing");
     }
 
-    private void initUI() {
-        MenuListView = (ListView) findViewById(R.id.MenulistView);
-
-    }
 
     HashMap<String, String> getparams(){
 

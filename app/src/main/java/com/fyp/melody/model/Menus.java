@@ -1,4 +1,4 @@
-package com.fyp.melody.activity;
+package com.fyp.melody.model;
 
 import com.fyp.melody.JSON.Json2Menu;
 
