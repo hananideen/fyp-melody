@@ -6,6 +6,7 @@ package com.fyp.melody;
 public class Menus {
 
     public String MenuName;
+    public String MenuDescription;
     public String MenuPrice;
     private String MenuImage;
     private int MenuID;
@@ -13,8 +14,9 @@ public class Menus {
     public Menus(){
     }
 
-    public Menus(String menuName, String menuPrice, String menuImage, int menuID) {
+    public Menus(String menuName, String menuDescription, String menuPrice, String menuImage, int menuID) {
         MenuName = menuName;
+        MenuDescription = menuDescription;
         MenuPrice = menuPrice;
         MenuImage = menuImage;
         MenuID = menuID;
@@ -22,6 +24,7 @@ public class Menus {
 
     public Menus(Json2Menu jMenu){
         MenuName = jMenu.menuName;
+        MenuDescription = jMenu.menuDescription;
         MenuPrice = jMenu.menuPrice;
         MenuImage = jMenu.menuImage;
         MenuID = jMenu.menuID;
@@ -34,6 +37,14 @@ public class Menus {
 
     public void setMenuName (String nameMenu) {
         MenuName = nameMenu;
+    }
+
+    public String getMenuDescription () {
+        return MenuDescription;
+    }
+
+    public void setMenuDescription (String descriptionMenu) {
+        MenuDescription = descriptionMenu;
     }
 
     public String getMenuPrice() {

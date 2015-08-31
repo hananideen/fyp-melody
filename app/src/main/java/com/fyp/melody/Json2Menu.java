@@ -9,7 +9,7 @@ public class Json2Menu {
 
     public JSONObject jsonObject, temp;
 
-    public String menuName, menuPrice, menuImage;
+    public String menuName, menuDescription, menuPrice, menuImage;
     public int menuID;
 
     public Json2Menu(){}
@@ -22,11 +22,13 @@ public class Json2Menu {
             temp= json.optJSONArray("Product").optJSONObject(0);
             menuName= temp.optString("prodDescription");
             menuPrice = json.optString("prodPrice");
-            //TODO get id and image
+            //TODO get description, id and image
         }
         else{
             menuName = "";
+            menuDescription = "";
             menuPrice = "";
+            menuID = 0;
         }
     }
 
