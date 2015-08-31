@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:weightSum="1.0"
-    tools:context="com.fyp.melody.SettingsProfile">
+    tools:context="com.fyp.melody.activity.SettingsProfile">
 
     <RelativeLayout
         android:layout_width="fill_parent"

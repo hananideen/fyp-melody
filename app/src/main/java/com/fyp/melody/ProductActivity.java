@@ -10,6 +10,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.fyp.melody.activity.ProductDetailsActivity;
+import com.fyp.melody.activity.SettingsActivity;
+import com.fyp.melody.activity.ShoppingCartActivity;
+import com.fyp.melody.helper.ShoppingCartHelper;
+
 import java.util.List;
 
 /**
@@ -36,7 +41,7 @@ public class ProductActivity extends ActionBarActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Intent productDetailsIntent = new Intent(getBaseContext(),ProductDetails.class);
+                Intent productDetailsIntent = new Intent(getBaseContext(),ProductDetailsActivity.class);
                 productDetailsIntent.putExtra(ShoppingCartHelper.PRODUCT_INDEX, position);
                 startActivity(productDetailsIntent);
             }
@@ -63,7 +68,7 @@ public class ProductActivity extends ActionBarActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent setting = new Intent(ProductActivity.this, Settings.class);
+            Intent setting = new Intent(ProductActivity.this, SettingsActivity.class);
             startActivity(setting);
             return true;
         }

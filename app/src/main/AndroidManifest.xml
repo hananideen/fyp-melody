@@ -33,7 +33,7 @@
         <!-- android:theme="@android:style/Theme.Holo.Light" > -->
 
         <activity
-            android:name=".SplashScreen"
+            android:name=".activity.SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RestaurantsActivity"
+            android:name=".activity.RestaurantsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
@@ -53,23 +53,23 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".LoginPhone"
+            android:name=".activity.LoginPhone"
             android:label="Verify your phone number"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ChooseCountry"
+            android:name=".login.ChooseCountry"
             android:label="Choose A country"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".SmsVerification"
+            android:name=".login.SmsVerification"
             android:label="@string/title_activity_sms_verification"
             android:screenOrientation="portrait" >
         </activity>
 
         <receiver
-            android:name=".SmsVerification$SmsReceiver"
+            android:name=".login.SmsVerification$SmsReceiver"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -77,18 +77,18 @@
         </receiver>
 
         <activity
-            android:name=".LoginProfile"
+            android:name=".activity.LoginProfile"
             android:label="Setup Profile"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".LoginPassword"
+            android:name=".activity.LoginPassword"
             android:label="Setup Password"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.Dialog">
         </activity>
         <activity
-            android:name=".Settings"
+            android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait">
             <meta-data
@@ -96,37 +96,37 @@
                 android:value=".Restaurant" />
         </activity>
         <activity
-            android:name=".SettingsProfile"
+            android:name=".activity.SettingsProfile"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Settings" />
+                android:value=".activity.SettingsActivity" />
         </activity>
         <activity
-            android:name=".SettingsPassword"
+            android:name=".activity.SettingsPassword"
             android:label="Edit Password"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Settings" />
+                android:value=".activity.SettingsActivity" />
         </activity>
         <activity
-            android:name=".SettingsAddress"
+            android:name=".activity.SettingsAddress"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Settings" />
+                android:value=".activity.SettingsActivity" />
         </activity>
         <activity
-            android:name=".SettingsAddress1"
+            android:name=".activity.SettingsAddress1"
             android:label="Main Address"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".SettingsAddress2"
+            android:name=".activity.SettingsAddress2"
             android:label="Delivery Address"
             android:screenOrientation="portrait">
         </activity>
@@ -139,7 +139,7 @@
                 android:value=".Restaurant" />
         </activity>
         <activity
-            android:name=".ShoppingCartActivity"
+            android:name=".activity.ShoppingCartActivity"
             android:label="Shopping Cart"
             android:screenOrientation="portrait">
             <meta-data
@@ -147,50 +147,50 @@
                 android:value=".ProductActivity" />
         </activity>
         <activity
-            android:name=".ProductDetails"
+            android:name=".activity.ProductDetailsActivity"
             android:label="Product Details"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ShoppingCartActivity" />
+                android:value=".activity.ShoppingCartActivity" />
         </activity>
         <activity
-            android:name=".PaymentActivity"
+            android:name=".activity.PaymentActivity"
             android:label="Choose Payment Method"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ShoppingCartActivity" />
+                android:value=".activity.ShoppingCartActivity" />
         </activity>
         <activity
-            android:name=".PaymentBankActivity"
+            android:name=".activity.PaymentBankActivity"
             android:label="Online Payment"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ShoppingCartActivity" />
+                android:value=".activity.ShoppingCartActivity" />
         </activity>
         <activity
-            android:name=".CheckoutActivity"
+            android:name=".activity.CheckoutActivity"
             android:label="Details Confirmation"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ShoppingCartActivity" />
+                android:value=".activity.ShoppingCartActivity" />
         </activity>
         <activity
-            android:name=".TrackingActivity"
+            android:name=".activity.TrackingActivity"
             android:label="Order Status"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ShoppingCartActivity" />
+                android:value=".activity.ShoppingCartActivity" />
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name=".activity.MenuActivity"
             android:label="Menu"
             android:screenOrientation="portrait">
             <meta-data
@@ -206,12 +206,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activity.MapsActivity"
             android:label="Map View"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.fyp.melody.TrackingActivity" />
+                android:value=".activity.TrackingActivity" />
         </activity>
     </application>
 

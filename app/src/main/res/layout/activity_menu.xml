@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray"
-    tools:context="com.fyp.melody.MenuActivity">
+    tools:context="com.fyp.melody.activity.MenuActivity">
 
         <ListView
             android:layout_width="wrap_content"

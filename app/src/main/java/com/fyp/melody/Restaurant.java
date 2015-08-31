@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.fyp.melody.activity.LoginPhone;
+import com.fyp.melody.activity.MenuActivity;
+import com.fyp.melody.activity.SettingsActivity;
+import com.fyp.melody.activity.ShoppingCartActivity;
+
 import java.util.List;
 
 /**
@@ -93,7 +98,7 @@ public class Restaurant extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent setting = new Intent(Restaurant.this, Settings.class);
+            Intent setting = new Intent(Restaurant.this, SettingsActivity.class);
             startActivity(setting);
             return true;
         }
