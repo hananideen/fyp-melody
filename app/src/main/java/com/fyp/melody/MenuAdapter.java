@@ -67,8 +67,8 @@ public class MenuAdapter extends BaseAdapter {
         menuPrice.setText(curMenu.getMenuPrice());
 
 
-        Log.e("tag", ApplicationLoader.getIp(curMenu.getCompanyImage()));
-        menuCompImg.setImageUrl(ApplicationLoader.getIp(curMenu.getCompanyImage()), VolleySingleton.getInstance().getImageLoader());
+        Log.e("tag", ApplicationLoader.getIp(curMenu.getMenuImage()));
+        menuCompImg.setImageUrl(ApplicationLoader.getIp(curMenu.getMenuImage()), VolleySingleton.getInstance().getImageLoader());
         switch (position) {
             case 3:
                 menuCompImg.setImageResource(R.mipmap.ic_launcher);

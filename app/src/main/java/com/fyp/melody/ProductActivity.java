@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by Hananideen on 2/6/2015.
  */
-public class Restaurant1 extends ActionBarActivity{
+public class ProductActivity extends ActionBarActivity{
 
     private List<Product> mProductList;
 
@@ -63,13 +63,13 @@ public class Restaurant1 extends ActionBarActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent setting = new Intent(Restaurant1.this, Settings.class);
+            Intent setting = new Intent(ProductActivity.this, Settings.class);
             startActivity(setting);
             return true;
         }
 
         if (id == R.id.action_cart) {
-            Intent cart = new Intent(Restaurant1.this, ShoppingCartActivity.class);
+            Intent cart = new Intent(ProductActivity.this, ShoppingCartActivity.class);
             startActivity(cart);
             return true;
         }

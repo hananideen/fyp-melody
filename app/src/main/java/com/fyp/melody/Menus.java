@@ -7,21 +7,24 @@ public class Menus {
 
     public String MenuName;
     public String MenuPrice;
-    private String CompanyImage;
+    private String MenuImage;
+    private int MenuID;
 
     public Menus(){
     }
 
-    public Menus(String menuName, String menuPrice, String compImage) {
+    public Menus(String menuName, String menuPrice, String menuImage, int menuID) {
         MenuName = menuName;
         MenuPrice = menuPrice;
-        CompanyImage = compImage;
+        MenuImage = menuImage;
+        MenuID = menuID;
     }
 
-    public Menus(Json2Menu jPromo){
-        MenuName = jPromo.menuName;
-        MenuPrice = jPromo.menuPrice;
-        CompanyImage = jPromo.companyImage;
+    public Menus(Json2Menu jMenu){
+        MenuName = jMenu.menuName;
+        MenuPrice = jMenu.menuPrice;
+        MenuImage = jMenu.menuImage;
+        MenuID = jMenu.menuID;
     }
 
 
@@ -29,24 +32,32 @@ public class Menus {
         return MenuName;
     }
 
-    public void setMenuName (String promoDesc) {
-        MenuName = promoDesc;
+    public void setMenuName (String nameMenu) {
+        MenuName = nameMenu;
     }
 
     public String getMenuPrice() {
         return MenuPrice;
     }
 
-    public void setMenuPrice (String promoPrice) {
-        MenuPrice = promoPrice;
+    public void setMenuPrice (String priceMenu) {
+        MenuPrice = priceMenu;
     }
 
-    public String getCompanyImage() {
-        return CompanyImage;
+    public String getMenuImage() {
+        return MenuImage;
     }
 
-    public void setCompanyImage(String compImage) {
-        CompanyImage = compImage;
+    public void setMenuImage(String imageMenu) {
+        MenuImage = imageMenu;
+    }
+
+    public int getMenuID () {
+        return MenuID;
+    }
+
+    public void setMenuID (int idMenu) {
+        MenuID = idMenu;
     }
 
 }

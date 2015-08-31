@@ -1,18 +1,13 @@
 package com.fyp.melody;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
@@ -55,23 +50,23 @@ public class Restaurant extends AppCompatActivity {
 
                 switch (position) {
                     case 0:
-                        Intent tokio = new Intent(Restaurant.this, Restaurant1.class);
+                        Intent tokio = new Intent(Restaurant.this, ProductActivity.class);
                         startActivity(tokio);
                         break;
                     case 1:
-                        Intent sana = new Intent(Restaurant.this, Restaurant1.class);
+                        Intent sana = new Intent(Restaurant.this, ProductActivity.class);
                         startActivity(sana);
                         break;
                     case 2:
-                        Intent sedap = new Intent(Restaurant.this, Restaurant1.class);
+                        Intent sedap = new Intent(Restaurant.this, ProductActivity.class);
                         startActivity(sedap);
                         break;
                     case 3:
-                        Intent tappers = new Intent(Restaurant.this, Restaurant1.class);
+                        Intent tappers = new Intent(Restaurant.this, ProductActivity.class);
                         startActivity(tappers);
                         break;
                     case 4:
-                        Intent salam = new Intent(Restaurant.this, Restaurant1.class);
+                        Intent salam = new Intent(Restaurant.this, ProductActivity.class);
                         startActivity(salam);
                         break;
                     case 5:

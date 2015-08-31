@@ -120,7 +120,7 @@
             android:label="Delivery Address">
         </activity>
         <activity
-            android:name=".Restaurant1"
+            android:name=".ProductActivity"
             android:label="Menu" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -131,7 +131,7 @@
             android:label="Shopping Cart" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Restaurant1" />
+                android:value=".ProductActivity" />
         </activity>
         <activity
             android:name=".ProductDetails"
