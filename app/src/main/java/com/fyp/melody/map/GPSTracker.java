@@ -1,4 +1,4 @@
-package com.fyp.melody;
+package com.fyp.melody.map;
 
 import android.app.AlertDialog;
 import android.app.Service;
@@ -11,7 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.util.Log;
+
 /**
  * Created by Hananideen on 16/8/2015.
  */

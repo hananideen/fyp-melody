@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/map"
-                class="com.fyp.melody.WorkaroundMapFragment"/>
+                class="com.fyp.melody.map.WorkaroundMapFragment"/>
 
 
         <LinearLayout

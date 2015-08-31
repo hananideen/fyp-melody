@@ -1,4 +1,4 @@
-package com.fyp.melody;
+package com.fyp.melody.map;
 
 /**
  * Created by Hananideen on 24/8/2015.

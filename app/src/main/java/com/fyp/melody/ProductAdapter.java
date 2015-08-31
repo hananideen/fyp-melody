@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fyp.melody.helper.ShoppingCartHelper;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
