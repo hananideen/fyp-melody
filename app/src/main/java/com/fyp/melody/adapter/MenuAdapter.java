@@ -69,7 +69,7 @@ public class MenuAdapter extends BaseAdapter {
 
         menuName.setText(curMenu.getMenuName());
         menuPrice.setText("RM" +curMenu.getMenuPrice());
-//        menuImg.setImageUrl(ApplicationLoader.getIp(curMenu.getMenuImage()), VolleySingleton.getInstance().getImageLoader());
+        menuImg.setImageUrl("http://mynetsys.com/restaurant/" + (curMenu.getMenuImage()), VolleySingleton.getInstance().getImageLoader());
 
         return convertView;
     }

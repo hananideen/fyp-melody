@@ -93,7 +93,7 @@ public class MenuActivity extends ActionBarActivity {
             }
         });
 
-        JsonArrayRequest menuRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+        JsonArrayRequest menuRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/menu.php"), new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
