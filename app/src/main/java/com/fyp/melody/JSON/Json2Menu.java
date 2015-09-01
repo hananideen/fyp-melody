@@ -7,7 +7,7 @@ import org.json.JSONObject;
  */
 public class Json2Menu {
 
-    public JSONObject jsonObject, temp;
+    public JSONObject jsonObject;
 
     public String menuName, menuDescription, menuPrice, menuImage;
     public int menuID;
@@ -19,12 +19,11 @@ public class Json2Menu {
         jsonObject = json;
         if (json!=null)
         {
-            temp= json.optJSONArray("Product").optJSONObject(0);
-            menuName= temp.optString("prodDescription");
-            menuPrice = json.optString("prodPrice");
-            menuDescription = json.optString("Description");
+            menuName= json.optString("name");
+            menuPrice = json.optString("price");
+            menuDescription = json.optString("description");
             menuID = json.optInt("id");
-            menuImage = json.optString("image");
+            menuImage = json.optString("logo");
         }
         else{
             menuName = "";

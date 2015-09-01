@@ -7,7 +7,7 @@ import org.json.JSONObject;
  */
 public class Json2Restaurants {
 
-    public JSONObject jsonObject, temp;
+    public JSONObject jsonObject;
     public String restaurantName, restaurantType, restaurantImage;
     public int restaurantID;
 
@@ -17,11 +17,10 @@ public class Json2Restaurants {
         jsonObject = json;
         if (json!=null)
         {
-            temp= json.optJSONArray("Product").optJSONObject(0);
-            restaurantName= temp.optString("prodDescription");
-            restaurantType = json.optString("prodPrice");
+            restaurantName= json.optString("Name");
+            restaurantType = json.optString("Category");
             restaurantID = json.optInt("id");
-            //TODO get image
+            restaurantImage = json.optString("Logo");
         }
         else{
             restaurantName = "";

@@ -74,25 +74,21 @@ public class MenuActivity extends ActionBarActivity {
             }
         });
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("/menu"),new JSONObject(getparams(restaurants.getRestaurantID())), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ApplicationLoader.getIp("menu/"),new JSONObject(getparams(1)), new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
 
-                Boolean success = response.optBoolean("success");
                 JSONArray jsonArray;
-                Log.e("jsonobjectRequest", "got response");
-                if (success){
-                    Log.e("jsonObjectRequest", "Success");
-                    jsonArray = response.optJSONArray("data");
-                    for (int i = 0; i <jsonArray.length();i++){
-                        Menus menus = new Menus(new Json2Menu(jsonArray.optJSONObject(i)));
-                        MenuList.add(0, menus);
-                        Log.d("json item", jsonArray.optJSONObject(i).toString());
-                        Log.e("jsonobjectrequest", menus.toString());
-                    }
-                    menuListAdapter.notifyDataSetChanged();
+                Log.e("jsonObjectRequest", "Success");
+                jsonArray = response.optJSONArray("data");
+                for (int i = 0; i <jsonArray.length();i++){
+                    Menus menus = new Menus(new Json2Menu(jsonArray.optJSONObject(i)));
+                    MenuList.add(0, menus);
+                    Log.d("json item", jsonArray.optJSONObject(i).toString());
+                    Log.e("jsonobjectrequest", menus.toString());
                 }
+                menuListAdapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override

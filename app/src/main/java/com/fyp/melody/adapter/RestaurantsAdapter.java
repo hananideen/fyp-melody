@@ -9,7 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.R;
+import com.fyp.melody.VolleySingleton;
 import com.fyp.melody.model.Restaurants;
 
 import java.util.List;
@@ -63,6 +65,7 @@ public class RestaurantsAdapter extends BaseAdapter {
 
         restName.setText(curRest.getRestaurantName());
         restType.setText(curRest.getRestaurantType());
+//        restImg.setImageUrl(ApplicationLoader.getIp(curRest.getRestaurantImage()), VolleySingleton.getInstance().getImageLoader());
 
         return convertView;
     }

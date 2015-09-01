@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.JSON.Json2Restaurants;
@@ -25,6 +26,7 @@ import com.fyp.melody.adapter.RestaurantsAdapter;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -43,7 +45,21 @@ public class RestaurantsActivity extends AppCompatActivity {
 
     protected void onCreate (Bundle savedInstance) {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_restaurants);
+
+        Boolean Login = ApplicationLoader.getInstance().getSettingPrefFile().getBoolean("hasLoggedIn", false);
+
+        if (!Login) {
+            Log.e("MainActivity", "login");
+            Intent intent = new Intent(this, LoginPhone.class);
+            startActivity(intent);
+            finish();
+
+        } else {
+            Log.e("MainActivity", "main");
+            setContentView(R.layout.activity_restaurants);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setIcon(R.mipmap.melody_logo);
+        }
 
         RestaurantsList = new ArrayList<Restaurants>();
         restListAdapter = new RestaurantsAdapter(this, RestaurantsList);
@@ -54,44 +70,36 @@ public class RestaurantsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Restaurants restaurants = new Restaurants();
-                Log.v("", String.valueOf(restaurants.getRestaurantID()));
-                Intent menu = new Intent(RestaurantsActivity.this, MenuActivity.class);
-                menu.putExtra("id", restaurants.getRestaurantID());
-                startActivity(menu);
+                Log.v("List view clicked: ", String.valueOf(id));
+                //Intent menu = new Intent(RestaurantsActivity.this, MenuActivity.class);
+                //menu.putExtra("id", restaurants.getRestaurantID());
+                //startActivity(menu);
             }
         });
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("/restaurant"),new JSONObject(getparams()), new Response.Listener<JSONObject>() {
-
+        JsonArrayRequest arrayReg = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(JSONObject response) {
-
-                Boolean success = response.optBoolean("success");
-                JSONArray jsonArray;
-                Log.e("jsonobjectRequest", "got response");
-                if (success){
-                    Log.e("jsonObjectRequest", "Success");
-                    jsonArray = response.optJSONArray("data");
-                    for (int i = 0; i <jsonArray.length();i++){
-                        Restaurants restaurants = new Restaurants(new Json2Restaurants(jsonArray.optJSONObject(i)));
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Restaurants restaurants = new Restaurants(new Json2Restaurants(obj));
                         RestaurantsList.add(0, restaurants);
-                        Log.d("json item", jsonArray.optJSONObject(i).toString());
-                        Log.e("jsonobjectrequest", restaurants.toString());
+                        restListAdapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    restListAdapter.notifyDataSetChanged();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("VolleyServer", "Error" + error.getMessage());
-                Toast.makeText(getApplication(), "No internet connection!", Toast.LENGTH_SHORT).show();
-                LoadData();
-                restListAdapter.notifyDataSetChanged();
+                VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
             }
         });
 
-        VolleySingleton.getInstance().getRequestQueue().add(jsonObjectRequest);
+        VolleySingleton.getInstance().getRequestQueue().add(arrayReg);
     }
 
     protected void onResume() {
@@ -115,7 +123,7 @@ public class RestaurantsActivity extends AppCompatActivity {
     HashMap<String, String> getparams(){
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("phoneNumber", "0148204633");
+        params.put("", "");
 
         return params;
     }

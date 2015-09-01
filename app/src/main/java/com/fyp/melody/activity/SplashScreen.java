@@ -27,7 +27,7 @@ public class SplashScreen extends Activity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(SplashScreen.this, Restaurant.class);
+                    Intent intent = new Intent(SplashScreen.this, RestaurantsActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.animator.fade_in, R.animator.hold);
                     SplashScreen.this.finish();
