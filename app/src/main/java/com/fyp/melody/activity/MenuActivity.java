@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
 import com.fyp.melody.adapter.MenuAdapter;
 import com.fyp.melody.model.Menus;
+import com.fyp.melody.model.Restaurants;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -55,24 +58,23 @@ public class MenuActivity extends ActionBarActivity {
         MenuListView = (ListView) findViewById(R.id.MenulistView);
         MenuListView.setAdapter(menuListAdapter);
 
-//        PromotionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                Promo promo = promoListAdapter.getPromo(position);
-//                Intent promoDetailsIntent = new Intent(getBaseContext(), PromotionDetails.class);
-//                promoDetailsIntent.putExtra("CompName", promo.CompanyName);
-//                promoDetailsIntent.putExtra("Description", promo.Description);
-//                promoDetailsIntent.putExtra("DueDate", promo.DueDate);
-//                promoDetailsIntent.putExtra("Price", promo.PromoPrice);
-//                promoDetailsIntent.putExtra("position", position);
-//
-//                startActivity(promoDetailsIntent);
-//                overridePendingTransition(R.animator.flip_out, R.animator.hold);
-//            }
-//        });
+        Intent menu = getIntent();
+        int id =  menu.getIntExtra("id", 0);
+        final Restaurants restaurants = new Restaurants();
+        restaurants.setRestaurantID(id);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("restaurant.json"),new JSONObject(getparams()), new Response.Listener<JSONObject>() {
+        MenuListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Menus menus = new Menus();
+                Log.v("", String.valueOf(menus.getMenuID()));
+                Intent menuDetails = new Intent(MenuActivity.this, MenuDetailsActivity.class);
+                menuDetails.putExtra("id", menus.getMenuID());
+                startActivity(menuDetails);
+            }
+        });
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("/menu"),new JSONObject(getparams(restaurants.getRestaurantID())), new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -121,14 +123,14 @@ public class MenuActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("pause","app is pausing");
+        Log.d("pause", "app is pausing");
     }
 
 
-    HashMap<String, String> getparams(){
+    HashMap<String, String> getparams(int restID){
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("phoneNumber", "0148204633");
+        params.put("restID", String.valueOf(restID));
 
         return params;
     }

@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class TrackingActivity extends ActionBarActivity {
     SharedPreferences settings;
     TextView timestamp, ETA;
     String total;
+    ImageView tracking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class TrackingActivity extends ActionBarActivity {
         textViewAddress2 = (TextView) findViewById(R.id.textAddress2);
         timestamp = (TextView) findViewById(R.id.textViewTimestamp);
         ETA = (TextView) findViewById(R.id.textViewETA);
+        tracking = (ImageView) findViewById(R.id.imageTracking);
 
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR);

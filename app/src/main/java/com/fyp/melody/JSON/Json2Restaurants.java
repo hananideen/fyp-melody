@@ -20,7 +20,8 @@ public class Json2Restaurants {
             temp= json.optJSONArray("Product").optJSONObject(0);
             restaurantName= temp.optString("prodDescription");
             restaurantType = json.optString("prodPrice");
-            //TODO get id and image
+            restaurantID = json.optInt("id");
+            //TODO get image
         }
         else{
             restaurantName = "";

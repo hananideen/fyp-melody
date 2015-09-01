@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/imageView2"
+        android:layout_below="@+id/imageTracking"
         android:text="Thank you for your order. We will deliver your food to: "
         android:textSize="18sp" />
 
@@ -101,7 +101,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+        android:id="@+id/imageTracking"
         android:src="@drawable/tracking1"
         android:scaleType="center"
         android:layout_below="@+id/textView11"

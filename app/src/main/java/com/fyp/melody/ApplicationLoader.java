@@ -17,7 +17,7 @@ public class ApplicationLoader extends Application {
     private static Context mAppContext;
 
     // global server IP address
-    private static final String IP = "http://melodelivery.herokuapp.com/";
+    private static final String IP = "http://mynetsys.com/";
 
 
     @Override

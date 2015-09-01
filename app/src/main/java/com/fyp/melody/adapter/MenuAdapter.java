@@ -61,30 +61,30 @@ public class MenuAdapter extends BaseAdapter {
 
         }
 
-        TextView menuDesc = (TextView) convertView.findViewById(R.id.Description);
+        TextView menuName = (TextView) convertView.findViewById(R.id.Name);
         TextView menuPrice = (TextView) convertView.findViewById(R.id.Price);
-        NetworkImageView menuCompImg = (NetworkImageView) convertView.findViewById(R.id.CompanyImage);
+        NetworkImageView menuImg = (NetworkImageView) convertView.findViewById(R.id.MenuImage);
 
         curMenu = MenuList.get(position);
 
-        menuDesc.setText(curMenu.getMenuName());
+        menuName.setText(curMenu.getMenuName());
         menuPrice.setText(curMenu.getMenuPrice());
 
 
         Log.e("tag", ApplicationLoader.getIp(curMenu.getMenuImage()));
-        menuCompImg.setImageUrl(ApplicationLoader.getIp(curMenu.getMenuImage()), VolleySingleton.getInstance().getImageLoader());
+        menuImg.setImageUrl(ApplicationLoader.getIp(curMenu.getMenuImage()), VolleySingleton.getInstance().getImageLoader());
         switch (position) {
             case 3:
-                menuCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuImg.setImageResource(R.mipmap.ic_launcher);
                 break;
             case 2:
-                menuCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuImg.setImageResource(R.mipmap.ic_launcher);
                 break;
             case 1:
-                menuCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuImg.setImageResource(R.mipmap.ic_launcher);
                 break;
             case 0:
-                menuCompImg.setImageResource(R.mipmap.ic_launcher);
+                menuImg.setImageResource(R.mipmap.ic_launcher);
                 break;
         }
 

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -48,7 +50,18 @@ public class RestaurantsActivity extends AppCompatActivity {
         RestListView = (ListView) findViewById(R.id.RestListView);
         RestListView.setAdapter(restListAdapter);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("restaurant.json"),new JSONObject(getparams()), new Response.Listener<JSONObject>() {
+        RestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Restaurants restaurants = new Restaurants();
+                Log.v("", String.valueOf(restaurants.getRestaurantID()));
+                Intent menu = new Intent(RestaurantsActivity.this, MenuActivity.class);
+                menu.putExtra("id", restaurants.getRestaurantID());
+                startActivity(menu);
+            }
+        });
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("/restaurant"),new JSONObject(getparams()), new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {

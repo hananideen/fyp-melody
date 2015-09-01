@@ -22,12 +22,15 @@ public class Json2Menu {
             temp= json.optJSONArray("Product").optJSONObject(0);
             menuName= temp.optString("prodDescription");
             menuPrice = json.optString("prodPrice");
-            //TODO get description, id and image
+            menuDescription = json.optString("Description");
+            menuID = json.optInt("id");
+            menuImage = json.optString("image");
         }
         else{
             menuName = "";
             menuDescription = "";
             menuPrice = "";
+            menuImage = "";
             menuID = 0;
         }
     }
