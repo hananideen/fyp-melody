@@ -44,7 +44,7 @@ public class SettingsListAdapter extends BaseAdapter {
         final ViewItem item;
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.settings_list, null);
+            convertView = mInflater.inflate(R.layout.settings_item, null);
             item = new ViewItem();
 
             item.productTitle = (TextView) convertView

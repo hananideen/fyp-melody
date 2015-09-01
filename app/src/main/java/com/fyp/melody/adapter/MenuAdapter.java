@@ -68,25 +68,8 @@ public class MenuAdapter extends BaseAdapter {
         curMenu = MenuList.get(position);
 
         menuName.setText(curMenu.getMenuName());
-        menuPrice.setText(curMenu.getMenuPrice());
-
-
-        Log.e("tag", ApplicationLoader.getIp(curMenu.getMenuImage()));
+        menuPrice.setText("RM" +curMenu.getMenuPrice());
 //        menuImg.setImageUrl(ApplicationLoader.getIp(curMenu.getMenuImage()), VolleySingleton.getInstance().getImageLoader());
-        switch (position) {
-            case 3:
-                menuImg.setImageResource(R.mipmap.ic_launcher);
-                break;
-            case 2:
-                menuImg.setImageResource(R.mipmap.ic_launcher);
-                break;
-            case 1:
-                menuImg.setImageResource(R.mipmap.ic_launcher);
-                break;
-            case 0:
-                menuImg.setImageResource(R.mipmap.ic_launcher);
-                break;
-        }
 
         return convertView;
     }

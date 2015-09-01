@@ -70,15 +70,15 @@ public class RestaurantsActivity extends AppCompatActivity {
         RestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Restaurants restaurants = new Restaurants();
-                Log.v("List view clicked: ", String.valueOf(id));
-                //Intent menu = new Intent(RestaurantsActivity.this, MenuActivity.class);
-                //menu.putExtra("id", restaurants.getRestaurantID());
-                //startActivity(menu);
+                Restaurants restaurants = restListAdapter.getRestaurants(position);
+                Log.v("List view clicked: ", restaurants.getRestaurantName());
+                Intent menu = new Intent(RestaurantsActivity.this, MenuActivity.class);
+                menu.putExtra("id", restaurants.getRestaurantName());
+                startActivity(menu);
             }
         });
 
-        JsonArrayRequest arrayReg = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+        JsonArrayRequest restRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
@@ -102,7 +102,7 @@ public class RestaurantsActivity extends AppCompatActivity {
             }
         });
 
-        VolleySingleton.getInstance().getRequestQueue().add(arrayReg);
+        VolleySingleton.getInstance().getRequestQueue().add(restRequest);
     }
 
     protected void onResume() {

@@ -25,7 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_setings);
+        setContentView(R.layout.activity_settings);
 
         mProductList = SettingsHelper.getCatalog(getResources());
 

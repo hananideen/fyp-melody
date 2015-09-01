@@ -1,16 +1,16 @@
-package com.fyp.melody.model;
+package com.fyp.melody;
 
 import com.fyp.melody.Product;
 
 /**
  * Created by Hananideen on 2/6/2015.
  */
-public class ShoppingCartEntry {
+public class ShoppingCartEntryP {
 
     private Product mProduct;
     private int mQuantity;
 
-    public ShoppingCartEntry(Product product, int quantity) {
+    public ShoppingCartEntryP(Product product, int quantity) {
         mProduct = product;
         mQuantity = quantity;
     }

@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import com.fyp.melody.Product;
 import com.fyp.melody.ProductAdapter;
+import com.fyp.melody.ProductDetailsActivity;
 import com.fyp.melody.R;
-import com.fyp.melody.helper.ShoppingCartHelper;
+import com.fyp.melody.ShoppingCartHelperP;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        mCartList = ShoppingCartHelper.getCartList();
+        mCartList = ShoppingCartHelperP.getCartList();
 
         // Make sure to clear the selections
         for(int i=0; i<mCartList.size(); i++) {
@@ -47,7 +48,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent productDetailsIntent = new Intent(getBaseContext(), ProductDetailsActivity.class);
-                productDetailsIntent.putExtra(ShoppingCartHelper.PRODUCT_INDEX, position);
+                productDetailsIntent.putExtra(ShoppingCartHelperP.PRODUCT_INDEX, position);
                 startActivity(productDetailsIntent);
             }
         });
@@ -64,7 +65,7 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
             }
         double subTotal = 0.00;
             for (Product p : mCartList) {
-                int quantity = ShoppingCartHelper.getProductQuantity(p);
+                int quantity = ShoppingCartHelperP.getProductQuantity(p);
 
                 subTotal += p.price * quantity;
             }

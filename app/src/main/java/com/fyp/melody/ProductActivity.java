@@ -10,10 +10,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.fyp.melody.activity.ProductDetailsActivity;
 import com.fyp.melody.activity.SettingsActivity;
 import com.fyp.melody.activity.ShoppingCartActivity;
-import com.fyp.melody.helper.ShoppingCartHelper;
 
 import java.util.List;
 
@@ -27,10 +25,10 @@ public class ProductActivity extends ActionBarActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.catalog);
+        setContentView(R.layout.catalog_list);
 
 
-        mProductList = ShoppingCartHelper.getCatalog(getResources());
+        mProductList = ShoppingCartHelperP.getCatalog(getResources());
 
 
         ListView listViewCatalog = (ListView) findViewById(R.id.ListViewCatalog);
@@ -42,7 +40,7 @@ public class ProductActivity extends ActionBarActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent productDetailsIntent = new Intent(getBaseContext(),ProductDetailsActivity.class);
-                productDetailsIntent.putExtra(ShoppingCartHelper.PRODUCT_INDEX, position);
+                productDetailsIntent.putExtra(ShoppingCartHelperP.PRODUCT_INDEX, position);
                 startActivity(productDetailsIntent);
             }
         });

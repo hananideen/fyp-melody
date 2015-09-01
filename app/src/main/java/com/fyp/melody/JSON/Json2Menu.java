@@ -19,11 +19,11 @@ public class Json2Menu {
         jsonObject = json;
         if (json!=null)
         {
-            menuName= json.optString("name");
-            menuPrice = json.optString("price");
-            menuDescription = json.optString("description");
-            menuID = json.optInt("id");
-            menuImage = json.optString("logo");
+            menuName= json.optString("Name");
+            menuPrice = json.optString("Price");
+            menuDescription = json.optString("Description");
+            menuID = json.optInt("Id");
+            menuImage = json.optString("Logo");
         }
         else{
             menuName = "";

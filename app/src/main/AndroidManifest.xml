@@ -147,7 +147,7 @@
                 android:value=".ProductActivity" />
         </activity>
         <activity
-            android:name=".activity.ProductDetailsActivity"
+            android:name=".ProductDetailsActivity"
             android:label="Product Details"
             android:screenOrientation="portrait">
             <meta-data

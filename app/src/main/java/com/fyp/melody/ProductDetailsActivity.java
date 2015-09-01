@@ -1,4 +1,4 @@
-package com.fyp.melody.activity;
+package com.fyp.melody;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,10 +8,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.fyp.melody.Product;
-import com.fyp.melody.R;
-import com.fyp.melody.helper.ShoppingCartHelper;
 
 import java.util.List;
 
@@ -26,10 +22,10 @@ public class ProductDetailsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
-        List<Product> catalog = ShoppingCartHelper.getCatalog(getResources());
+        List<Product> catalog = ShoppingCartHelperP.getCatalog(getResources());
 
         int productIndex = getIntent().getExtras().getInt(
-                ShoppingCartHelper.PRODUCT_INDEX);
+                ShoppingCartHelperP.PRODUCT_INDEX);
         final Product selectedProduct = catalog.get(productIndex);
 
         // Set the proper image and text
@@ -48,7 +44,7 @@ public class ProductDetailsActivity extends ActionBarActivity {
         // Update the current quantity in the cart
         TextView textViewCurrentQuantity = (TextView) findViewById(R.id.textViewCurrentlyInCart);
         textViewCurrentQuantity.setText("Currently in Cart: "
-                + ShoppingCartHelper.getProductQuantity(selectedProduct));
+                + ShoppingCartHelperP.getProductQuantity(selectedProduct));
 
         // Save a reference to the quantity edit text
         final EditText editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
@@ -81,7 +77,7 @@ public class ProductDetailsActivity extends ActionBarActivity {
                 }
 
                 // If we make it here, a valid quantity was entered
-                ShoppingCartHelper.setQuantity(selectedProduct, quantity);
+                ShoppingCartHelperP.setQuantity(selectedProduct, quantity);
 
                 // Close the activity
                 finish();

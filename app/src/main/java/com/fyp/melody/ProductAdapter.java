@@ -7,8 +7,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.fyp.melody.helper.ShoppingCartHelper;
-
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class ProductAdapter extends BaseAdapter {
         df = new DecimalFormat("@@##");
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.menu_list, null);
+            convertView = mInflater.inflate(R.layout.catalog_item, null);
             item = new ViewItem();
 
             item.productImageView = (ImageView) convertView
@@ -79,7 +77,7 @@ public class ProductAdapter extends BaseAdapter {
         // Show the quantity in the cart or not
         if (mShowQuantity) {
             item.productQuantity.setText("Quantity: "
-                    + ShoppingCartHelper.getProductQuantity(curProduct));
+                    + ShoppingCartHelperP.getProductQuantity(curProduct));
         } else {
             // Hid the view
             item.productQuantity.setVisibility(View.GONE);
