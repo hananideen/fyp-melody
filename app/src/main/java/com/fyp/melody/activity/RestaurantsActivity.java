@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.JSON.Json2Restaurants;
 import com.fyp.melody.R;
+import com.fyp.melody.Restaurant;
 import com.fyp.melody.model.Restaurants;
 import com.fyp.melody.VolleySingleton;
 import com.fyp.melody.adapter.RestaurantsAdapter;
@@ -96,6 +97,8 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
                 Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                LoadData();
+                restListAdapter.notifyDataSetChanged();
             }
         });
 
@@ -150,6 +153,12 @@ public class RestaurantsActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             Intent setting = new Intent(RestaurantsActivity.this, SettingsActivity.class);
             startActivity(setting);
+            return true;
+        }
+
+        if (id == R.id.action_inapp){
+            Intent inapp = new Intent(RestaurantsActivity.this, Restaurant.class);
+            startActivity(inapp);
             return true;
         }
 

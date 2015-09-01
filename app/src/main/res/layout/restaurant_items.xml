@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:id="@+id/RestName"
-                android:textSize="23sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/niagara"
                 android:text="Restaurant Name"
@@ -66,19 +66,6 @@
                 android:ellipsize="end"
                 android:text="Type"
                 android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right"
-            android:layout_below="@id/promotionDetails"
-            android:layout_toRightOf="@id/companyLogoName"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp" >
-
 
         </LinearLayout>
 

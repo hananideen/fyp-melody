@@ -65,7 +65,7 @@ public class RestaurantsAdapter extends BaseAdapter {
 
         restName.setText(curRest.getRestaurantName());
         restType.setText(curRest.getRestaurantType());
-//        restImg.setImageUrl(ApplicationLoader.getIp(curRest.getRestaurantImage()), VolleySingleton.getInstance().getImageLoader());
+        restImg.setImageUrl("http://mynetsys.com/restaurant/"+ (curRest.getRestaurantImage()), VolleySingleton.getInstance().getImageLoader());
 
         return convertView;
     }
