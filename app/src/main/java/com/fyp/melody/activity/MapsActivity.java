@@ -4,13 +4,24 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.JSON.DirectionsJSONParser;
+import com.fyp.melody.JSON.Json2Location;
+import com.fyp.melody.JSON.Json2Tracking;
 import com.fyp.melody.R;
+import com.fyp.melody.VolleySingleton;
+import com.fyp.melody.model.Location;
+import com.fyp.melody.model.Tracking;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,6 +31,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -36,12 +49,18 @@ public class MapsActivity extends ActionBarActivity {
 
     private GoogleMap mMap;
     private String latitude, longitude;
+    private double latServer, longServer;
     private TextView tvDistanceDuration;
+    Handler mHandler;
+    LatLng delivery, location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        this.mHandler = new Handler();
+        this.mHandler.postDelayed(m_Runnable, 30000);
 
         tvDistanceDuration = (TextView) findViewById(R.id.tvDistanceTime);
 
@@ -55,15 +74,43 @@ public class MapsActivity extends ActionBarActivity {
         Double latDouble = Double.parseDouble(latitude);
         Double longDouble = Double.parseDouble(longitude);
 
-        LatLng location = new LatLng(latDouble, longDouble);
+        location = new LatLng(latDouble, longDouble);
         mMap.addMarker(new MarkerOptions().position(location).title("Your location")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_finish)));
         CameraUpdate zoomLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
         mMap.animateCamera(zoomLocation);
 
-        LatLng delivery = new LatLng(2.923615, 101.662622);
+        delivery = new LatLng(2.923615, 101.662622);
         mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
+
+        JsonArrayRequest locationRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Location location = new Location(new Json2Location(obj));
+                        latServer = location.getLatitude();
+                        longServer = location.getLongitude();
+                        delivery = new LatLng(latServer, longServer);
+                        mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman " + String.format("%.3f", latServer)
+                                + ", " + String.format("%.3f", longServer))
+                                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        VolleySingleton.getInstance().getRequestQueue().add(locationRequest);
 
         LatLng destination = location;
         LatLng origin = delivery;
@@ -75,6 +122,48 @@ public class MapsActivity extends ActionBarActivity {
         downloadTask.execute(url);
 
     }
+
+    private final Runnable m_Runnable = new Runnable() {
+        public void run() {
+            JsonArrayRequest locationRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject obj = response.getJSONObject(i);
+                            Location location = new Location(new Json2Location(obj));
+                            latServer = location.getLatitude();
+                            longServer = location.getLongitude();
+                            delivery = new LatLng(latServer, longServer);
+                            mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman " + String.format("%.3f", latServer)
+                                    + ", " + String.format("%.3f", longServer))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                    Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            VolleySingleton.getInstance().getRequestQueue().add(locationRequest);
+
+            LatLng destination = location;
+            LatLng origin = delivery;
+
+            String url = getDirectionsUrl(destination, origin);
+            DownloadTask downloadTask = new DownloadTask();
+            downloadTask.execute(url);
+
+            Toast.makeText(MapsActivity.this,"update",Toast.LENGTH_SHORT).show();
+            MapsActivity.this.mHandler.postDelayed(m_Runnable, 30000);
+        }
+    };
 
     private String getDirectionsUrl(LatLng destination ,LatLng origin){
 

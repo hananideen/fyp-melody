@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,16 +17,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.fyp.melody.ApplicationLoader;
+import com.fyp.melody.JSON.Json2Tracking;
 import com.fyp.melody.R;
+import com.fyp.melody.VolleySingleton;
+import com.fyp.melody.model.Tracking;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Hananideen on 30/6/2015.
  */
-
-
-@TargetApi(Build.VERSION_CODES.GINGERBREAD)
-@SuppressLint("NewApi")
 
 public class TrackingActivity extends ActionBarActivity {
 
@@ -33,13 +41,17 @@ public class TrackingActivity extends ActionBarActivity {
     TextView textViewTime, textViewName, textViewAddress1, textViewAddress2;
     SharedPreferences settings;
     TextView timestamp, ETA;
-    String total;
+    String total, status;
     ImageView tracking;
+    Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
+
+        this.mHandler = new Handler();
+        this.mHandler.postDelayed(m_Runnable, 10000);
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
 
@@ -118,58 +130,78 @@ public class TrackingActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent map = new Intent(TrackingActivity.this, MapsActivity.class);
-                map.putExtra("lat",latitude);
-                map.putExtra("long",longitude);
+                map.putExtra("lat", latitude);
+                map.putExtra("long", longitude);
                 startActivity(map);
             }
         });
 
+        JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Tracking tracking = new Tracking(new Json2Tracking(obj));
+                        status = tracking.getStatus();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-
-//        btnStart = (Button) findViewById(R.id.btnStart);
-//        textViewTime = (TextView) findViewById(R.id.textViewTime);
-//        textViewTime.setText("01:00:00");
-//        final CounterClass timer = new CounterClass(3600000, 1000);
-//        btnStart.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                timer.start();
-//            }
-//        });timer.start();
+        VolleySingleton.getInstance().getRequestQueue().add(trackingRequest);
 
 
     }
 
-//    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-//    @SuppressLint("NewApi")
-//    public class CounterClass extends CountDownTimer {
-//
-//        public CounterClass(long millisInFuture, long countDownInterval) {
-//            super(millisInFuture, countDownInterval);
-//        }
-//
-//        @SuppressLint("NewApi")
-//        @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-//        @Override
-//        public void onTick(long millisUntilFinished) {
-//
-//            long millis = millisUntilFinished;
-//            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-//                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-//                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-//            System.out.println(hms);
-//            textViewTime.setText(hms);
-//        }
-//
-//        @Override
-//        public void onFinish() {
-//            textViewTime.setText("Completed.");
-//        }
-//
-//
-//
-//    }
+    private final Runnable m_Runnable = new Runnable() {
+        public void run() {
 
+            JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject obj = response.getJSONObject(i);
+                            Tracking tracking = new Tracking(new Json2Tracking(obj));
+                            status = tracking.getStatus();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                    Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            VolleySingleton.getInstance().getRequestQueue().add(trackingRequest);
+
+            if(status.equals("cooking")) {
+                tracking.setImageResource(R.drawable.tracking2);
+            }else if (status.equals("packing")){
+                tracking.setImageResource(R.drawable.tracking3);
+            }else if (status.equals("preparing")){
+                tracking.setImageResource(R.drawable.tracking4);
+            }else if (status.equals("delivering")){
+                tracking.setImageResource(R.drawable.tracking5);
+            }else{
+                tracking.setImageResource(R.drawable.tracking1);
+            }
+            Toast.makeText(TrackingActivity.this,"update",Toast.LENGTH_SHORT).show();
+            TrackingActivity.this.mHandler.postDelayed(m_Runnable, 10000);
+        }
+    };
 
 }
