@@ -8,15 +8,18 @@ import com.fyp.melody.JSON.Json2Tracking;
 public class Tracking {
 
     public String Status;
+    public int Order_ID;
 
     public Tracking() {}
 
-    public Tracking (String statusTracking){
+    public Tracking (String statusTracking, int order_ID){
         Status = statusTracking;
+        Order_ID = order_ID;
     }
 
     public Tracking(Json2Tracking jTrack) {
         Status = jTrack.status;
+        Order_ID = jTrack.id;
     }
 
     public String getStatus() {
@@ -25,5 +28,13 @@ public class Tracking {
 
     public void setStatus (String status) {
         Status = status;
+    }
+
+    public int getOrder_ID() {
+        return Order_ID;
+    }
+
+    public void setOrder_ID(int orderId) {
+        Order_ID = orderId;
     }
 }

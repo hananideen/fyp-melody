@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class TrackingActivity extends ActionBarActivity {
     String total, status;
     ImageView tracking;
     Handler mHandler;
+    LinearLayout deliveryman;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class TrackingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_tracking);
 
         this.mHandler = new Handler();
-        this.mHandler.postDelayed(m_Runnable, 10000);
+        this.mHandler.postDelayed(m_Runnable, 5000);
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
 
@@ -62,6 +64,7 @@ public class TrackingActivity extends ActionBarActivity {
         timestamp = (TextView) findViewById(R.id.textViewTimestamp);
         ETA = (TextView) findViewById(R.id.textViewETA);
         tracking = (ImageView) findViewById(R.id.imageTracking);
+        deliveryman = (LinearLayout) findViewById(R.id.layoutDelivery);
 
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR);
@@ -136,7 +139,7 @@ public class TrackingActivity extends ActionBarActivity {
             }
         });
 
-        JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+        JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/order-status.php"), new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
@@ -165,7 +168,7 @@ public class TrackingActivity extends ActionBarActivity {
     private final Runnable m_Runnable = new Runnable() {
         public void run() {
 
-            JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+            JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/order-status.php"), new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     for (int i = 0; i < response.length(); i++) {
@@ -194,13 +197,13 @@ public class TrackingActivity extends ActionBarActivity {
                 tracking.setImageResource(R.drawable.tracking3);
             }else if (status.equals("preparing")){
                 tracking.setImageResource(R.drawable.tracking4);
+                deliveryman.setVisibility(View.VISIBLE);
             }else if (status.equals("delivering")){
                 tracking.setImageResource(R.drawable.tracking5);
             }else{
                 tracking.setImageResource(R.drawable.tracking1);
             }
-            Toast.makeText(TrackingActivity.this,"update",Toast.LENGTH_SHORT).show();
-            TrackingActivity.this.mHandler.postDelayed(m_Runnable, 10000);
+            TrackingActivity.this.mHandler.postDelayed(m_Runnable, 5000);
         }
     };
 
