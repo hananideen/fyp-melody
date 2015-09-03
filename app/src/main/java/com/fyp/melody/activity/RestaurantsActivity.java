@@ -163,11 +163,11 @@ public class RestaurantsActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.action_login){
-            Intent inapp = new Intent(RestaurantsActivity.this, LoginProfile.class);
-            startActivity(inapp);
-            return true;
-        }
+//        if (id == R.id.action_login){
+//            Intent inapp = new Intent(RestaurantsActivity.this, LoginProfile.class);
+//            startActivity(inapp);
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

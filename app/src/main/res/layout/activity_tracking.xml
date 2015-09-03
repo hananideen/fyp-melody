@@ -109,15 +109,14 @@
         android:layout_toRightOf="@+id/textViewETA"
         android:layout_toEndOf="@+id/textViewETA" />
 
-    <LinearLayout
-        android:layout_width="200dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         android:id="@+id/layoutDelivery"
         android:background="#d3d3d3"
         android:orientation="vertical"
         android:visibility="invisible"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_margin="20dp"
         android:layout_below="@+id/textAddress2">
 
         <TextView
@@ -128,34 +127,49 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/linearLayout2"
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@+id/textView15"
+            android:layout_alignEnd="@+id/textView15">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ahmad bin Ali"
+                android:textStyle="bold"
+                android:id="@+id/textViewDName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="012 345 6789"
+                android:textStyle="bold"
+                android:id="@+id/textViewDContact" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WJP 1356"
+                android:textStyle="bold"
+                android:id="@+id/textViewDPlat" />
+        </LinearLayout>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView3"
-            android:src="@mipmap/melodelivery_logo" />
+            android:src="@mipmap/melodelivery_logo"
+            android:layout_alignBottom="@+id/linearLayout2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ahmad bin Ali"
-            android:textStyle="bold"
-            android:id="@+id/textViewDName" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="012 345 6789"
-            android:textStyle="bold"
-            android:id="@+id/textViewDContact" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WJP 1356"
-            android:textStyle="bold"
-            android:id="@+id/textViewDPlat" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -164,9 +178,10 @@
         android:layout_height="32dp"
         android:background="@drawable/button_bg"
         android:textColor="@color/white"
-        android:layout_below="@+id/layoutDelivery"
         android:visibility="invisible"
-        android:layout_marginLeft="30dp"/>
+        android:layout_alignBottom="@+id/layoutDelivery"
+        android:layout_alignRight="@+id/layoutDelivery"
+        android:layout_alignEnd="@+id/layoutDelivery" />
 
     </RelativeLayout>
     </ScrollView>

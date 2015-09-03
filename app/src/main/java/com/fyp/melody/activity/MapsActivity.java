@@ -28,7 +28,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
@@ -53,6 +55,8 @@ public class MapsActivity extends ActionBarActivity {
     private TextView tvDistanceDuration;
     Handler mHandler;
     LatLng delivery, location;
+    Marker driver;
+    Polyline line;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,7 @@ public class MapsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_maps);
 
         this.mHandler = new Handler();
-        this.mHandler.postDelayed(m_Runnable, 30000);
+        this.mHandler.postDelayed(m_Runnable, 10000);
 
         tvDistanceDuration = (TextView) findViewById(R.id.tvDistanceTime);
 
@@ -80,23 +84,31 @@ public class MapsActivity extends ActionBarActivity {
         CameraUpdate zoomLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
         mMap.animateCamera(zoomLocation);
 
-        delivery = new LatLng(2.923615, 101.662622);
-        mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman")
-                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
+//        delivery = new LatLng(2.923615, 101.662622);
+//        mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman")
+//                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
 
-        JsonArrayRequest locationRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+        JsonArrayRequest locationRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/coordinate.php"), new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
-                        Location location = new Location(new Json2Location(obj));
-                        latServer = location.getLatitude();
-                        longServer = location.getLongitude();
+                        Location coordinates = new Location(new Json2Location(obj));
+                        latServer = coordinates.getLatitude();
+                        longServer = coordinates.getLongitude();
                         delivery = new LatLng(latServer, longServer);
-                        mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman " + String.format("%.3f", latServer)
+                        driver = mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman " + String.format("%.3f", latServer)
                                 + ", " + String.format("%.3f", longServer))
                                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
+                        LatLng destination = location;
+                        LatLng origin = delivery;
+
+                        String url = getDirectionsUrl(destination, origin);
+
+                        DownloadTask downloadTask = new DownloadTask();
+
+                        downloadTask.execute(url);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -112,32 +124,32 @@ public class MapsActivity extends ActionBarActivity {
 
         VolleySingleton.getInstance().getRequestQueue().add(locationRequest);
 
-        LatLng destination = location;
-        LatLng origin = delivery;
-
-        String url = getDirectionsUrl(destination, origin);
-
-        DownloadTask downloadTask = new DownloadTask();
-
-        downloadTask.execute(url);
-
     }
 
     private final Runnable m_Runnable = new Runnable() {
         public void run() {
-            JsonArrayRequest locationRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+            driver.remove();
+            line.remove();
+
+            JsonArrayRequest locationRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/coordinate.php"), new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject obj = response.getJSONObject(i);
-                            Location location = new Location(new Json2Location(obj));
-                            latServer = location.getLatitude();
-                            longServer = location.getLongitude();
+                            Location coordinates = new Location(new Json2Location(obj));
+                            latServer = coordinates.getLatitude();
+                            longServer = coordinates.getLongitude();
                             delivery = new LatLng(latServer, longServer);
-                            mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman " + String.format("%.3f", latServer)
+                            driver = mMap.addMarker(new MarkerOptions().position(delivery).title("Deliveryman " + String.format("%.3f", latServer)
                                     + ", " + String.format("%.3f", longServer))
                                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.melody_logo)));
+                            LatLng destination = location;
+                            LatLng origin = delivery;
+
+                            String url = getDirectionsUrl(destination, origin);
+                            DownloadTask downloadTask = new DownloadTask();
+                            downloadTask.execute(url);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -153,15 +165,7 @@ public class MapsActivity extends ActionBarActivity {
 
             VolleySingleton.getInstance().getRequestQueue().add(locationRequest);
 
-            LatLng destination = location;
-            LatLng origin = delivery;
-
-            String url = getDirectionsUrl(destination, origin);
-            DownloadTask downloadTask = new DownloadTask();
-            downloadTask.execute(url);
-
-            Toast.makeText(MapsActivity.this,"update",Toast.LENGTH_SHORT).show();
-            MapsActivity.this.mHandler.postDelayed(m_Runnable, 30000);
+            MapsActivity.this.mHandler.postDelayed(m_Runnable, 10000);
         }
     };
 
@@ -303,7 +307,7 @@ public class MapsActivity extends ActionBarActivity {
 
             tvDistanceDuration.setText("ETA: "+duration +", Distance: "+distance );
 
-            mMap.addPolyline(lineOptions);
+            line = mMap.addPolyline(lineOptions);
         }
     }
 

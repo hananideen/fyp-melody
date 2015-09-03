@@ -12,6 +12,7 @@ public class Menus {
     public String MenuPrice;
     private String MenuImage;
     private int MenuID;
+    public boolean selected;
 
     public Menus(){
     }

@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class TrackingActivity extends ActionBarActivity {
     String total, status;
     ImageView tracking;
     Handler mHandler;
-    LinearLayout deliveryman;
+    RelativeLayout deliveryman;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class TrackingActivity extends ActionBarActivity {
         timestamp = (TextView) findViewById(R.id.textViewTimestamp);
         ETA = (TextView) findViewById(R.id.textViewETA);
         tracking = (ImageView) findViewById(R.id.imageTracking);
-        deliveryman = (LinearLayout) findViewById(R.id.layoutDelivery);
+        deliveryman = (RelativeLayout) findViewById(R.id.layoutDelivery);
 
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR);

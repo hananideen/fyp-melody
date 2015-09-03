@@ -80,6 +80,8 @@ public class LoginProfile extends ActionBarActivity {
                                 @Override
                                 public void onResponse(JSONObject jsonObject) {
                                     Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+                                    ApplicationLoader.getInstance().getSettingsPrefFileEditor().putString("userName", userName);
+                                    ApplicationLoader.getInstance().getSettingsPrefFileEditor().apply();
                                     startActivity(intent);
 
                                 }
@@ -89,6 +91,8 @@ public class LoginProfile extends ActionBarActivity {
                                 public void onErrorResponse(VolleyError volleyError) {
                                     Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
                                     Log.d("Response Error: ", volleyError.toString());
+                                    ApplicationLoader.getInstance().getSettingsPrefFileEditor().putString("userName", userName);
+                                    ApplicationLoader.getInstance().getSettingsPrefFileEditor().apply();
                                     startActivity(intent);
                                 }
                             });
