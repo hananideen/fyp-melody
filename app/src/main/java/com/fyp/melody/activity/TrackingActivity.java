@@ -200,6 +200,7 @@ public class TrackingActivity extends ActionBarActivity {
                 deliveryman.setVisibility(View.VISIBLE);
             }else if (status.equals("delivering")){
                 tracking.setImageResource(R.drawable.tracking5);
+                btnMap.setVisibility(View.VISIBLE);
             }else{
                 tracking.setImageResource(R.drawable.tracking1);
             }

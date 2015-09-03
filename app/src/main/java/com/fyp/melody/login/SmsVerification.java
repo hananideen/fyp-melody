@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -36,7 +37,7 @@ import java.util.Random;
 /**
  * Created by Hananideen on 28/5/2015.
  */
-public class SmsVerification extends Activity {
+public class SmsVerification extends AppCompatActivity {
 
     private static final String TAG = SmsVerification.class.getSimpleName();
 

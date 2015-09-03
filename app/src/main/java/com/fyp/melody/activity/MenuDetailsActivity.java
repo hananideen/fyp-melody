@@ -7,10 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.fyp.melody.ApplicationLoader;
+import com.fyp.melody.JSON.Json2Menu;
 import com.fyp.melody.Product;
 import com.fyp.melody.R;
 import com.fyp.melody.ShoppingCartHelperP;
@@ -19,6 +26,11 @@ import com.fyp.melody.adapter.MenuAdapter;
 import com.fyp.melody.helper.ShoppingCartHelper;
 import com.fyp.melody.model.Menus;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,10 +41,18 @@ public class MenuDetailsActivity extends AppCompatActivity {
 
     int id, position;
     String name, description, price,image;
+    MenuAdapter menuListAdapter;
+    List<Menus> MenuList;
+    private ListView MenuListView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_details);
+
+        MenuList = new ArrayList<Menus>();
+        menuListAdapter = new MenuAdapter(this,MenuList);
+        MenuListView = (ListView) findViewById(R.id.listViewHidden);
+        MenuListView.setAdapter(menuListAdapter);
 
         Intent menu = getIntent();
         position = menu.getIntExtra("position", 0);
@@ -48,10 +68,36 @@ public class MenuDetailsActivity extends AppCompatActivity {
         TextView productPriceTextView = (TextView) findViewById(R.id.TextViewProductPrice);
         TextView textViewCurrentQuantity = (TextView) findViewById(R.id.textViewCurrentlyInCart);
 
-        productImageView.setImageUrl("http://mynetsys.com/restaurant/" +image, VolleySingleton.getInstance().getImageLoader());
+        productImageView.setImageUrl("http://mynetsys.com/restaurant/" + image, VolleySingleton.getInstance().getImageLoader());
         productTitleTextView.setText(name);
         productDetailsTextView.setText(description);
         productPriceTextView.setText("RM" + price);
+
+        JsonArrayRequest menuRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/menu.php"), new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Menus menu = new Menus(new Json2Menu(obj));
+                        MenuList.add(0, menu);
+                        menuListAdapter.notifyDataSetChanged();
+                        //final Menus selectedMenu = MenuList.get(position);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        VolleySingleton.getInstance().getRequestQueue().add(menuRequest);
+//
 //        textViewCurrentQuantity.setText("Currently in Cart: "
 //                + ShoppingCartHelper.getProductQuantity(selectedMenu));
 //
@@ -82,7 +128,6 @@ public class MenuDetailsActivity extends AppCompatActivity {
 //                finish();
 //            }
 //        });
-
     }
 
 }

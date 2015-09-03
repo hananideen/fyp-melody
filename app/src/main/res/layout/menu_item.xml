@@ -22,8 +22,8 @@
             android:orientation="vertical" >
 
             <com.android.volley.toolbox.NetworkImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:id="@+id/MenuImage"
                 android:src="@mipmap/ic_launcher" />
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:id="@+id/Name"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:text="Product Name"

@@ -37,6 +37,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/PhoneNumber"
+                android:textStyle="bold"
                 android:textSize="24sp"
 
                 android:id="@+id/phone_number_view" />
@@ -44,7 +45,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="end"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_drawer_home"
                 android:id="@+id/edit_phone_number_button" />
 
         </LinearLayout>

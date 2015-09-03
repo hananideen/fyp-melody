@@ -117,7 +117,7 @@
         android:orientation="vertical"
         android:visibility="invisible"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/textAddress2">
 
         <TextView
@@ -165,6 +165,7 @@
         android:background="@drawable/button_bg"
         android:textColor="@color/white"
         android:layout_below="@+id/layoutDelivery"
+        android:visibility="invisible"
         android:layout_marginLeft="30dp"/>
 
     </RelativeLayout>

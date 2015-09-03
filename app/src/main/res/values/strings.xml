@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Melody</string>
+    <string name="app_name">Mealody</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_rest">Restaurant</string>
     <string name="title_activity_cart">Shopping Cart</string>

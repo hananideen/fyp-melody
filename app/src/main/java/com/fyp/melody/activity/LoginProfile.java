@@ -21,16 +21,31 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fyp.melody.ApplicationLoader;
+import com.fyp.melody.CustomRequest;
 import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Hananideen on 7/7/2015.
@@ -54,36 +69,95 @@ public class LoginProfile extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 userName = Username.getText().toString();
-                if (userName.length() == 0){
+                if (userName.length() == 0) {
                     Toast.makeText(ApplicationLoader.getContext(), "Please Enter a Username", Toast.LENGTH_LONG).show();
                 } else {
-                    final ProgressDialog dialog = ProgressDialog.show(LoginProfile.this,"", "Getting you ready for Melody", true);
-
+//                    final ProgressDialog dialog = ProgressDialog.show(LoginProfile.this, "", "Getting you ready for Mealody", true);
                     final Intent intent = new Intent(LoginProfile.this, LoginPassword.class);
-                    JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("user/userregister"),new JSONObject(getParams()), new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("loginRequest", response.toString());
 
-                            ApplicationLoader.getInstance().getSettingsPrefFileEditor().putString("userName", userName);
-                            ApplicationLoader.getInstance().getSettingsPrefFileEditor().apply();
-                            dialog.dismiss();
-                            startActivity(intent);
-                            finish();
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // in case couldn't contact the server
-                            Log.e("loginRequest", "Error");
-                            intent.putExtra("response", false);
-                            dialog.dismiss();
-                            startActivity(intent);
-                            finish();
-                            // TODO go to mainactivity and add default username
-                        }
-                    });
+                    JsonObjectRequest loginRequest = new JsonObjectRequest(ApplicationLoader.getIp("restaurant/user.php"), new JSONObject(getParams("0148204633", userName)),
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject jsonObject) {
+                                    Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError volleyError) {
+                                    Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+                                    Log.d("Response Error: ", volleyError.toString());
+                                    startActivity(intent);
+                                }
+                            });
+
                     VolleySingleton.getInstance().getRequestQueue().add(loginRequest);
+
+
+//                    CustomRequest jsObjRequest = new CustomRequest(ApplicationLoader.getIp("restaurant/user.php"), getParams(), new Response.Listener<JSONObject>() {
+//
+//                        @Override
+//                        public void onResponse(JSONObject response) {
+//                            Log.d("Response: ", response.toString());
+//                            Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }, new Response.ErrorListener() {
+//
+//                        @Override
+//                        public void onErrorResponse(VolleyError response) {
+//                            Log.d("Response Error: ", response.toString());
+//                            Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                    VolleySingleton.getInstance().getRequestQueue().add(jsObjRequest);
+
+//                    JsonObjectRequest loginRequest = new JsonObjectRequest(Request.Method.POST, ApplicationLoader.getIp("restaurant/user.php"),new JSONObject(getParams()),
+//                            new Response.Listener<JSONObject>() {
+//                        @Override
+//                        public void onResponse(JSONObject response) {
+//                            Log.d("loginRequest", response.toString());
+//
+//                            ApplicationLoader.getInstance().getSettingsPrefFileEditor().putString("userName", userName);
+//                            ApplicationLoader.getInstance().getSettingsPrefFileEditor().apply();
+//                            dialog.dismiss();
+//                            startActivity(intent);
+//                        }
+//                    }, new Response.ErrorListener() {
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//                            Log.e("loginRequest error", error.toString());
+//                            intent.putExtra("response", false);
+//                            dialog.dismiss();
+//                            startActivity(intent);
+//                        }
+//                    });
+//                    VolleySingleton.getInstance().getRequestQueue().add(loginRequest);
+
+//                    JsonArrayRequest restRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/user.php"), new JSONObject(getParams()), new Response.Listener<JSONArray>() {
+//                        @Override
+//                        public void onResponse(JSONArray response) {
+//                            for (int i = 0; i < response.length(); i++) {
+//                                try {
+//                                    JSONObject obj = response.getJSONObject(i);
+//                                    Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+//
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                    }, new Response.ErrorListener() {
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//                            VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+//                            Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//
+//                    VolleySingleton.getInstance().getRequestQueue().add(restRequest);
+
                 }
             }
         });
@@ -178,11 +252,10 @@ public class LoginProfile extends ActionBarActivity {
         return Uri.parse(path);
     }
 
-    public HashMap<String, String> getParams(){
+    public HashMap<String, String> getParams(String phoneNum, String userName){
         HashMap<String, String> params = new HashMap<>();
-        params.put("phoneNumber", ApplicationLoader.getInstance().getSettingPrefFile().getString("phoneNumber", ""));
+        params.put("phoneNumber", phoneNum);
         params.put("userName", userName);
-        params.put("phoneModel", Build.MODEL);
 
         return params;
     }
@@ -190,5 +263,12 @@ public class LoginProfile extends ActionBarActivity {
     public void LoadDefaultSettings(){
 
     }
+
+//    protected Map<String, String> getParams() {
+//        Map<String, String> params = new HashMap<String, String>();
+//        params.put("phoneNumber", "0148204633");
+//        params.put("userName", "Hanani");
+//        return params;
+//    }
 
 }

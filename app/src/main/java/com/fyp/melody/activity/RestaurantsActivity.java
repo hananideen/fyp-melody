@@ -60,49 +60,50 @@ public class RestaurantsActivity extends AppCompatActivity {
             setContentView(R.layout.activity_restaurants);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setIcon(R.mipmap.melody_logo);
-        }
 
-        RestaurantsList = new ArrayList<Restaurants>();
-        restListAdapter = new RestaurantsAdapter(this, RestaurantsList);
-        RestListView = (ListView) findViewById(R.id.RestListView);
-        RestListView.setAdapter(restListAdapter);
+            RestaurantsList = new ArrayList<Restaurants>();
+            restListAdapter = new RestaurantsAdapter(this, RestaurantsList);
+            RestListView = (ListView) findViewById(R.id.RestListView);
+            RestListView.setAdapter(restListAdapter);
 
-        RestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Restaurants restaurants = restListAdapter.getRestaurants(position);
-                Log.v("List view clicked: ", restaurants.getRestaurantName());
-                Intent menu = new Intent(RestaurantsActivity.this, MenuActivity.class);
-                menu.putExtra("id", restaurants.getRestaurantName());
-                startActivity(menu);
-            }
-        });
+            RestListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Restaurants restaurants = restListAdapter.getRestaurants(position);
+                    Log.v("List view clicked: ", restaurants.getRestaurantName());
+                    Intent menu = new Intent(RestaurantsActivity.this, MenuActivity.class);
+                    menu.putExtra("id", restaurants.getRestaurantName());
+                    startActivity(menu);
+                }
+            });
 
-        JsonArrayRequest restRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject obj = response.getJSONObject(i);
-                        Restaurants restaurants = new Restaurants(new Json2Restaurants(obj));
-                        RestaurantsList.add(0, restaurants);
-                        restListAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+            JsonArrayRequest restRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/"), new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject obj = response.getJSONObject(i);
+                            Restaurants restaurants = new Restaurants(new Json2Restaurants(obj));
+                            RestaurantsList.add(0, restaurants);
+                            restListAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
-                Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
-                LoadData();
-                restListAdapter.notifyDataSetChanged();
-            }
-        });
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                    Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                    LoadData();
+                    restListAdapter.notifyDataSetChanged();
+                }
+            });
 
-        VolleySingleton.getInstance().getRequestQueue().add(restRequest);
+            VolleySingleton.getInstance().getRequestQueue().add(restRequest);
+        }
+
     }
 
     protected void onResume() {
@@ -158,6 +159,12 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         if (id == R.id.action_inapp){
             Intent inapp = new Intent(RestaurantsActivity.this, Restaurant.class);
+            startActivity(inapp);
+            return true;
+        }
+
+        if (id == R.id.action_login){
+            Intent inapp = new Intent(RestaurantsActivity.this, LoginProfile.class);
             startActivity(inapp);
             return true;
         }
