@@ -68,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
         emailIntent.setData(Uri.parse("mailto:"));
 
         emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from Melody app");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from Meal-o-dy app");
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Feedback on this app:");
 
         try {

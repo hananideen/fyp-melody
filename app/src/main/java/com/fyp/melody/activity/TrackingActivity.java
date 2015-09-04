@@ -124,7 +124,7 @@ public class TrackingActivity extends ActionBarActivity {
         final String latitude = track.getStringExtra("lat");
         final String longitude = track.getStringExtra("long");
         total = track.getStringExtra("subtotal");
-        Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
 
         textViewName.setText(settings.getString("userName", ""));
         textViewAddress1.setText(home);

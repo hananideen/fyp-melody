@@ -72,16 +72,17 @@ public class LoginProfile extends ActionBarActivity {
                 if (userName.length() == 0) {
                     Toast.makeText(ApplicationLoader.getContext(), "Please Enter a Username", Toast.LENGTH_LONG).show();
                 } else {
-//                    final ProgressDialog dialog = ProgressDialog.show(LoginProfile.this, "", "Getting you ready for Mealody", true);
+                   final ProgressDialog dialog = ProgressDialog.show(LoginProfile.this, "", "Getting you ready for Meal-o-dy", true);
                     final Intent intent = new Intent(LoginProfile.this, LoginPassword.class);
 
                     JsonObjectRequest loginRequest = new JsonObjectRequest(ApplicationLoader.getIp("restaurant/user.php"), new JSONObject(getParams("0148204633", userName)),
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject jsonObject) {
-                                    Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "send", Toast.LENGTH_SHORT).show();
                                     ApplicationLoader.getInstance().getSettingsPrefFileEditor().putString("userName", userName);
                                     ApplicationLoader.getInstance().getSettingsPrefFileEditor().apply();
+                                    dialog.dismiss();
                                     startActivity(intent);
 
                                 }
@@ -89,10 +90,11 @@ public class LoginProfile extends ActionBarActivity {
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError volleyError) {
-                                    Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "failed", Toast.LENGTH_SHORT).show();
                                     Log.d("Response Error: ", volleyError.toString());
                                     ApplicationLoader.getInstance().getSettingsPrefFileEditor().putString("userName", userName);
                                     ApplicationLoader.getInstance().getSettingsPrefFileEditor().apply();
+                                    dialog.dismiss();
                                     startActivity(intent);
                                 }
                             });

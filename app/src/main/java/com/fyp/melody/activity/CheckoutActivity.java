@@ -35,7 +35,7 @@ public class CheckoutActivity extends Activity {
 
         Intent intent = getIntent();
         total = intent.getStringExtra("subtotal");
-        Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
 
         editName = (EditText) findViewById(R.id.ProfileUsername);
         editName.setText(settings.getString("userName", ""));

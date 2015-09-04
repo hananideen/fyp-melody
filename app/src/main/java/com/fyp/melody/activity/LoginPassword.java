@@ -72,7 +72,7 @@ public class LoginPassword extends Activity {
                     editor.putString("confirmPassword", editPass2.getText().toString());
                     editor.commit();
                     Toast.makeText(getApplicationContext(), "Password saved", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginPassword.this, Restaurant.class);
+                    Intent intent = new Intent(LoginPassword.this, RestaurantsActivity.class);
                     startActivity(intent);
                 }
                 else {
