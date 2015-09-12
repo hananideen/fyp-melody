@@ -54,7 +54,7 @@ public class TrackingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_tracking);
 
         this.mHandler = new Handler();
-        this.mHandler.postDelayed(m_Runnable, 5000);
+        this.mHandler.postDelayed(m_Runnable, 3000);
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
 
@@ -205,7 +205,7 @@ public class TrackingActivity extends ActionBarActivity {
             }else{
                 tracking.setImageResource(R.drawable.tracking1);
             }
-            TrackingActivity.this.mHandler.postDelayed(m_Runnable, 5000);
+            TrackingActivity.this.mHandler.postDelayed(m_Runnable, 3000);
         }
     };
 
