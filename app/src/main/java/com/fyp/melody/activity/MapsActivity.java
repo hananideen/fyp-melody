@@ -118,7 +118,7 @@ public class MapsActivity extends ActionBarActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
-                Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Oops! Have you checked your internet connection?", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -159,7 +159,7 @@ public class MapsActivity extends ActionBarActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
-                    Toast.makeText(getApplication(), "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), "Oops! Have you checked your internet connection?", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -309,6 +309,9 @@ public class MapsActivity extends ActionBarActivity {
 
             line = mMap.addPolyline(lineOptions);
         }
+    }
+
+    public void onBackPressed (){
     }
 
 }

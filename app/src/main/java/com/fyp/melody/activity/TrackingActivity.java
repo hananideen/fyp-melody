@@ -24,9 +24,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fyp.melody.ApplicationLoader;
+import com.fyp.melody.JSON.Json2Deliveryman;
 import com.fyp.melody.JSON.Json2Tracking;
 import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
+import com.fyp.melody.model.Deliveryman;
 import com.fyp.melody.model.Tracking;
 
 import org.json.JSONArray;
@@ -42,7 +44,7 @@ public class TrackingActivity extends ActionBarActivity {
     Button btnStart, btnMap;
     TextView textViewTime, textViewName, textViewAddress1, textViewAddress2;
     SharedPreferences settings;
-    TextView timestamp, ETA;
+    TextView timestamp, ETA, dName, dPhone, dPlate;
     String total, status;
     ImageView tracking;
     Handler mHandler;
@@ -66,6 +68,9 @@ public class TrackingActivity extends ActionBarActivity {
         ETA = (TextView) findViewById(R.id.textViewETA);
         tracking = (ImageView) findViewById(R.id.imageTracking);
         deliveryman = (RelativeLayout) findViewById(R.id.layoutDelivery);
+        dName = (TextView) findViewById(R.id.textViewDName);
+        dPhone = (TextView) findViewById(R.id.textViewDContact);
+        dPlate = (TextView) findViewById(R.id.textViewDPlat);
 
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR);
@@ -202,6 +207,7 @@ public class TrackingActivity extends ActionBarActivity {
             }else if (status.equals("preparing")){
                 tracking.setImageResource(R.drawable.tracking4);
                 deliveryman.setVisibility(View.VISIBLE);
+                deliveryman();
             }else if (status.equals("delivering")){
                 tracking.setImageResource(R.drawable.tracking5);
                 btnMap.setVisibility(View.VISIBLE);
@@ -213,6 +219,33 @@ public class TrackingActivity extends ActionBarActivity {
             TrackingActivity.this.mHandler.postDelayed(m_Runnable, 3000);
         }
     };
+
+    public void deliveryman(){
+        JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/deliveryman.php"), new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Deliveryman deliveryman = new Deliveryman(new Json2Deliveryman(obj));
+                        dName.setText(deliveryman.getName());
+                        dPhone.setText(deliveryman.getPhone());
+                        dPlate.setText(deliveryman.getPlate());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                Toast.makeText(getApplication(), "Oops! Have you checked your internet connection?", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        VolleySingleton.getInstance().getRequestQueue().add(trackingRequest);
+    }
 
     public void onBackPressed (){
     }
