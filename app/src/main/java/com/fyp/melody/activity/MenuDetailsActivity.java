@@ -34,6 +34,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+import android.os.AsyncTask;
+
 /**
  * Created by Hananideen on 1/9/2015.
  */
@@ -103,11 +114,13 @@ public class MenuDetailsActivity extends AppCompatActivity {
 //
 //        final EditText editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
 //
-//        Button addToCartButton = (Button) findViewById(R.id.ButtonAddToCart);
-//        addToCartButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
+        Button addToCartButton = (Button) findViewById(R.id.ButtonAddToCart);
+        addToCartButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                new Play().execute("http://mynetsys.com/restaurant/user.php?phoneNumber=0148204633&userName=Hanani");
 //                int quantity = 0;
 //                try {
 //                    quantity = Integer.parseInt(editTextQuantity.getText()
@@ -126,9 +139,40 @@ public class MenuDetailsActivity extends AppCompatActivity {
 //                }
 //                ShoppingCartHelper.setQuantity(selectedMenu, quantity);
 //                finish();
-//            }
-//        });
+            }
+        });
     }
+
+    class Play extends AsyncTask<String, Void, Boolean> {
+        String result;
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try{
+                URL url = new URL(params[0]);
+                URLConnection connection = url.openConnection();
+                HttpURLConnection conn = (HttpURLConnection)connection;
+                int responseCode = conn.getResponseCode();
+                if(responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStream is = conn.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is,"UTF-8");
+                    BufferedReader reader = new BufferedReader(isr);
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line + " sucess");
+                    }
+                    result = sb.toString();
+                    return true;
+                }
+            }catch (MalformedURLException e) {
+                e.printStackTrace();
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+    }
+
 
 }
 
