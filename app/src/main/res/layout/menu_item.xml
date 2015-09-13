@@ -25,8 +25,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:id="@+id/MenuImage"
-                android:src="@mipmap/ic_launcher" />
+                android:id="@+id/MenuImage" />
 
 
         </LinearLayout>
