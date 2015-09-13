@@ -16,10 +16,12 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.JSON.DirectionsJSONParser;
+import com.fyp.melody.JSON.Json2Deliveryman;
 import com.fyp.melody.JSON.Json2Location;
 import com.fyp.melody.JSON.Json2Tracking;
 import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
+import com.fyp.melody.model.Deliveryman;
 import com.fyp.melody.model.Location;
 import com.fyp.melody.model.Tracking;
 import com.google.android.gms.maps.CameraUpdate;
@@ -52,7 +54,7 @@ public class MapsActivity extends ActionBarActivity {
     private GoogleMap mMap;
     private String latitude, longitude;
     private double latServer, longServer;
-    private TextView tvDistanceDuration;
+    private TextView tvDistanceDuration, dName, dPhone, dPlate;
     Handler mHandler;
     LatLng delivery, location;
     Marker driver;
@@ -64,9 +66,12 @@ public class MapsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_maps);
 
         this.mHandler = new Handler();
-        this.mHandler.postDelayed(m_Runnable, 10000);
+        this.mHandler.postDelayed(m_Runnable, 5000);
 
         tvDistanceDuration = (TextView) findViewById(R.id.tvDistanceTime);
+        dName = (TextView) findViewById(R.id.textViewDName);
+        dPhone = (TextView) findViewById(R.id.textViewDContact);
+        dPlate = (TextView) findViewById(R.id.textViewDPlat);
 
         mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         mMap.setMyLocationEnabled(true);
@@ -124,6 +129,31 @@ public class MapsActivity extends ActionBarActivity {
 
         VolleySingleton.getInstance().getRequestQueue().add(locationRequest);
 
+        JsonArrayRequest trackingRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/deliveryman.php"), new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject obj = response.getJSONObject(i);
+                        Deliveryman deliveryman = new Deliveryman(new Json2Deliveryman(obj));
+                        dName.setText(deliveryman.getName());
+                        dPhone.setText(deliveryman.getPhone());
+                        dPlate.setText(deliveryman.getPlate());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("VolleyServer", "Error: " + error.getMessage());
+                Toast.makeText(getApplication(), "Oops! Have you checked your internet connection?", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        VolleySingleton.getInstance().getRequestQueue().add(trackingRequest);
+
     }
 
     private final Runnable m_Runnable = new Runnable() {
@@ -165,7 +195,7 @@ public class MapsActivity extends ActionBarActivity {
 
             VolleySingleton.getInstance().getRequestQueue().add(locationRequest);
 
-            MapsActivity.this.mHandler.postDelayed(m_Runnable, 10000);
+            MapsActivity.this.mHandler.postDelayed(m_Runnable, 5000);
         }
     };
 

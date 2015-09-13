@@ -1,14 +1,66 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fyp.melody.activity.MapsActivity" >
+    tools:context="com.fyp.melody.activity.MapsActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/layoutDelivery"
+        android:background="#d3d3d3"
+        android:orientation="vertical"
+        android:layout_below="@+id/textAddress2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/linearLayout2"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView3"
+            android:layout_toEndOf="@+id/imageView3">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:id="@+id/textViewDName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:id="@+id/textViewDContact" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:id="@+id/textViewDPlat" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:src="@mipmap/melodelivery_logo"
+            android:layout_alignBottom="@+id/linearLayout2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tvDistanceTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ETA: Distance: "
+        android:text="ETA:0mins Distance:0km"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
@@ -18,7 +70,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/map"
-        android:layout_below="@id/tvDistanceTime"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-</RelativeLayout>
+</LinearLayout>
