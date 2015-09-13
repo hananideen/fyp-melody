@@ -84,7 +84,8 @@ public class MapsActivity extends ActionBarActivity {
         Double longDouble = Double.parseDouble(longitude);
 
         location = new LatLng(latDouble, longDouble);
-        mMap.addMarker(new MarkerOptions().position(location).title("Your location")
+        mMap.addMarker(new MarkerOptions().position(location).title("Your location " +latitude
+                + ", " +longitude)
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_finish)));
         CameraUpdate zoomLocation = CameraUpdateFactory.newLatLngZoom(location, 15);
         mMap.animateCamera(zoomLocation);

@@ -1,11 +1,20 @@
 package com.fyp.melody.activity;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Calendar;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -131,6 +140,8 @@ public class TrackingActivity extends ActionBarActivity {
         total = track.getStringExtra("subtotal");
         //Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
 
+        new Send().execute("http://mynetsys.com/restaurant/userlocationupdate.php?latitude="+latitude+"&longitude="+longitude);
+
         textViewName.setText(settings.getString("userName", ""));
         textViewAddress1.setText(home);
         textViewAddress2.setText(street);
@@ -248,6 +259,36 @@ public class TrackingActivity extends ActionBarActivity {
     }
 
     public void onBackPressed (){
+    }
+
+    class Send extends AsyncTask<String, Void, Boolean> {
+        String result;
+        @Override
+        protected Boolean doInBackground(String... params) {
+            try{
+                URL url = new URL(params[0]);
+                URLConnection connection = url.openConnection();
+                HttpURLConnection conn = (HttpURLConnection)connection;
+                int responseCode = conn.getResponseCode();
+                if(responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStream is = conn.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is,"UTF-8");
+                    BufferedReader reader = new BufferedReader(isr);
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line + " sucess");
+                    }
+                    result = sb.toString();
+                    return true;
+                }
+            }catch (MalformedURLException e) {
+                e.printStackTrace();
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
     }
 
 }
