@@ -54,7 +54,7 @@ public class TrackingActivity extends ActionBarActivity {
     TextView textViewTime, textViewName, textViewAddress1, textViewAddress2;
     SharedPreferences settings;
     TextView timestamp, ETA, dName, dPhone, dPlate;
-    String total, status;
+    String total, status, phoneNumber;
     ImageView tracking;
     Handler mHandler;
     RelativeLayout deliveryman;
@@ -68,6 +68,8 @@ public class TrackingActivity extends ActionBarActivity {
         this.mHandler.postDelayed(m_Runnable, 3000);
 
         settings = getSharedPreferences(ApplicationLoader.Settings_PREFS_NAME, 0);
+
+        phoneNumber = ApplicationLoader.getInstance().getSettingPrefFile().getString("phoneNumber", "");
 
         btnMap = (Button) findViewById(R.id.btnMap);
         textViewName = (TextView) findViewById(R.id.textName);
@@ -140,7 +142,7 @@ public class TrackingActivity extends ActionBarActivity {
         total = track.getStringExtra("subtotal");
         //Toast.makeText(getApplicationContext(), ""+total, Toast.LENGTH_LONG).show();
 
-        new Send().execute("http://mynetsys.com/restaurant/userlocationupdate.php?latitude="+latitude+"&longitude="+longitude);
+        new Send().execute("http://mynetsys.com/restaurant/userlocationupdate.php?latitude="+latitude+"&longitude="+longitude+"&phoneNumber="+phoneNumber);
 
         textViewName.setText(settings.getString("userName", ""));
         textViewAddress1.setText(home);
