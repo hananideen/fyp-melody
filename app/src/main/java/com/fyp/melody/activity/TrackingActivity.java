@@ -34,7 +34,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.JSON.Json2Deliveryman;
-import com.fyp.melody.JSON.Json2Tracking;
+import com.fyp.melody.JSON.Json2Trackings;
 import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
 import com.fyp.melody.model.Deliveryman;
@@ -164,7 +164,7 @@ public class TrackingActivity extends ActionBarActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject obj = response.getJSONObject(i);
-                        Tracking tracking = new Tracking(new Json2Tracking(obj));
+                        Tracking tracking = new Tracking(new Json2Trackings(obj));
                         status = tracking.getStatus();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -193,7 +193,7 @@ public class TrackingActivity extends ActionBarActivity {
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject obj = response.getJSONObject(i);
-                            Tracking tracking = new Tracking(new Json2Tracking(obj));
+                            Tracking tracking = new Tracking(new Json2Trackings(obj));
                             status = tracking.getStatus();
                         } catch (JSONException e) {
                             e.printStackTrace();
