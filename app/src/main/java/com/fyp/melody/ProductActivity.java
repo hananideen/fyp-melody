@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.fyp.melody.activity.SettingsActivity;
 import com.fyp.melody.activity.ShoppingCartActivity;
+import com.fyp.melody.activity.ShoppingCartActivityP;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class ProductActivity extends ActionBarActivity{
 
             @Override
             public void onClick(View v) {
-                Intent viewShoppingCartIntent = new Intent(getBaseContext(), ShoppingCartActivity.class);
+                Intent viewShoppingCartIntent = new Intent(getBaseContext(), ShoppingCartActivityP.class);
                 startActivity(viewShoppingCartIntent);
             }
         });

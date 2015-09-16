@@ -1,6 +1,6 @@
 package com.fyp.melody.model;
 
-import com.fyp.melody.JSON.Json2Tracking;
+import com.fyp.melody.JSON.Json2Trackings;
 
 /**
  * Created by Hananideen on 2/9/2015.
@@ -17,7 +17,7 @@ public class Tracking {
         Order_ID = order_ID;
     }
 
-    public Tracking(Json2Tracking jTrack) {
+    public Tracking(Json2Trackings jTrack) {
         Status = jTrack.status;
         Order_ID = jTrack.id;
     }
