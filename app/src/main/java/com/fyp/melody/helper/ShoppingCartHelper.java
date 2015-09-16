@@ -14,6 +14,9 @@ import java.util.Vector;
  * Created by Hananideen on 1/9/2015.
  */
 public class ShoppingCartHelper {
+
+    public static final String PRODUCT_INDEX = "PRODUCT_INDEX";
+
     private static Map<Menus, ShoppingCart> cartMap = new HashMap<Menus, ShoppingCart>();
 
     public static void setQuantity(Menus menus, int quantity) {

@@ -1,28 +1,27 @@
 package com.fyp.melody.activity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.fyp.melody.Product;
-import com.fyp.melody.ProductAdapter;
-import com.fyp.melody.ProductDetailsActivity;
+import com.fyp.melody.adapter.MenuAdapter;
+import com.fyp.melody.model.Menus;
 import com.fyp.melody.R;
-import com.fyp.melody.ShoppingCartHelperP;
+import com.fyp.melody.helper.ShoppingCartHelper;
 
 import java.util.List;
 
 /**
- * Created by Hananideen on 2/6/2015.
+ * Created by Hananideen on 16/9/2015.
  */
-public class ShoppingCartActivity extends ActionBarActivity implements View.OnClickListener {
+public class ShoppingCartActivity extends AppCompatActivity {
 
-    private List<Product> mCartList;
-    private ProductAdapter mProductAdapter;
+    private List<Menus> mCartList;
+    private MenuAdapter mMenuAdapter;
     String total;
 
     @Override
@@ -30,62 +29,57 @@ public class ShoppingCartActivity extends ActionBarActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        mCartList = ShoppingCartHelperP.getCartList();
+        mCartList = ShoppingCartHelper.getCartList();
 
         // Make sure to clear the selections
         for(int i=0; i<mCartList.size(); i++) {
-            mCartList.get(i).selected = false;
+        mCartList.get(i).selected = false;
         }
 
-        // Create the list
-        final ListView listViewCatalog = (ListView) findViewById(R.id.ListViewCatalog);
-        mProductAdapter = new ProductAdapter(mCartList, getLayoutInflater(), true);
-        listViewCatalog.setAdapter(mProductAdapter);
+    // Create the list
+    final ListView listViewCatalog = (ListView) findViewById(R.id.ListViewCatalog);
+        mMenuAdapter = new MenuAdapter(mCartList, getLayoutInflater(), true);
+        listViewCatalog.setAdapter(mMenuAdapter);
 
         listViewCatalog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                Intent productDetailsIntent = new Intent(getBaseContext(), ProductDetailsActivity.class);
-                productDetailsIntent.putExtra(ShoppingCartHelperP.PRODUCT_INDEX, position);
-                startActivity(productDetailsIntent);
-            }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+        long id) {
+        Intent productDetailsIntent = new Intent(getBaseContext(), MenuDetailsActivity.class);
+        productDetailsIntent.putExtra("position", position);
+        startActivity(productDetailsIntent);
+        }
         });
 
-    }
+        }
 
     @Override
     protected void onResume() {
         super.onResume();
         // Refresh the data
-        if(mProductAdapter != null)
-            {
-                mProductAdapter.notifyDataSetChanged();
-            }
+        if(mMenuAdapter != null)
+        {
+        mMenuAdapter.notifyDataSetChanged();
+        }
         double subTotal = 0.00;
-            for (Product p : mCartList) {
-                int quantity = ShoppingCartHelperP.getProductQuantity(p);
+        for (Menus p : mCartList) {
+        int quantity = ShoppingCartHelper.getProductQuantity(p);
 
-                subTotal += p.price * quantity;
-            }
+        subTotal += p.MenuPrice * quantity;
+        }
 
-            TextView productPriceTextView = (TextView) findViewById(R.id.TextViewSubtotal);
-            productPriceTextView.setText("Subtotal: RM" + String.format("%.2f", subTotal));
+        TextView productPriceTextView = (TextView) findViewById(R.id.TextViewSubtotal);
+        productPriceTextView.setText("Subtotal: RM" + String.format("%.2f", subTotal));
         total = String.format("%.2f", subTotal);
 
-    }
+        }
 
-    public void checkout (View v) {
+public void checkout (View v) {
         Intent payment = new Intent(getBaseContext(), PaymentActivity.class);
         payment.putExtra("subtotal", total);
         startActivity(payment);
-    }
+        }
 
 
-    @Override
-    public void onClick(View v) {
-        // TODO Auto-generated method stub
-
-    }
 }

@@ -9,7 +9,8 @@ public class Json2Menu {
 
     public JSONObject jsonObject;
 
-    public String menuName, menuDescription, menuPrice, menuImage;
+    public String menuName, menuDescription, menuImage;
+    public double menuPrice;
     public int menuID;
 
     public Json2Menu(){}
@@ -20,7 +21,7 @@ public class Json2Menu {
         if (json!=null)
         {
             menuName= json.optString("Name");
-            menuPrice = json.optString("Price");
+            menuPrice = json.optDouble("Price");
             menuDescription = json.optString("Description");
             menuID = json.optInt("Id");
             menuImage = json.optString("Logo");
@@ -28,7 +29,7 @@ public class Json2Menu {
         else{
             menuName = "";
             menuDescription = "";
-            menuPrice = "";
+            menuPrice = 0;
             menuImage = "";
             menuID = 0;
         }

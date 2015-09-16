@@ -1,7 +1,6 @@
 package com.fyp.melody.activity;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,9 +17,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.JSON.Json2Menu;
-import com.fyp.melody.Product;
 import com.fyp.melody.R;
-import com.fyp.melody.ShoppingCartHelperP;
 import com.fyp.melody.VolleySingleton;
 import com.fyp.melody.adapter.MenuAdapter;
 import com.fyp.melody.helper.ShoppingCartHelper;
@@ -32,18 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
-import android.os.AsyncTask;
 
 /**
  * Created by Hananideen on 1/9/2015.
@@ -51,7 +36,8 @@ import android.os.AsyncTask;
 public class MenuDetailsActivity extends AppCompatActivity {
 
     int id, position;
-    String name, description, price,image;
+    String name, description,image;
+    double price;
     MenuAdapter menuListAdapter;
     List<Menus> MenuList;
     private ListView MenuListView;
@@ -61,7 +47,7 @@ public class MenuDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_details);
 
         MenuList = new ArrayList<Menus>();
-        menuListAdapter = new MenuAdapter(this,MenuList);
+        menuListAdapter = new MenuAdapter(MenuList, getLayoutInflater(), false);
         MenuListView = (ListView) findViewById(R.id.listViewHidden);
         MenuListView.setAdapter(menuListAdapter);
 
@@ -70,8 +56,10 @@ public class MenuDetailsActivity extends AppCompatActivity {
         id =  menu.getIntExtra("id", 0);
         name = menu.getStringExtra("name");
         description = menu.getStringExtra("description");
-        price = menu.getStringExtra("price");
+        price = menu.getDoubleExtra("price", 0);
         image = menu.getStringExtra("image");
+
+        final Menus[] selectedMenu = new Menus[1];
 
         NetworkImageView productImageView = (NetworkImageView) findViewById(R.id.ImageViewProduct);
         TextView productTitleTextView = (TextView) findViewById(R.id.TextViewProductTitle);
@@ -82,7 +70,7 @@ public class MenuDetailsActivity extends AppCompatActivity {
         productImageView.setImageUrl("http://mynetsys.com/restaurant/" + image, VolleySingleton.getInstance().getImageLoader());
         productTitleTextView.setText(name);
         productDetailsTextView.setText(description);
-        productPriceTextView.setText("RM" + price);
+        productPriceTextView.setText("RM" + String.format("%.2f", price));
 
         JsonArrayRequest menuRequest = new JsonArrayRequest(ApplicationLoader.getIp("restaurant/menu.php"), new Response.Listener<JSONArray>() {
             @Override
@@ -92,8 +80,9 @@ public class MenuDetailsActivity extends AppCompatActivity {
                         JSONObject obj = response.getJSONObject(i);
                         Menus menu = new Menus(new Json2Menu(obj));
                         MenuList.add(0, menu);
+                        selectedMenu[0] = MenuList.get(position);
                         menuListAdapter.notifyDataSetChanged();
-                        //final Menus selectedMenu = MenuList.get(position);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -108,71 +97,33 @@ public class MenuDetailsActivity extends AppCompatActivity {
         });
 
         VolleySingleton.getInstance().getRequestQueue().add(menuRequest);
-//
-//        textViewCurrentQuantity.setText("Currently in Cart: "
-//                + ShoppingCartHelper.getProductQuantity(selectedMenu));
-//
-//        final EditText editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
-//
+
+        textViewCurrentQuantity.setText("Currently in Cart: "+ ShoppingCartHelper.getProductQuantity(selectedMenu[0]));
+
+        final EditText editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
+
         Button addToCartButton = (Button) findViewById(R.id.ButtonAddToCart);
         addToCartButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                new Play().execute("http://mynetsys.com/restaurant/user.php?phoneNumber=0148204633&userName=Hanani");
-//                int quantity = 0;
-//                try {
-//                    quantity = Integer.parseInt(editTextQuantity.getText()
-//                            .toString());
-//                    if (quantity < 0) {
-//                        Toast.makeText(getBaseContext(),
-//                                "Please enter a quantity of 0 or higher",
-//                                Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                } catch (Exception e) {
-//                    Toast.makeText(getBaseContext(),
-//                            "Please enter a numeric quantity",
-//                            Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                ShoppingCartHelper.setQuantity(selectedMenu, quantity);
-//                finish();
+                int quantity = 0;
+                try {
+                    quantity = Integer.parseInt(editTextQuantity.getText().toString());
+                    if (quantity < 0) {
+                        Toast.makeText(getBaseContext(), "Please enter a quantity of 0 or higher", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getBaseContext(), "Please enter a numeric quantity", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ShoppingCartHelper.setQuantity(selectedMenu[0], quantity);
+                finish();
             }
         });
     }
-
-    class Play extends AsyncTask<String, Void, Boolean> {
-        String result;
-        @Override
-        protected Boolean doInBackground(String... params) {
-            try{
-                URL url = new URL(params[0]);
-                URLConnection connection = url.openConnection();
-                HttpURLConnection conn = (HttpURLConnection)connection;
-                int responseCode = conn.getResponseCode();
-                if(responseCode == HttpURLConnection.HTTP_OK) {
-                    InputStream is = conn.getInputStream();
-                    InputStreamReader isr = new InputStreamReader(is,"UTF-8");
-                    BufferedReader reader = new BufferedReader(isr);
-                    StringBuilder sb = new StringBuilder();
-                    String line = null;
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line + " sucess");
-                    }
-                    result = sb.toString();
-                    return true;
-                }
-            }catch (MalformedURLException e) {
-                e.printStackTrace();
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-            return false;
-        }
-    }
-
 
 }
 

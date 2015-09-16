@@ -13,20 +13,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.fyp.melody.ApplicationLoader;
 import com.fyp.melody.JSON.Json2Menu;
-import com.fyp.melody.JSON.Json2Restaurants;
 import com.fyp.melody.R;
 import com.fyp.melody.VolleySingleton;
 import com.fyp.melody.adapter.MenuAdapter;
 import com.fyp.melody.model.Menus;
-import com.fyp.melody.model.Restaurants;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -58,7 +54,7 @@ public class MenuActivity extends ActionBarActivity {
         Settings = getSharedPreferences(Settings_PREFS_NAME, 0);
 
         MenuList = new ArrayList<Menus>();
-        menuListAdapter = new MenuAdapter(this,MenuList);
+        menuListAdapter = new MenuAdapter(MenuList, getLayoutInflater(), false);
         MenuListView = (ListView) findViewById(R.id.MenulistView);
         MenuListView.setAdapter(menuListAdapter);
 
@@ -154,7 +150,7 @@ public class MenuActivity extends ActionBarActivity {
         {
             Menus menus = new Menus();
             menus.setMenuName("Menu Name " + i);
-            menus.setMenuPrice("Price " + i);
+//            menus.setMenuPrice("Price " + i);
             MenuList.add(0, menus);
         }
     }
@@ -174,7 +170,7 @@ public class MenuActivity extends ActionBarActivity {
         }
 
         if (id == R.id.action_cart) {
-            Intent cart = new Intent(MenuActivity.this, ShoppingCartActivity.class);
+            Intent cart = new Intent(MenuActivity.this, ShoppingCartActivityP.class);
             startActivity(cart);
             return true;
         }

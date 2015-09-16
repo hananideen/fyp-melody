@@ -9,7 +9,7 @@ public class Menus {
 
     public String MenuName;
     public String MenuDescription;
-    public String MenuPrice;
+    public double MenuPrice;
     private String MenuImage;
     private int MenuID;
     public boolean selected;
@@ -17,7 +17,7 @@ public class Menus {
     public Menus(){
     }
 
-    public Menus(String menuName, String menuDescription, String menuPrice, String menuImage, int menuID) {
+    public Menus(String menuName, String menuDescription, double menuPrice, String menuImage, int menuID) {
         MenuName = menuName;
         MenuDescription = menuDescription;
         MenuPrice = menuPrice;
@@ -50,11 +50,11 @@ public class Menus {
         MenuDescription = descriptionMenu;
     }
 
-    public String getMenuPrice() {
+    public double getMenuPrice() {
         return MenuPrice;
     }
 
-    public void setMenuPrice (String priceMenu) {
+    public void setMenuPrice (double priceMenu) {
         MenuPrice = priceMenu;
     }
 
